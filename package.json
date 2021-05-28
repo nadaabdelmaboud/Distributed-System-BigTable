@@ -1,0 +1,23 @@
+{
+  "name": "bigtable",
+  "version": "1.0.0",
+  "description": "",
+  "main": "master.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nadaabdelmaboud/BigTable.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nadaabdelmaboud/BigTable/issues"
+  },
+  "homepage": "https://github.com/nadaabdelmaboud/BigTable#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.12.11"
+  }
+}
