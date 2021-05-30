@@ -47,12 +47,12 @@ async checkDataEmpty(connection){
     }
     return false;
 },
-async updateMetaDate(connection,tablet1KeyRange,tablet2KeyRange,tablet3KeyRange,tabletDocuments){
+async updateMetaData(connection,tablet1KeyRange,tablet2KeyRange,tablet3KeyRange,tablet1Documents,tablet2Documents,tablet3Documents){
     const metaDataCollection =(await connection).collection("metadata");
     const metadata =  await metaDataCollection.updateOne({},{$set:{
-        tablet1Documents:tabletDocuments,
-        tablet2Documents:tabletDocuments,
-        tablet3Documents:tabletDocuments,
+        tablet1Documents:tablet1Documents,
+        tablet2Documents:tablet2Documents,
+        tablet3Documents:tablet3Documents,
         tablet1KeyRange,
         tablet2KeyRange,
         tablet3KeyRange
