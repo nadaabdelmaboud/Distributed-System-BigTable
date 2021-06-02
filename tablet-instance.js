@@ -12,6 +12,9 @@ const TabletInstance={
     async disconnect(){
         tabletConnection.close();
     },
+    async drop(){
+        (await tabletConnection).db.dropDatabase();
+    }, 
     async loadData(animeDocuments){
         await tabletConnection.db.collection("BigTable").insertMany(animeDocuments);
     },

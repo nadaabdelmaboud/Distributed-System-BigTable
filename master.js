@@ -20,6 +20,17 @@ masterConnection.once('open',async function(){
         await MetaData.insertNewMetaData(masterConnection);
     }
     if(await MetaData.checkDataEmpty(masterConnection)){
+            await MasterData.balanceData();
+        }
+  
+    
+})
+
+const MasterData={
+    async balanceData(){
+        //drop 3 databases
+        const release = await mutex.acquire();
+        try {
         const BigTableCollection = (await masterConnection).collection("BigTable");
         let totalMasterDocuments = await BigTableCollection.countDocuments({});
         let documentsTablet=parseInt(totalMasterDocuments/3);
@@ -27,6 +38,8 @@ masterConnection.once('open',async function(){
              return data;
          });
         await tablet.connect(dbs.tablet1);
+        await tablet.drop();
+
         await tablet.loadData(documentsTablet1);
         documentsTablet2 =  await BigTableCollection.find({}).skip(documentsTablet).limit(documentsTablet).toArray().then(data=>{
             return data;
@@ -48,18 +61,18 @@ masterConnection.once('open',async function(){
         };
         await tablet.disconnect();
          await tablet.connect(dbs.tablet2);
+         await tablet.drop();
          await tablet.loadData(documentsTablet2);
          await tablet.disconnect();
          await tablet.connect(dbs.tablet3);
+         await tablet.drop();
          await tablet.loadData(documentsTablet3);
          await tablet.disconnect();
          await MetaData.updateMetaData(masterConnection,tablet1KeyRange,tablet2KeyRange,tablet3KeyRange,documentsTablet,documentsTablet,documentsTablet);
-        }
-  
-    
-})
-
-const MasterData={
+    } finally {
+        release();
+    }
+        },
     //lock
     async insert(animeDocuments){
         const release = await mutex.acquire();
@@ -116,9 +129,6 @@ const MasterData={
           )
     },
 
-    async checkBalancing(){
-
-    }
 }
 
 const BROWSER_CLIENTS = {};
@@ -141,17 +151,18 @@ io.on("connection", socket => {
             documents = await tablet.getUpdatedDocuments(payload.ids);
             }
             if(payload.updateType=='insert'){
-                await MasterData.insert(documents,payload.ids);
+                await MasterData.insert(documents);
             }
             if(payload.updateType=='update'){
-                await MasterData.update(documents,payload.ids);                
+                await MasterData.update(documents);                
             }
             if(payload.updateType=='delete'){
-                await MasterData.delete(payload.ids);                
+                await MasterData.delete(payload.ids,payload.tabletId);                
             }
             await tablet.disconnect();
             if(payload.updateType!='update'){
-            metadata = await MasterData.checkBalancing();
+            await MasterData.balanceData();
+            const metadata =  await MetaData.getMetaData();
             for (let i in BROWSER_CLIENTS)
                 BROWSER_CLIENTS[i].emit("metadata",metadata)
             }
