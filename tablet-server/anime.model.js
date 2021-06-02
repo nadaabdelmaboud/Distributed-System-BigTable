@@ -30,4 +30,4 @@ const AnimeSchema = new mongoose.Schema({
 const AnimeModel1 = mongoose.model('model1',AnimeSchema,'BigTable');
 const AnimeModel2 = mongoose.model('model2',AnimeSchema,'BigTable');//change to the other package name
 
-module.exports = [AnimeModel1,AnimeModel2];                              
+module.exports = [AnimeModel1,AnimeModel2];

@@ -11,7 +11,7 @@ var socketMaster = ioMaster.connect("http://localhost:3000/", {
 });
 
 //Tablet socket setup(connecting tablet with client)
-var ioTablet = require('socket.io')(8080);
+var ioTablet = require('socket.io')(8000);
 
 socketMaster.on('connect', function () {
     console.log('connected to Master');
