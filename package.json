@@ -20,7 +20,9 @@
   "homepage": "https://github.com/nadaabdelmaboud/BigTable#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "joi": "^17.4.0",
     "mongoose": "^5.12.12",
+    "socker.io": "0.0.0-alpha-beta",
     "socket.io": "^4.1.2",
     "socket.io-client": "^4.1.2"
   }

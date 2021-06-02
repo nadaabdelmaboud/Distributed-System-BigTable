@@ -1,4 +1,7 @@
-const tabletQueries = require("./anime.queries.js");
+const AnimeService = require("./anime.service.js");
+let metaData = require("./tabletMetaData.js");
+let set = metaData.set;
+
 require("./db.connection.js")(1);
 
 //Master socket setup(connecting tablet with master)
@@ -6,8 +9,6 @@ var ioMaster = require('socket.io-client');
 var socketMaster = ioMaster.connect("http://localhost:3000/", {
     reconnection: true
 });
-
-var metaData;
 
 //Tablet socket setup(connecting tablet with client)
 var ioTablet = require('socket.io')(8080);
@@ -19,68 +20,79 @@ socketMaster.on('connect', function () {
     });
     socketMaster.on('GetMetaData', (data)=>
     {
-        metaData = data.metaData;
+        set(data.metaData);
     });
 })
 
 
 ioTablet.on('connection', function (socket) {
-    console.log('client connected to Tablet :', socket.client.id);
+  console.log("client connected to Tablet :", socket.client.id);
 
-    //Tablet queries from client
+  //Tablet queries from client
 
-    //check on each id and send to the appropriate tablet
-    socket.on('ReadRows', async function (data) {
-        console.log("read request is send");
-        const result = await tabletQueries.findRows(data.rowKeys,0);
-        if(!result||result.length == 0){
-             console.log("Invalid Ids");
-             return;
-        }
-        socket.emit('ReadRowsResponse',result);
-    });
+  //the client must send the tablet number that contains the data
+  let tabletNumber =1; // tablet not tablet server
 
-    socket.on('Set', async function (data) {
-        console.log("Set the row with the updated data");
-        const result = await tabletQueries.updateAnime(data.Anime,data.rowKey,0);
-        if(!result){
-             console.log("Invalid data");
-             return;
-        }
-        socket.emit('SetResponse',result);
-    });
+  //check on each id and send to the appropriate tablet
+  socket.on("ReadRows", async function (ClientData) {
+    console.log("read request is send");
+    const data = await AnimeService.findRows(ClientData.rowKeys, tabletNumber);
+    if (!data.data) {
+      console.log(data.err);
+    }
+    socket.emit("ReadRowsResponse", data);
+  });
 
-    socket.on('AddRow', async function (data) {
-        console.log("Add new Row");
-        const result = await tabletQueries.createAnime(data.Anime,0);
-        if(!result){
-             console.log("Error adding new row");
-             return;
-        }
-        socket.emit('AddRowResponse',result);
-    });
+  socket.on("Set", async function (ClientData) {
+    console.log("Set the row with the updated data");
+    const data = await AnimeService.updateAnime(
+      ClientData.Anime,
+      ClientData.rowKey,
+      tabletNumber
+    );
+    if (!data.data) {
+      console.log(data.err);
+    }
+    socket.emit("SetResponse", data);
+  });
 
-    socket.on('DeleteCells', async function (data) {
-        console.log("Delete Cells");
-        const result = await tabletQueries.deleteCells(data.columnFamilies,data.rowKey,0);
-        if(!result){
-             console.log("Error in deleting cells");
-             return;
-        }
-        socket.emit('DeleteCellsResponse',result);
-    });
+  socket.on("AddRow", async function (ClientData) {
+    console.log("Add new Row");
+    const data = await AnimeService.createAnime(
+      ClientData.Anime,
+      tabletNumber
+    );
+    if (!data.data) {
+      console.log(data.err);
+    }
+    socket.emit("AddRowResponse", data);
+  });
 
-    socket.on('DeleteRow', async function (data) {
-        console.log("Delete Row");
-        const result = await tabletQueries.deleteRow(data.rowKey,0);
-        if(!result){
-             console.log("Error in deleting row");
-             return;
-        }
-        socket.emit('DeleteRowResponse',result);
-    });
+  socket.on("DeleteCells", async function (ClientData) {
+    console.log("Delete Cells");
+    const data = await AnimeService.deleteCells(
+      ClientData.columnFamilies,
+      ClientData.rowKey,
+      tabletNumber
+    );
+    if (!data.data) {
+      console.log(data.err);
+    }
+    socket.emit("DeleteCellsResponse", data);
+  });
 
- });
+  socket.on("DeleteRow", async function (ClientData) {
+    console.log("Delete Row");
+    const data = await AnimeService.deleteRow(
+      ClientData.rowKey,
+      tabletNumber
+    );
+    if (!data.data) {
+      console.log(data.err);
+    }
+    socket.emit("DeleteRowResponse", data);
+  });
+});
 
 
 
