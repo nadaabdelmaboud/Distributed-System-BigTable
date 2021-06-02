@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/nadaabdelmaboud/BigTable#readme",
   "dependencies": {
+    "async-mutex": "^0.3.1",
     "express": "^4.17.1",
     "joi": "^17.4.0",
     "mongoose": "^5.12.12",

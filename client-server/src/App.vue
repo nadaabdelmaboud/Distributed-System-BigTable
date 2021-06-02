@@ -373,7 +373,10 @@ import io from "socket.io-client";
 export default {
   data: function () {
     return {
-      socketTablet: "",
+      socketMaster: "",
+      metaData: "",
+      socketTablet1: "",
+      socketTablet2: "",
       updatedAnimeNumber: "",
       updatedAnimeName: "",
       updatedAnimeGenre: "",
@@ -402,39 +405,100 @@ export default {
   },
 
   created() {
-    //starting socket connection
-    this.socketTablet = io.connect("http://localhost:8000/", {
+    //starting tablet socket connection
+    this.socketTablet1 = io.connect("http://localhost:8000/", {
+      transports: ["websocket"],
+    });
+    // this.socketTablet2 = io.connect("http://localhost:9000/", {
+    //   transports: ["websocket"],
+    // });
+    //starting master socket connection
+    this.socketMaster = io.connect("http://localhost:3000/", {
       transports: ["websocket"],
     });
     //Add listeners here
+    //get Meta Data
+    this.socketMaster.emit("clientStarting");
+    this.socketMaster.on("GetMetaData", (data) => {
+      this.metaData = data.metaData;
+      console.log("hihihihihi",this.metaData);
+    });
+
+
+    // //Tablet 2 listeners
+    // //Set
+    // this.socketTablet2.on("SetResponse", function (UpdateData) {
+    //   console.log("Data recieved in client (Update Row):", UpdateData);
+    // });
+    // //Delete cells
+    // this.socketTablet2.on("DeleteCellsResponse", function (DeleteCells) {
+    //   console.log(
+    //     "Row cells deleted in client (Delete row cells):",
+    //     DeleteCells
+    //   );
+    // });
+    // //Delete Row
+    // this.socketTablet2.on("DeleteRowResponse", function (DeleteRow) {
+    //   console.log("Row deleted in client (Delete Row):", DeleteRow);
+    // });
+    // //Add Row
+    // this.socketTablet2.on("AddRowResponse", function (CreateRow) {
+    //   console.log("Row Added in client (Add Row):", CreateRow);
+    // });
+    // //Read Row
+    // this.socketTablet2.on("ReadRowsResponse", (data) => {
+    //   var dataBack = data.data;
+    //   this.animes = [];
+    //   for (var a in dataBack) {
+    //     this.animes.push(dataBack[a]);
+    //   }
+    // });
+
+    //Tablet 1 listeners
     //Set
-    this.socketTablet.on("SetResponse", function (UpdateData) {
+    this.socketTablet1.on("SetResponse", function (UpdateData) {
       console.log("Data recieved in client (Update Row):", UpdateData);
     });
     //Delete cells
-    this.socketTablet.on("DeleteCellsResponse", function (DeleteCells) {
+    this.socketTablet1.on("DeleteCellsResponse", function (DeleteCells) {
       console.log(
         "Row cells deleted in client (Delete row cells):",
         DeleteCells
       );
     });
     //Delete Row
-    this.socketTablet.on("DeleteRowResponse", function (DeleteRow) {
+    this.socketTablet1.on("DeleteRowResponse", function (DeleteRow) {
       console.log("Row deleted in client (Delete Row):", DeleteRow);
     });
     //Add Row
-    this.socketTablet.on("AddRowResponse", function (CreateRow) {
+    this.socketTablet1.on("AddRowResponse", function (CreateRow) {
       console.log("Row Added in client (Add Row):", CreateRow);
     });
     //Read Row
-    this.socketTablet.on("ReadRowsResponse", (data) => {
+    this.socketTablet1.on("ReadRowsResponse", (data) => {
+      var dataBack = data.data;
       this.animes = [];
-      for (var a in data) {
-        this.animes.push(data[a]);
+      for (var a in dataBack) {
+        this.animes.push(dataBack[a]);
       }
     });
   },
   methods: {
+
+    ///////
+    validateRowKey(rowKey) {
+      var anime_id = parseInt(rowKey);
+      var start1 = this.metaData.tablet1KeyRange.start;
+      var end1 = this.metaData.tablet1KeyRange.end;
+      var start2 = this.metaData.tablet2KeyRange.start;
+      var end2 = this.metaData.tablet2KeyRange.end;
+      var start3 = this.metaData.tablet3KeyRange.start;
+      var end3 = this.metaData.tablet3KeyRange.end;
+      if (anime_id >= start1 && anime_id <= end1) return 1;
+      else if (anime_id >= start2 && anime_id <= end2) return 2;
+      else if (anime_id >= start3 && anime_id <= end3) return 3;
+      else return -1;
+    },
     SetSubmit() {
       var UpdateData = {
         Anime: {
@@ -452,13 +516,18 @@ export default {
           delete UpdateData.Anime[propName];
         }
       }
-      this.socketTablet.emit("Set", UpdateData);
+      const tNum = this.validateRowKey(UpdateData.rowKey);
+      if(tNum == 1 || tNum == 2)
+        this.socketTablet1.emit("Set", UpdateData);
+      if(tNum == 3)
+        this.socketTablet2.emit("Set", UpdateData);      
     },
     ReadRowsSubmit() {
       var data = {
         rowKeys: this.getAnimeNumber.split(" "),
       };
-      this.socketTablet.emit("ReadRows", data);
+      
+      this.socketTablet1.emit("ReadRows", data);
     },
     AddRowSubmit() {
       var CreateRow = {
@@ -471,7 +540,7 @@ export default {
           members: this.addAnimeMembers,
         },
       };
-      this.socketTablet.emit("AddRow", CreateRow);
+      this.socketTablet2.emit("AddRow", CreateRow);
     },
     DeleteCellsSubmit() {
       var DeleteCells = {
@@ -485,13 +554,21 @@ export default {
       if (this.animeRating) DeleteCells.columnFamilies.push("rating");
       if (this.animeMembers) DeleteCells.columnFamilies.push("members");
       console.log("DeleteCells ", DeleteCells);
-      this.socketTablet.emit("DeleteCells", DeleteCells);
+      const tNum = this.validateRowKey(DeleteCells.rowKey);
+      if(tNum == 1 || tNum == 2)
+        this.socketTablet1.emit("DeleteCells", DeleteCells);
+      if(tNum == 3)
+        this.socketTablet2.emit("DeleteCells", DeleteCells);
     },
     DeleteRowSubmit() {
       var DeleteRow = {
         rowKey: this.deletedAnimeNumber,
       };
-      this.socketTablet.emit("DeleteRow", DeleteRow);
+      const tNum = this.validateRowKey(DeleteRow.rowKey);
+      if(tNum == 1 || tNum == 2)
+        this.socketTablet1.emit("DeleteRow", DeleteRow);
+      if(tNum == 3)
+        this.socketTablet2.emit("DeleteRow", DeleteRow);
     },
   },
 };
