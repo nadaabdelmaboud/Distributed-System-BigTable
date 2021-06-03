@@ -401,13 +401,26 @@ export default {
       animeEpisodes: "",
       animeRating: "",
       animeMembers: "",
+      clientLogs: [],
     };
   },
-
+  beforeDestroy() {
+    console.log("before destroy");
+    this.clientLogs.push({
+      message: "client is disconnecting ",
+      timeStamp: Date.now(),
+    });
+    this.socketMaster.emit("clientLogs", this.clientLogs);
+    console.log(this.clientLogs);
+  },
   created() {
     //starting tablet socket connection
     this.socketTablet1 = io.connect("http://localhost:8000/", {
       transports: ["websocket"],
+    });
+    this.clientLogs.push({
+      message: "Connected to tablet",
+      timeStamp: Date.now(),
     });
     // this.socketTablet2 = io.connect("http://localhost:9000/", {
     //   transports: ["websocket"],
@@ -416,15 +429,20 @@ export default {
     this.socketMaster = io.connect("http://localhost:3000/", {
       transports: ["websocket"],
     });
+    this.clientLogs.push({
+      message: "Connected to master",
+      timeStamp: Date.now(),
+    });
     //Add listeners here
     //get Meta Data
     this.socketMaster.emit("clientStarting");
     this.socketMaster.on("GetMetaData", (data) => {
       this.metaData = data.metaData;
-      console.log("hihihihihi",this.metaData);
+      this.clientLogs.push({
+        message: "Getting metadata successfully",
+        timeStamp: Date.now(),
+      });
     });
-
-
     // //Tablet 2 listeners
     // //Set
     // this.socketTablet2.on("SetResponse", function (UpdateData) {
@@ -458,6 +476,10 @@ export default {
     //Set
     this.socketTablet1.on("SetResponse", function (UpdateData) {
       console.log("Data recieved in client (Update Row):", UpdateData);
+      this.clientLogs.push({
+        message: "Updated data recieved",
+        timeStamp: Date.now(),
+      });
     });
     //Delete cells
     this.socketTablet1.on("DeleteCellsResponse", function (DeleteCells) {
@@ -465,14 +487,26 @@ export default {
         "Row cells deleted in client (Delete row cells):",
         DeleteCells
       );
+      this.clientLogs.push({
+        message: "Delete cells finished successfully",
+        timeStamp: Date.now(),
+      });
     });
     //Delete Row
     this.socketTablet1.on("DeleteRowResponse", function (DeleteRow) {
       console.log("Row deleted in client (Delete Row):", DeleteRow);
+      this.clientLogs.push({
+        message: "Delete row finished successfully",
+        timeStamp: Date.now(),
+      });
     });
     //Add Row
     this.socketTablet1.on("AddRowResponse", function (CreateRow) {
       console.log("Row Added in client (Add Row):", CreateRow);
+      this.clientLogs.push({
+        message: "Row is added successfully",
+        timeStamp: Date.now(),
+      });
     });
     //Read Row
     this.socketTablet1.on("ReadRowsResponse", (data) => {
@@ -481,10 +515,24 @@ export default {
       for (var a in dataBack) {
         this.animes.push(dataBack[a]);
       }
+      this.clientLogs.push({
+        message: "Data retrieved successfully",
+        timeStamp: Date.now(),
+      });
     });
+
+    //Sending Client Logs to Master and Flushing this Logs
+    //each five minutes
+    setInterval(() => {
+      console.log("sending to master", this.clientLogs);
+      if(this.clientLogs.length)
+       {
+        this.socketMaster.emit("clientLogs", this.clientLogs);
+        this.clientLogs = [];
+       } 
+    }, 3000);
   },
   methods: {
-
     ///////
     validateRowKey(rowKey) {
       var anime_id = parseInt(rowKey);
@@ -517,17 +565,25 @@ export default {
         }
       }
       const tNum = this.validateRowKey(UpdateData.rowKey);
-      if(tNum == 1 || tNum == 2)
-        this.socketTablet1.emit("Set", UpdateData);
-      if(tNum == 3)
-        this.socketTablet2.emit("Set", UpdateData);      
+      if (tNum == 1 || tNum == 2) this.socketTablet1.emit("Set", UpdateData);
+      if (tNum == 3) this.socketTablet2.emit("Set", UpdateData);
+
+      this.clientLogs.push({
+        message: "Sending request to update data",
+        timeStamp: Date.now(),
+      });
     },
     ReadRowsSubmit() {
       var data = {
         rowKeys: this.getAnimeNumber.split(" "),
       };
-      
+
       this.socketTablet1.emit("ReadRows", data);
+      console.log("dataRowKeys", data.rowKeys);
+      this.clientLogs.push({
+        message: "Sending request to retrieve rows from data" + data.rowKeys,
+        timeStamp: Date.now(),
+      });
     },
     AddRowSubmit() {
       var CreateRow = {
@@ -541,6 +597,11 @@ export default {
         },
       };
       this.socketTablet2.emit("AddRow", CreateRow);
+
+      this.clientLogs.push({
+        message: "Sending request to add new row to data",
+        timeStamp: Date.now(),
+      });
     },
     DeleteCellsSubmit() {
       var DeleteCells = {
@@ -555,20 +616,27 @@ export default {
       if (this.animeMembers) DeleteCells.columnFamilies.push("members");
       console.log("DeleteCells ", DeleteCells);
       const tNum = this.validateRowKey(DeleteCells.rowKey);
-      if(tNum == 1 || tNum == 2)
+      if (tNum == 1 || tNum == 2)
         this.socketTablet1.emit("DeleteCells", DeleteCells);
-      if(tNum == 3)
-        this.socketTablet2.emit("DeleteCells", DeleteCells);
+      if (tNum == 3) this.socketTablet2.emit("DeleteCells", DeleteCells);
+
+      this.clientLogs.push({
+        message: "Sending request to delete cells from rows",
+        timeStamp: Date.now(),
+      });
     },
     DeleteRowSubmit() {
       var DeleteRow = {
         rowKey: this.deletedAnimeNumber,
       };
       const tNum = this.validateRowKey(DeleteRow.rowKey);
-      if(tNum == 1 || tNum == 2)
+      if (tNum == 1 || tNum == 2)
         this.socketTablet1.emit("DeleteRow", DeleteRow);
-      if(tNum == 3)
-        this.socketTablet2.emit("DeleteRow", DeleteRow);
+      if (tNum == 3) this.socketTablet2.emit("DeleteRow", DeleteRow);
+      this.clientLogs.push({
+        message: "Sending request to delete row from data",
+        timeStamp: Date.now(),
+      });
     },
   },
 };
