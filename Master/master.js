@@ -99,6 +99,7 @@ const MasterData={
         await BigTableCollection.deleteMany({
             'anime_id': { $in: ids}
          });
+         let metadata = await MetaData.getMetaData(masterConnection);
          if(tabletId==1){
              metadata.tablet1Documents -= ids.length;
          }
@@ -108,6 +109,8 @@ const MasterData={
         if(tabletId==3){
             metadata.tablet3Documents -= ids.length;
         }
+        await MetaData.updateMetaData(masterConnection,metadata.tablet1KeyRange,metadata.tablet2KeyRange,metadata.tablet3KeyRange,metadata.tablet1Documents,metadata.tablet2Documents,metadata.tablet3Documents)
+
     },
 
     
@@ -130,13 +133,13 @@ const MasterData={
 const BROWSER_CLIENTS = {};
 const SERVER_CLIENTS = {};
 io.on("connection", socket => {
-        socket.on("source", (payload) => {
+        socket.on("source", async (payload) => {
             if (payload == "client")
                 BROWSER_CLIENTS[socket.id] = socket;
             else if (payload == "tablet")
                 SERVER_CLIENTS[socket.id] = socket;
             console.log("Tablet Connected");
-
+            await socket.emit('GetMetaData',await MetaData.getMetaData(masterConnection));
         });
 
         socket.on("disconnect", () => {
@@ -145,10 +148,10 @@ io.on("connection", socket => {
         });
         socket.on("tablet-update",async (payload)=>{
             console.log(payload);
-            //await tablet.connect(dbs["tablet"+payload.tabletId]);
+            await tablet.connect(dbs["tablet"+payload.tabletId],payload.tabletId);
             let documents;
             if(payload.updateType!='delete'){
-            documents = await tablet.getUpdatedDocuments(payload.ids,1);
+            documents = await tablet.getUpdatedDocuments(payload.ids,payload.tabletId);
             }
             if(payload.updateType=='insert'){
                 await MasterData.insert(documents);
@@ -159,10 +162,9 @@ io.on("connection", socket => {
             if(payload.updateType=='delete'){
                 await MasterData.delete(payload.ids,payload.tabletId);                
             }
-            await tablet.disconnect();
             if(payload.updateType!='update'){
             await MasterData.balanceData();
-            const metadata =  await MetaData.getMetaData();
+            const metadata =  await MetaData.getMetaData(masterConnection);
             await io.sockets.emit("GetMetaData", metadata);
             }
         })

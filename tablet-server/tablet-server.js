@@ -30,7 +30,7 @@ socketMaster.on("connect", function () {
 });
 
 //send updates to master
-setTimeout(function () {
+setInterval(function () {
   if (MasterUpdateD.length != 0) {
     ids1 = [];
     ids2 = [];
@@ -46,7 +46,7 @@ setTimeout(function () {
       };
       socketMaster.emit("tablet-update", MasterUpdateData);
     }
-    else{
+    if(ids2.length != 0){
       MasterUpdateData = {
         updateType: "update",
         tabletId: 2,
@@ -111,14 +111,14 @@ ioTablet.on("connection", function (socket) {
       console.log("Add new Row");
       const data = await AnimeService.createAnime(
         ClientData.Anime,
-        tabletNumber
+        1
       );
       if (!data.data) {
         console.log(data.err);
       } else {
         console.log(data);
         const masterUpdateData = {
-          tabletId: 3,
+          tabletId: 1,
           updateType: "insert",
           ids: [data.data.anime_id],
         };

@@ -6,6 +6,7 @@ let tabletConnection2;
 let tabletConnection3;
 const TabletInstance={
     async connect(connectionString,tabletId){
+        console.log(connectionString);
         if(tabletId==1){
         tabletConnection  = await mongoose.createConnection(connectionString,{ useUnifiedTopology: true ,useNewUrlParser: true});
         }
@@ -69,9 +70,11 @@ const TabletInstance={
         });
     }
     else{
+        console.log(ids);
         return await tabletConnection3.db.collection("BigTable").find({
             'anime_id': { $in: ids}
          }).toArray().then(data=>{
+             console.log(data);
             return data;
         });
     }
