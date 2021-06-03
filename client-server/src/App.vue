@@ -540,7 +540,7 @@ export default {
           members: this.addAnimeMembers,
         },
       };
-      this.socketTablet2.emit("AddRow", CreateRow);
+      this.socketTablet1.emit("AddRow", CreateRow);
     },
     DeleteCellsSubmit() {
       var DeleteCells = {

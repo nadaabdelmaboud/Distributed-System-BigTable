@@ -80,6 +80,7 @@ const MasterData={
                 anime.anime_id=id;
                 id+=1;
             });
+            console.log(animeDocuments);
             await BigTableCollection.insertMany(animeDocuments);
             id=id-1;
             metadata.tablet3KeyRange.end=id;
@@ -143,10 +144,11 @@ io.on("connection", socket => {
             delete SERVER_CLIENTS[socket.id];
         });
         socket.on("tablet-update",async (payload)=>{
-            await tablet.connect(dbs[payload.tabletId]);
+            console.log(payload);
+            //await tablet.connect(dbs["tablet"+payload.tabletId]);
             let documents;
             if(payload.updateType!='delete'){
-            documents = await tablet.getUpdatedDocuments(payload.ids);
+            documents = await tablet.getUpdatedDocuments(payload.ids,1);
             }
             if(payload.updateType=='insert'){
                 await MasterData.insert(documents);
@@ -161,10 +163,7 @@ io.on("connection", socket => {
             if(payload.updateType!='update'){
             await MasterData.balanceData();
             const metadata =  await MetaData.getMetaData();
-            for (let i in BROWSER_CLIENTS){
-                BROWSER_CLIENTS[i].emit("metadata",metadata);
-                SERVER_CLIENTS[i].emit("metadata",metadata);
-            }
+            await io.sockets.emit("GetMetaData", metadata);
             }
         })
 });
