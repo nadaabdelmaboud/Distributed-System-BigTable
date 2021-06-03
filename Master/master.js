@@ -224,11 +224,12 @@ io.on("connection", socket => {
               });
             const metadata =  await MetaData.getMetaData(masterConnection);
             await io.sockets.emit("GetMetaData", metadata);
-            }
             masterLog.push({
                 message: "master updated and re-emitted the metadata",
                 timeStamp: Date.now(),
               });
+            }
+        
         })
 
         //Getting logs from clients and tablets 

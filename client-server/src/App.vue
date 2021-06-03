@@ -475,7 +475,7 @@ export default {
 
     //Tablet 1 listeners
     //Set
-    this.socketTablet1.on("SetResponse", function (UpdateData) {
+    this.socketTablet1.on("SetResponse", (UpdateData)=> {
       console.log("Data recieved in client (Update Row):", UpdateData);
       this.clientLogs.push({
         message: "Updated data recieved",
@@ -483,7 +483,7 @@ export default {
       });
     });
     //Delete cells
-    this.socketTablet1.on("DeleteCellsResponse", function (DeleteCells) {
+    this.socketTablet1.on("DeleteCellsResponse", (DeleteCells) =>{
       console.log(
         "Row cells deleted in client (Delete row cells):",
         DeleteCells
@@ -494,7 +494,7 @@ export default {
       });
     });
     //Delete Row
-    this.socketTablet1.on("DeleteRowResponse", function (DeleteRow) {
+    this.socketTablet1.on("DeleteRowResponse", (DeleteRow) =>{
       console.log("Row deleted in client (Delete Row):", DeleteRow);
       this.clientLogs.push({
         message: "Delete row finished successfully",
@@ -502,7 +502,7 @@ export default {
       });
     });
     //Add Row
-    this.socketTablet1.on("AddRowResponse", function (CreateRow) {
+    this.socketTablet1.on("AddRowResponse", (CreateRow)=> {
       console.log("Row Added in client (Add Row):", CreateRow);
       this.clientLogs.push({
         message: "Row is added successfully",
