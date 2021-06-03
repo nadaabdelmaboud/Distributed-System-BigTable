@@ -4,41 +4,35 @@ const dbs = require('./config');
 const masterConnection  = mongoose.createConnection(dbs.master,{ useUnifiedTopology: true ,useNewUrlParser: true});
 const MetaData = require('./metaData');
 const tablet = require('./tablet-instance')
-const { Server } = require("socket.io");
 const Mutex = require('async-mutex').Mutex;
 const mutex = new Mutex();
 const fs = require('fs')
 let masterLog = []
-const app = express();
-const server = app.listen(3000,()=>{
-    console.log("Server is listening on port 3000");
-    masterLog.push({
-        message: "Master started...",
-        timeStamp: Date.now(),
-      });
-    setInterval(()=>{
-        if(masterLog.length == 0) return;
-        let logFileString;
-        let logArray = [];
-        try {
-            logFileString = fs.readFileSync('./systemLogs.log', 'utf8');
-            logArray = JSON.parse(logFileString);
-        } catch (err) {
-            console.log("output file not created yet",err)
+const io = require("socket.io")(3000);
+
+masterLog.push({
+    message: "Master started...",
+    timeStamp: Date.now(),
+  });
+setInterval(()=>{
+    if(masterLog.length == 0) return;
+    let logFileString;
+    let logArray = [];
+    try {
+        logFileString = fs.readFileSync('./systemLogs.log', 'utf8');
+        logArray = JSON.parse(logFileString);
+    } catch (err) {
+        console.log("output file not created yet",err)
+    }
+    logArray = logArray.concat(masterLog);
+    masterLog=[]
+    fs.writeFile('systemLogs.log', JSON.stringify(logArray), err => {
+        if (err) {
+        console.error(err)
+        return
         }
-        logArray = logArray.concat(masterLog);
-        masterLog=[]
-        fs.writeFile('systemLogs.log', JSON.stringify(logArray), err => {
-            if (err) {
-            console.error(err)
-            return
-            }
-        })
-    },3000)
-})
-const io = new Server(server);
-
-
+    })
+},3000)
 masterConnection.once('open',async function(){
 
     if(await MetaData.checkMetaDataEmpty(masterConnection)){
@@ -46,6 +40,7 @@ masterConnection.once('open',async function(){
     }
     if(await MetaData.checkDataEmpty(masterConnection)){
             await MasterData.balanceData();
+            await io.sockets.emit('GetMetaData',await MetaData.getMetaData(masterConnection));
         }
   
     
@@ -62,10 +57,10 @@ const MasterData={
         documentsTablet1 = await BigTableCollection.find({}).skip(0).limit(documentsTablet).toArray().then(data=>{
              return data;
          });
-        await tablet.connect(dbs.tablet1);
-        await tablet.drop();
+        await tablet.connect(dbs.tablet1,1);
+        await tablet.drop(1);
 
-        await tablet.loadData(documentsTablet1);
+        await tablet.loadData(documentsTablet1,1);
         documentsTablet2 =  await BigTableCollection.find({}).skip(documentsTablet).limit(documentsTablet).toArray().then(data=>{
             return data;
         });
@@ -84,15 +79,12 @@ const MasterData={
             start:parseInt(documentsTablet3[0].anime_id),
             end:parseInt(documentsTablet3[documentsTablet3.length-1].anime_id)
         };
-        await tablet.disconnect();
-         await tablet.connect(dbs.tablet2);
-         await tablet.drop();
-         await tablet.loadData(documentsTablet2);
-         await tablet.disconnect();
-         await tablet.connect(dbs.tablet3);
-         await tablet.drop();
-         await tablet.loadData(documentsTablet3);
-         await tablet.disconnect();
+         await tablet.connect(dbs.tablet2,2);
+         await tablet.drop(2);
+         await tablet.loadData(documentsTablet2,2);
+         await tablet.connect(dbs.tablet3,3);
+         await tablet.drop(3);
+         await tablet.loadData(documentsTablet3,3);
          await MetaData.updateMetaData(masterConnection,tablet1KeyRange,tablet2KeyRange,tablet3KeyRange,documentsTablet,documentsTablet,documentsTablet);
     } finally {
         release();
@@ -110,6 +102,7 @@ const MasterData={
                 anime.anime_id=id;
                 id+=1;
             });
+            console.log(animeDocuments);
             await BigTableCollection.insertMany(animeDocuments);
             id=id-1;
             metadata.tablet3KeyRange.end=id;
@@ -128,6 +121,7 @@ const MasterData={
         await BigTableCollection.deleteMany({
             'anime_id': { $in: ids}
          });
+         let metadata = await MetaData.getMetaData(masterConnection);
          if(tabletId==1){
              metadata.tablet1Documents -= ids.length;
          }
@@ -137,6 +131,8 @@ const MasterData={
         if(tabletId==3){
             metadata.tablet3Documents -= ids.length;
         }
+        await MetaData.updateMetaData(masterConnection,metadata.tablet1KeyRange,metadata.tablet2KeyRange,metadata.tablet3KeyRange,metadata.tablet1Documents,metadata.tablet2Documents,metadata.tablet3Documents)
+
     },
 
     
@@ -160,7 +156,7 @@ const BROWSER_CLIENTS = [];
 const SERVER_CLIENTS = [];
 //Stay alive signal with tablet
 io.on("connection", socket => {
-        socket.on("source", payload => {
+        socket.on("source", async (payload) => {
             if (payload == "client")
             {
                 BROWSER_CLIENTS[socket.id] = socket;
@@ -177,7 +173,10 @@ io.on("connection", socket => {
                     timeStamp: Date.now(),
                   });
             }
+            console.log("Tablet Connected");
+            await socket.emit('GetMetaData',await MetaData.getMetaData(masterConnection));
         });
+
         socket.on("disconnect", () => {
             //if socket is not found in server array then it is a client
             //-1 => client
@@ -202,10 +201,11 @@ io.on("connection", socket => {
 
         });
         socket.on("tablet-update",async (payload)=>{
-            await tablet.connect(dbs[payload.tabletId]);
+            console.log(payload);
+            await tablet.connect(dbs["tablet"+payload.tabletId],payload.tabletId);
             let documents;
             if(payload.updateType!='delete'){
-            documents = await tablet.getUpdatedDocuments(payload.ids);
+            documents = await tablet.getUpdatedDocuments(payload.ids,payload.tabletId);
             }
             if(payload.updateType=='insert'){
                 await MasterData.insert(documents);
@@ -216,16 +216,14 @@ io.on("connection", socket => {
             if(payload.updateType=='delete'){
                 await MasterData.delete(payload.ids,payload.tabletId);                
             }
-            await tablet.disconnect();
             if(payload.updateType!='update'){
             await MasterData.balanceData();
             masterLog.push({
                 message: "master rebalanced the data",
                 timeStamp: Date.now(),
               });
-            const metadata =  await MetaData.getMetaData();
-            for (let i in BROWSER_CLIENTS)
-                BROWSER_CLIENTS[i].emit("metadata",metadata)
+            const metadata =  await MetaData.getMetaData(masterConnection);
+            await io.sockets.emit("GetMetaData", metadata);
             }
             masterLog.push({
                 message: "master updated and re-emitted the metadata",

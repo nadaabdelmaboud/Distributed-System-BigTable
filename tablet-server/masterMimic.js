@@ -7,20 +7,20 @@ io.on("connection", function (socket) {
     console.log("Tablet : ", data.tabletNumber, " started ");
     data = {
       metaData: {
-        tablet1Documents: 10,
-        tablet2Documents: 10,
-        tablet3Documents: 20,
+        tablet1Documents: 533,
+        tablet2Documents: 533,
+        tablet3Documents: 533,
         tablet1KeyRange: {
-          start: 0,
-          end: 10,
+          start: 1,
+          end: 567,
         },
         tablet2KeyRange: {
-          start: 11,
-          end: 20,
+          start: 568,
+          end: 1169,
         },
         tablet3KeyRange: {
-          start: 21,
-          end: 40,
+          start: 1170,
+          end: 1759
         },
       },
     };
@@ -33,20 +33,20 @@ io.on("connection", function (socket) {
     console.log("client started ");
     data = {
       metaData: {
-        tablet1Documents: 10,
-        tablet2Documents: 10,
-        tablet3Documents: 20,
+        tablet1Documents: 533,
+        tablet2Documents: 533,
+        tablet3Documents: 533,
         tablet1KeyRange: {
-          start: 0,
-          end: 10,
+          start: 1,
+          end: 567,
         },
         tablet2KeyRange: {
-          start: 11,
-          end: 20,
+          start: 568,
+          end: 1169,
         },
         tablet3KeyRange: {
-          start: 21,
-          end: 40,
+          start: 1170,
+          end: 1759
         },
       },
     };

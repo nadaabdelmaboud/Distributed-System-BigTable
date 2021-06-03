@@ -435,13 +435,14 @@ export default {
     });
     //Add listeners here
     //get Meta Data
-    this.socketMaster.emit("clientStarting");
+    this.socketMaster.emit("source","client");
     this.socketMaster.on("GetMetaData", (data) => {
-      this.metaData = data.metaData;
+      this.metaData = data;
       this.clientLogs.push({
         message: "Getting metadata successfully",
         timeStamp: Date.now(),
       });
+      console.log("hihihihihi",this.metaData);
     });
     // //Tablet 2 listeners
     // //Set
@@ -616,7 +617,8 @@ export default {
       if (this.animeMembers) DeleteCells.columnFamilies.push("members");
       console.log("DeleteCells ", DeleteCells);
       const tNum = this.validateRowKey(DeleteCells.rowKey);
-      if (tNum == 1 || tNum == 2)
+      console.log(tNum);
+      if(tNum == 1 || tNum == 2)
         this.socketTablet1.emit("DeleteCells", DeleteCells);
       if (tNum == 3) this.socketTablet2.emit("DeleteCells", DeleteCells);
 
@@ -630,7 +632,8 @@ export default {
         rowKey: this.deletedAnimeNumber,
       };
       const tNum = this.validateRowKey(DeleteRow.rowKey);
-      if (tNum == 1 || tNum == 2)
+      console.log(tNum);
+      if(tNum == 1 || tNum == 2)
         this.socketTablet1.emit("DeleteRow", DeleteRow);
       if (tNum == 3) this.socketTablet2.emit("DeleteRow", DeleteRow);
       this.clientLogs.push({

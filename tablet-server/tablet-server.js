@@ -3,13 +3,18 @@ const AnimeValidation = require("./anime.validation");
 let metaData = require("./tabletMetaData.js");
 var Mutex = require("async-mutex").Mutex;
 let set = metaData.set;
+let MasterUpdateD = [];
 
 let MUtexTablet1, MUtexTablet2;
+fs = require('fs')
 let tabletLogs = []; 
 
-require("./db.connection.js")(1);
-fs = require('fs')
 
+require("./server1.db.connection")
+  .connect()
+  .then(async (data) => {
+    await AnimeService.setModels();
+  });
 //Master socket setup(connecting tablet with master)
 var ioMaster = require("socket.io-client");
 var socketMaster = ioMaster.connect("http://localhost:3000/", {
@@ -38,17 +43,45 @@ tabletLogs.push({
 socketMaster.on("connect", function () {
   MUtexTablet1 = new Mutex();
   console.log("connected to Master");
-  socketMaster.emit("tabletStarting", {
-    tabletNumber: 1,
-  });
+  socketMaster.emit("source", "tablet");
   socketMaster.on("GetMetaData", (data) => {
-    set(data.metaData);
+    console.log(data);
+    set(data);
   });
   tabletLogs.push({
     message: "tablet number: 1 started and getting metadata",
     timeStamp: Date.now(),
   });
 });
+
+//send updates to master
+setInterval(function () {
+  if (MasterUpdateD.length != 0) {
+    ids1 = [];
+    ids2 = [];
+    for (i = 0; i < MasterUpdateD.length; i++) {
+      if (MasterUpdateD[i].tabletId == 1) ids1.push(MasterUpdateD[i].ids);
+      else ids2.push(MasterUpdateD[i].ids);
+    }
+    if (ids1.length != 0) {
+      MasterUpdateData = {
+        updateType: "update",
+        tabletId: 1,
+        ids:ids1
+      };
+      socketMaster.emit("tablet-update", MasterUpdateData);
+    }
+    if(ids2.length != 0){
+      MasterUpdateData = {
+        updateType: "update",
+        tabletId: 2,
+        ids: ids2,
+      };
+      socketMaster.emit("tablet-update", MasterUpdateData);
+    }
+    MasterUpdateD=[];
+  }
+}, 30000);
 
 ioTablet.on("connection", function (socket) {
   console.log("client connected to Tablet :", socket.client.id);
@@ -59,7 +92,7 @@ ioTablet.on("connection", function (socket) {
   //Tablet queries from client
 
   //the client must send the tablet number that contains the data
-  let tabletNumber = 1; //tablet not tablet server
+  let tabletNumber; //tablet not tablet server
 
   //check on each id and send to the appropriate tablet
   socket.on("ReadRows", async function (ClientData) { ///client
@@ -68,14 +101,17 @@ ioTablet.on("connection", function (socket) {
       message: "client => id: " + socket.client.id + "requested data reterival",
       timeStamp: Date.now(),
     });
-    //const tabletNumber = AnimeValidation.validateRowKey(ClientData.rowKeys);
-    if (tabletNumber == -1) {
-    console.log("row key doesn't exist");
-    tabletLogs.push({
-      message: "client => id: " + socket.client.id + "requested data reterival => Error: row key doesn't exist",
-      timeStamp: Date.now(),
-    });
-  }
+
+    tabletNumber = await AnimeValidation.validateRowKey(ClientData.rowKeys[0]);
+    console.log(tabletNumber);
+        //const tabletNumber = AnimeValidation.validateRowKey(ClientData.rowKeys);
+        if (tabletNumber == -1) {
+          console.log("row key doesn't exist");
+          tabletLogs.push({
+            message: "client => id: " + socket.client.id + "requested data reterival => Error: row key doesn't exist",
+            timeStamp: Date.now(),
+          });
+        }
     const data = await AnimeService.findRows(ClientData.rowKeys, tabletNumber);
     if (!data.data) {
       console.log(data.err);
@@ -107,6 +143,7 @@ ioTablet.on("connection", function (socket) {
       console.log("After aquire", MUtexTablet1.isLocked());
       //await new Promise((resolve) => setTimeout(resolve, 10000));
       console.log("Set the row with the updated data");
+      tabletNumber = await AnimeValidation.validateRowKey(ClientData.rowKey);
       const data = await AnimeService.updateAnime(
         ClientData.Anime,
         ClientData.rowKey,
@@ -118,6 +155,8 @@ ioTablet.on("connection", function (socket) {
           message: "client => id: " + socket.client.id + "requested data update => Error: " + data.err,
           timeStamp: Date.now(),
         });
+      } else {
+        MasterUpdateD.push({ tabletId: tabletNumber, ids: ClientData.rowKey });
       }
       socket.emit("SetResponse", data);
       tabletLogs.push({
@@ -148,7 +187,7 @@ ioTablet.on("connection", function (socket) {
       console.log("Add new Row");
       const data = await AnimeService.createAnime(
         ClientData.Anime,
-        tabletNumber
+        1
       );
       if (!data.data) {
         console.log(data.err);
@@ -156,9 +195,15 @@ ioTablet.on("connection", function (socket) {
           message: "client => id: " + socket.client.id + "requested add new row => Error: " + data.err,
           timeStamp: Date.now(),
         });
-      }
-      else{
-        socketMaster.emit("AddRowResponse", data.data);
+      } else {
+        console.log(data);
+        const masterUpdateData = {
+          tabletId: 1,
+          updateType: "insert",
+          ids: [data.data.anime_id],
+        };
+        console.log(masterUpdateData);
+        socketMaster.emit("tablet-update", masterUpdateData);
         tabletLogs.push({
           message: "client => id: " + socket.client.id + "requested add new row to master => Succeeded",
           timeStamp: Date.now(),
@@ -190,6 +235,7 @@ ioTablet.on("connection", function (socket) {
     });
     try {
       console.log("Delete Cells");
+      tabletNumber = await AnimeValidation.validateRowKey(ClientData.rowKey);
       const data = await AnimeService.deleteCells(
         ClientData.columnFamilies,
         ClientData.rowKey,
@@ -201,6 +247,8 @@ ioTablet.on("connection", function (socket) {
           message: "client => id: " + socket.client.id + "requested Delete Cells => Error: " + data.err,
           timeStamp: Date.now(),
         });
+      } else {
+        MasterUpdateD.push({ tabletId: tabletNumber, ids: ClientData.rowKey });
       }
       socket.emit("DeleteCellsResponse", data);
       tabletLogs.push({
@@ -228,6 +276,7 @@ ioTablet.on("connection", function (socket) {
     });
     try {
       console.log("Delete Row");
+      tabletNumber = await AnimeValidation.validateRowKey(ClientData.rowKey);
       const data = await AnimeService.deleteRow(
         ClientData.rowKey,
         tabletNumber
@@ -239,7 +288,12 @@ ioTablet.on("connection", function (socket) {
           timeStamp: Date.now(),
         });
       } else {
-        socketMaster.emit("DeleteRowResponse", data.data);
+        const masterUpdateData = {
+          tabletId: tabletNumber,
+          updateType: "delete",
+          ids: [ClientData.rowKey],
+        };
+        socketMaster.emit("tablet-update", masterUpdateData);
         tabletLogs.push({
           message: "client => id: " + socket.client.id + "requested Delete Row to master => Succeeded",
           timeStamp: Date.now(),

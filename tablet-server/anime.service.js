@@ -1,6 +1,9 @@
 const Anime = require("./anime.queries.js");
 const AnimeValidation = require("./anime.validation");
 const AnimeService = {
+  async setModels(){
+    await Anime.setAnimeModel();
+  },
   async findRows(rowKeys, tabletNum) {
     const isKeysValid = await AnimeValidation.validateRowKeys(rowKeys);
     if (isKeysValid == -1) return { data: false, err: "rowKey Doesn't Exist" };
@@ -36,10 +39,10 @@ const AnimeService = {
     return { data: result, err: "" };
   },
   async createAnime(newAnime, tabletNum) {
-    const isAnimeValid = await AnimeValidation.validateAddAnime(newAnime);
-    if (isAnimeValid.error)
-      return { data: false, err: isAnimeValid.error.message };
-    const result = await Anime.createAnime(newAnime, tabletNum);
+    const validResult = await AnimeValidation.validateAddAnime(newAnime);
+    if (validResult.isValidAnime.error)
+      return { data: false, err: validResult.isValidAnime.error.message };
+    const result = await Anime.createAnime(validResult.newAnime, tabletNum);
     if (!result || result.length == 0)
       return { data: false, err: "problem creating Anime" };
     return { data: result, err: "" };

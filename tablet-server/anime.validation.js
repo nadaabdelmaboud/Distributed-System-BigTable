@@ -37,7 +37,7 @@ const AnimeValidation = {
     if(!result.error){
       Anime.anime_id = (metaData.tablet3KeyRange.end + 1).toString();
     }
-    return result;
+    return {isValidAnime:result,newAnime:Anime};
   },
 };
 
