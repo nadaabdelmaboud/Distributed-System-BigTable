@@ -1,7 +1,17 @@
-const AnimeModel = require("./anime.model.js");
+let AnimeModel=[];
+const Models = require('./server1.db.connection').Models;
+const Models3 = require('./server2.db.connection').Models;
 
 const Tablet = {
+    async setAnimeModel(){
+        AnimeModel.push(await Models.getAnimeModel1());
+        AnimeModel.push(await Models.getAnimeModel2());
+        AnimeModel.push(await Models3.getAnimeModel3());
+
+    },
+
     async findRows(rowKeys,tabletNum){
+        console.log(tabletNum,AnimeModel,AnimeModel[tabletNum-1]);
         const data = await AnimeModel[tabletNum-1].find({anime_id:{$in : rowKeys}});
         return data;
     },

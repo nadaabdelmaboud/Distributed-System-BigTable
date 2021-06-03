@@ -4,14 +4,11 @@ const dbs = require('./config');
 const masterConnection  = mongoose.createConnection(dbs.master,{ useUnifiedTopology: true ,useNewUrlParser: true});
 const MetaData = require('./metaData');
 const tablet = require('./tablet-instance')
-const { Server } = require("socket.io");
+const io = require("socket.io")(3000);
 const Mutex = require('async-mutex').Mutex;
 const mutex = new Mutex();
 const app = express();
-const server = app.listen(3000,()=>{
-    console.log("Server is listening on port 3000")
-})
-const io = new Server(server);
+
 
 
 masterConnection.once('open',async function(){
@@ -21,6 +18,7 @@ masterConnection.once('open',async function(){
     }
     if(await MetaData.checkDataEmpty(masterConnection)){
             await MasterData.balanceData();
+            await io.sockets.emit('GetMetaData',await MetaData.getMetaData(masterConnection));
         }
   
     
@@ -37,10 +35,10 @@ const MasterData={
         documentsTablet1 = await BigTableCollection.find({}).skip(0).limit(documentsTablet).toArray().then(data=>{
              return data;
          });
-        await tablet.connect(dbs.tablet1);
-        await tablet.drop();
+        await tablet.connect(dbs.tablet1,1);
+        await tablet.drop(1);
 
-        await tablet.loadData(documentsTablet1);
+        await tablet.loadData(documentsTablet1,1);
         documentsTablet2 =  await BigTableCollection.find({}).skip(documentsTablet).limit(documentsTablet).toArray().then(data=>{
             return data;
         });
@@ -59,15 +57,12 @@ const MasterData={
             start:parseInt(documentsTablet3[0].anime_id),
             end:parseInt(documentsTablet3[documentsTablet3.length-1].anime_id)
         };
-        await tablet.disconnect();
-         await tablet.connect(dbs.tablet2);
-         await tablet.drop();
-         await tablet.loadData(documentsTablet2);
-         await tablet.disconnect();
-         await tablet.connect(dbs.tablet3);
-         await tablet.drop();
-         await tablet.loadData(documentsTablet3);
-         await tablet.disconnect();
+         await tablet.connect(dbs.tablet2,2);
+         await tablet.drop(2);
+         await tablet.loadData(documentsTablet2,2);
+         await tablet.connect(dbs.tablet3,3);
+         await tablet.drop(3);
+         await tablet.loadData(documentsTablet3,3);
          await MetaData.updateMetaData(masterConnection,tablet1KeyRange,tablet2KeyRange,tablet3KeyRange,documentsTablet,documentsTablet,documentsTablet);
     } finally {
         release();
@@ -134,12 +129,15 @@ const MasterData={
 const BROWSER_CLIENTS = {};
 const SERVER_CLIENTS = {};
 io.on("connection", socket => {
-        socket.on("source", payload => {
+        socket.on("source", (payload) => {
             if (payload == "client")
                 BROWSER_CLIENTS[socket.id] = socket;
             else if (payload == "tablet")
                 SERVER_CLIENTS[socket.id] = socket;
+            console.log("Tablet Connected");
+
         });
+
         socket.on("disconnect", () => {
             delete BROWSER_CLIENTS[socket.id];
             delete SERVER_CLIENTS[socket.id];
@@ -163,8 +161,10 @@ io.on("connection", socket => {
             if(payload.updateType!='update'){
             await MasterData.balanceData();
             const metadata =  await MetaData.getMetaData();
-            for (let i in BROWSER_CLIENTS)
-                BROWSER_CLIENTS[i].emit("metadata",metadata)
+            for (let i in BROWSER_CLIENTS){
+                BROWSER_CLIENTS[i].emit("metadata",metadata);
+                SERVER_CLIENTS[i].emit("metadata",metadata);
+            }
             }
         })
 });

@@ -5,9 +5,9 @@ var Mutex = require("async-mutex").Mutex;
 let set = metaData.set;
 
 let MUtexTablet1, MUtexTablet2;
-
-require("./db.connection.js")(1);
-
+require("./server1.db.connection").connect().then(async (data)=>{
+  await AnimeService.setModels();
+});
 //Master socket setup(connecting tablet with master)
 var ioMaster = require("socket.io-client");
 var socketMaster = ioMaster.connect("http://localhost:3000/", {
@@ -16,15 +16,15 @@ var socketMaster = ioMaster.connect("http://localhost:3000/", {
 
 //Tablet socket setup(connecting tablet with client)
 var ioTablet = require("socket.io")(8000);
-
 socketMaster.on("connect", function () {
   MUtexTablet1 = new Mutex();
   console.log("connected to Master");
-  socketMaster.emit("tabletStarting", {
-    tabletNumber: 1,
-  });
+  socketMaster.emit("source", 
+    "tablet",
+  );
   socketMaster.on("GetMetaData", (data) => {
-    set(data.metaData);
+    console.log(data);
+    set(data);
   });
 });
 
@@ -39,7 +39,8 @@ ioTablet.on("connection", function (socket) {
   //check on each id and send to the appropriate tablet
   socket.on("ReadRows", async function (ClientData) {
     console.log("read request is send");
-    //const tabletNumber = AnimeValidation.validateRowKey(ClientData.rowKeys);
+    tabletNumber = await AnimeValidation.validateRowKey(ClientData.rowKeys[0]);
+    console.log(tabletNumber);
     if (tabletNumber == -1) console.log("row key doesn't exist");
     const data = await AnimeService.findRows(ClientData.rowKeys, tabletNumber);
     if (!data.data) {
@@ -83,7 +84,7 @@ ioTablet.on("connection", function (socket) {
         console.log(data.err);
       }
       else{
-        socketMaster.emit("AddRowResponse", data.data);
+        socketMaster.emit("update-table", data.data);
       }
       socket.emit("AddRowResponse", data);
     } finally {

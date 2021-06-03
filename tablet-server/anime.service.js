@@ -1,6 +1,9 @@
 const Anime = require("./anime.queries.js");
 const AnimeValidation = require("./anime.validation");
 const AnimeService = {
+  async setModels(){
+    await Anime.setAnimeModel();
+  },
   async findRows(rowKeys, tabletNum) {
     const isKeysValid = await AnimeValidation.validateRowKeys(rowKeys);
     if (isKeysValid == -1) return { data: false, err: "rowKey Doesn't Exist" };
