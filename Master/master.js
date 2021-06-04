@@ -8,7 +8,7 @@ const io = require("socket.io")(3000);
 const Mutex = require('async-mutex').Mutex;
 const mutex = new Mutex();
 const app = express();
-
+let serversStatus=[]
 
 
 masterConnection.once('open',async function(){
@@ -24,7 +24,20 @@ masterConnection.once('open',async function(){
     
 })
 
+/* setInterval(async ()=>{
+  serversStatus=[];
+  await io.sockets.emit("GetServerStatus");
+  setTimeout(async () => {
+      if(serversStatus.length!=2){
+            await updateMetaDataAfterFailure();
+            await reAssignTabletToServer();
+      }
+
+ }, 2000);
+},120000); */
+
 const MasterData={
+   
     async checkBalance(){
         const metadata = await MetaData.getMetaData(masterConnection);
         const docs1 = metadata.tablet1Documents;
@@ -83,6 +96,8 @@ const MasterData={
          await tablet.drop(3);
          await tablet.loadData(documentsTablet3,3);
          await MetaData.updateMetaData(masterConnection,tablet1KeyRange,tablet2KeyRange,tablet3KeyRange,documentsTablet,documentsTablet,documentsTablet);
+         await io.sockets.emit("End-Balance");
+
     } finally {
         release();
     }
@@ -171,6 +186,9 @@ io.on("connection", socket => {
         socket.on("disconnect", () => {
             delete BROWSER_CLIENTS[socket.id];
             delete SERVER_CLIENTS[socket.id];
+        });
+        socket.on("ServerStatus", (payload) => {
+            serversStatus.push(payload);
         });
         socket.on("tablet-update",async (payload)=>{
             console.log(payload);

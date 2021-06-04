@@ -6,6 +6,18 @@ const MetaData={
         tablet1Documents:0,
         tablet2Documents:0,
         tablet3Documents:0,
+/*         tabletServer1Status:true,
+        tabletServer2Status:true,
+        server1:{
+            tablet1:true;
+            tablet2:true;
+            tablet3:false;
+        },
+        server2:{
+            tablet1:false;
+            tablet2:false;
+            tablet3:true;
+        }, */
         tablet1KeyRange:{
             start:0,
             end:0
