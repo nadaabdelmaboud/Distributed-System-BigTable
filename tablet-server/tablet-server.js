@@ -8,9 +8,8 @@ let MasterUpdateD = [];
 let MUtexTablet1, MUtexTablet2;
 let MasterLock;
 let MasterRelease;
-fs = require('fs')
-let tabletLogs = []; 
-
+fs = require("fs");
+let tabletLogs = [];
 
 require("./server1.db.connection")
   .connect()
@@ -23,13 +22,12 @@ var socketMaster = ioMaster.connect("http://localhost:3000/", {
   reconnection: true,
 });
 setInterval(() => {
-  if(tabletLogs.length)
-   {
+  if (tabletLogs.length) {
     socketMaster.emit("tabletLogs", tabletLogs);
     tabletLogs = [];
-   } 
+  }
 }, 3000);
-  tabletLogs.push({
+tabletLogs.push({
   message: "Connected to master",
   timeStamp: Date.now(),
 });
@@ -51,16 +49,16 @@ socketMaster.on("connect", function () {
     set(data);
   });
 
-    //Balance
-    socketMaster.on('Balance',async ()=>{
-        console.log("master is balancing");
-        MasterRelease = await MasterLock.acquire();
-    });
+  //Balance
+  socketMaster.on("Balance", async () => {
+    console.log("master is balancing");
+    MasterRelease = await MasterLock.acquire();
+  });
 
-    socketMaster.on('End-Balance', ()=>{
-        console.log("master finished balancing");
-        MasterRelease();
-    });
+  socketMaster.on("End-Balance", () => {
+    console.log("master finished balancing");
+    MasterRelease();
+  });
 
   tabletLogs.push({
     message: "tablet number: 1 started and getting metadata",
@@ -81,11 +79,11 @@ setInterval(function () {
       MasterUpdateData = {
         updateType: "update",
         tabletId: 1,
-        ids:ids1
+        ids: ids1,
       };
       socketMaster.emit("tablet-update", MasterUpdateData);
     }
-    if(ids2.length != 0){
+    if (ids2.length != 0) {
       MasterUpdateData = {
         updateType: "update",
         tabletId: 2,
@@ -93,14 +91,15 @@ setInterval(function () {
       };
       socketMaster.emit("tablet-update", MasterUpdateData);
     }
-    MasterUpdateD=[];
+    MasterUpdateD = [];
   }
 }, 30000);
 
 ioTablet.on("connection", function (socket) {
   console.log("client connected to Tablet :", socket.client.id);
   tabletLogs.push({
-    message: "tablet => number: 1 connected to client => id: " + socket.client.id,
+    message:
+      "tablet => number: 1 connected to client => id: " + socket.client.id,
     timeStamp: Date.now(),
   });
   //Tablet queries from client
@@ -109,56 +108,87 @@ ioTablet.on("connection", function (socket) {
   let tabletNumber; //tablet not tablet server
 
   //check on each id and send to the appropriate tablet
-  socket.on("ReadRows", async function (ClientData) { ///client
-    console.log("acuiring master lock  ",MasterLock.isLocked());
+  socket.on("ReadRows", async function (ClientData) {
+    ///client
+    console.log("acuiring master lock  ", MasterLock.isLocked());
     var before = new Date().getTime() / 1000;
-    if(MasterLock.isLocked())
-     {
+    if (MasterLock.isLocked()) {
       MasterRelease = await MasterLock.acquire();
       MasterRelease();
-     } 
-    console.log("time taken to acquire : ",(new Date().getTime() / 1000)- before);
+    }
+    console.log(
+      "time taken to acquire : ",
+      new Date().getTime() / 1000 - before
+    );
     console.log("read request is send");
     tabletLogs.push({
-    message: "client => id: " + socket.client.id + "requested data reterival",
-    timeStamp: Date.now(),
+      message: "client => id: " + socket.client.id + "requested data reterival",
+      timeStamp: Date.now(),
     });
+    const ids = await AnimeValidation.seperateId(ClientData.rowKeys);
+    const data1 = await AnimeService.findRows(ids.ids1, 1);
+    const data2 = await AnimeService.findRows(ids.ids2, 2);
 
-    tabletNumber = await AnimeValidation.validateRowKey(ClientData.rowKeys[0]);
-    console.log(tabletNumber);
-        //const tabletNumber = AnimeValidation.validateRowKey(ClientData.rowKeys);
-        if (tabletNumber == -1) {
-        console.log("row key doesn't exist");
-        tabletLogs.push({
-            message: "client => id: " + socket.client.id + "requested data reterival => Error: row key doesn't exist",
-            timeStamp: Date.now(),
-        });
-        }
-    const data = await AnimeService.findRows(ClientData.rowKeys, tabletNumber);
-    if (!data.data) {
-    console.log(data.err);
-    tabletLogs.push({
-    message: "client => id: " + socket.client.id + "requested data reterival => Error: " + data.err,
-    timeStamp: Date.now(),
-    });
+    if (!data1.data) {
+      console.log(data1.err);
+      tabletLogs.push({
+        message:
+          "client => id: " +
+          socket.client.id +
+          "requested data reterival => Error: " +
+          data1.err,
+        timeStamp: Date.now(),
+      });
     }
-    socket.emit("ReadRowsResponse", data);///tablet
+    if (!data2.data) {
+      console.log(data2.err);
+      tabletLogs.push({
+        message:
+          "client => id: " +
+          socket.client.id +
+          "requested data reterival => Error: " +
+          data2.err,
+        timeStamp: Date.now(),
+      });
+    }
+    var data = {};
+    data.data =
+      data1.data != false && data2.data !=false
+        ? data1.data.concat(data2.data)
+        : data1.data != false
+        ? data1.data
+        : data2.data;
+    data.errids =
+      data1.data == false && data2.data == false
+        ? ids.ids1.concat(ids.ids2)
+        : data1.data == false
+        ? ids.ids1
+        : data2.data == false
+        ? ids.ids2
+        : [];
+    console.log(data);
+    socket.emit("ReadRowsResponse", data); ///tablet
     tabletLogs.push({
-    message: "client => id: " + socket.client.id + "requested data reterival => Succeeded",
-    timeStamp: Date.now(),
+      message:
+        "client => id: " +
+        socket.client.id +
+        "requested data reterival => Succeeded",
+      timeStamp: Date.now(),
     });
   });
 
   socket.on("Set", async function (ClientData) {
-    console.log("acuiring master lock  ",MasterLock.isLocked());
+    console.log("acuiring master lock  ", MasterLock.isLocked());
     var before = new Date().getTime() / 1000;
-    if(MasterLock.isLocked())
-     {
+    if (MasterLock.isLocked()) {
       MasterRelease = await MasterLock.acquire();
       MasterRelease();
-     } 
-    console.log("time taken to acquire : ",(new Date().getTime() / 1000)- before);
-    
+    }
+    console.log(
+      "time taken to acquire : ",
+      new Date().getTime() / 1000 - before
+    );
+
     console.log("Before aquire", MUtexTablet1.isLocked());
     tabletLogs.push({
       message: "client => id: " + socket.client.id + "requested data update",
@@ -183,7 +213,11 @@ ioTablet.on("connection", function (socket) {
       if (!data.data) {
         console.log(data.err);
         tabletLogs.push({
-          message: "client => id: " + socket.client.id + "requested data update => Error: " + data.err,
+          message:
+            "client => id: " +
+            socket.client.id +
+            "requested data update => Error: " +
+            data.err,
           timeStamp: Date.now(),
         });
       } else {
@@ -191,7 +225,10 @@ ioTablet.on("connection", function (socket) {
       }
       socket.emit("SetResponse", data);
       tabletLogs.push({
-        message: "client => id: " + socket.client.id + "requested data update => Succeeded",
+        message:
+          "client => id: " +
+          socket.client.id +
+          "requested data update => Succeeded",
         timeStamp: Date.now(),
       });
     } finally {
@@ -205,14 +242,16 @@ ioTablet.on("connection", function (socket) {
   });
 
   socket.on("AddRow", async function (ClientData) {
-    console.log("acuiring master lock  ",MasterLock.isLocked());
+    console.log("acuiring master lock  ", MasterLock.isLocked());
     var before = new Date().getTime() / 1000;
-    if(MasterLock.isLocked())
-     {
+    if (MasterLock.isLocked()) {
       MasterRelease = await MasterLock.acquire();
       MasterRelease();
-     } 
-    console.log("time taken to acquire : ",(new Date().getTime() / 1000)- before);
+    }
+    console.log(
+      "time taken to acquire : ",
+      new Date().getTime() / 1000 - before
+    );
 
     tabletLogs.push({
       message: "client => id: " + socket.client.id + "requested to add new row",
@@ -225,14 +264,15 @@ ioTablet.on("connection", function (socket) {
     });
     try {
       console.log("Add new Row");
-      const data = await AnimeService.createAnime(
-        ClientData.Anime,
-        1
-      );
+      const data = await AnimeService.createAnime(ClientData.Anime, 1);
       if (!data.data) {
         console.log(data.err);
         tabletLogs.push({
-          message: "client => id: " + socket.client.id + "requested add new row => Error: " + data.err,
+          message:
+            "client => id: " +
+            socket.client.id +
+            "requested add new row => Error: " +
+            data.err,
           timeStamp: Date.now(),
         });
       } else {
@@ -245,13 +285,19 @@ ioTablet.on("connection", function (socket) {
         console.log(masterUpdateData);
         socketMaster.emit("tablet-update", masterUpdateData);
         tabletLogs.push({
-          message: "client => id: " + socket.client.id + "requested add new row to master => Succeeded",
+          message:
+            "client => id: " +
+            socket.client.id +
+            "requested add new row to master => Succeeded",
           timeStamp: Date.now(),
         });
       }
       socket.emit("AddRowResponse", data);
       tabletLogs.push({
-        message: "client => id: " + socket.client.id + "requested add new row to client => Succeeded",
+        message:
+          "client => id: " +
+          socket.client.id +
+          "requested add new row to client => Succeeded",
         timeStamp: Date.now(),
       });
     } finally {
@@ -264,21 +310,23 @@ ioTablet.on("connection", function (socket) {
   });
 
   socket.on("DeleteCells", async function (ClientData) {
-    console.log("acuiring master lock  ",MasterLock.isLocked());
+    console.log("acuiring master lock  ", MasterLock.isLocked());
     var before = new Date().getTime() / 1000;
-    if(MasterLock.isLocked())
-     {
+    if (MasterLock.isLocked()) {
       MasterRelease = await MasterLock.acquire();
       MasterRelease();
-     } 
-    console.log("time taken to acquire : ",(new Date().getTime() / 1000)- before);
+    }
+    console.log(
+      "time taken to acquire : ",
+      new Date().getTime() / 1000 - before
+    );
 
     tabletLogs.push({
       message: "client => id: " + socket.client.id + "requested Delete Cells",
       timeStamp: Date.now(),
     });
     const release = await MUtexTablet1.acquire();
-      tabletLogs.push({
+    tabletLogs.push({
       message: "client => id: " + socket.client.id + "acquired the lock",
       timeStamp: Date.now(),
     });
@@ -293,7 +341,11 @@ ioTablet.on("connection", function (socket) {
       if (!data.data) {
         console.log(data.err);
         tabletLogs.push({
-          message: "client => id: " + socket.client.id + "requested Delete Cells => Error: " + data.err,
+          message:
+            "client => id: " +
+            socket.client.id +
+            "requested Delete Cells => Error: " +
+            data.err,
           timeStamp: Date.now(),
         });
       } else {
@@ -301,7 +353,10 @@ ioTablet.on("connection", function (socket) {
       }
       socket.emit("DeleteCellsResponse", data);
       tabletLogs.push({
-        message: "client => id: " + socket.client.id + "requested Delete Cells => Succeeded",
+        message:
+          "client => id: " +
+          socket.client.id +
+          "requested Delete Cells => Succeeded",
         timeStamp: Date.now(),
       });
     } finally {
@@ -314,14 +369,16 @@ ioTablet.on("connection", function (socket) {
   });
 
   socket.on("DeleteRow", async function (ClientData) {
-    console.log("acuiring master lock  ",MasterLock.isLocked());
+    console.log("acuiring master lock  ", MasterLock.isLocked());
     var before = new Date().getTime() / 1000;
-    if(MasterLock.isLocked())
-     {
+    if (MasterLock.isLocked()) {
       MasterRelease = await MasterLock.acquire();
       MasterRelease();
-     } 
-    console.log("time taken to acquire : ",(new Date().getTime() / 1000)- before);
+    }
+    console.log(
+      "time taken to acquire : ",
+      new Date().getTime() / 1000 - before
+    );
 
     tabletLogs.push({
       message: "client => id: " + socket.client.id + "requested Delete Row",
@@ -342,7 +399,11 @@ ioTablet.on("connection", function (socket) {
       if (!data.data) {
         console.log(data.err);
         tabletLogs.push({
-          message: "client => id: " + socket.client.id + "requested Delete Row => Error: " + data.err,
+          message:
+            "client => id: " +
+            socket.client.id +
+            "requested Delete Row => Error: " +
+            data.err,
           timeStamp: Date.now(),
         });
       } else {
@@ -353,13 +414,19 @@ ioTablet.on("connection", function (socket) {
         };
         socketMaster.emit("tablet-update", masterUpdateData);
         tabletLogs.push({
-          message: "client => id: " + socket.client.id + "requested Delete Row to master => Succeeded",
+          message:
+            "client => id: " +
+            socket.client.id +
+            "requested Delete Row to master => Succeeded",
           timeStamp: Date.now(),
         });
       }
       socket.emit("DeleteRowResponse", data);
       tabletLogs.push({
-        message: "client => id: " + socket.client.id + "requested Delete Row to client => Succeeded",
+        message:
+          "client => id: " +
+          socket.client.id +
+          "requested Delete Row to client => Succeeded",
         timeStamp: Date.now(),
       });
     } finally {

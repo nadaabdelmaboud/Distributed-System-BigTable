@@ -7,6 +7,7 @@ const AnimeService = {
   async findRows(rowKeys, tabletNum) {
     const isKeysValid = await AnimeValidation.validateRowKeys(rowKeys);
     if (isKeysValid == -1) return { data: false, err: "rowKey Doesn't Exist" };
+    if (isKeysValid == -2) return { data: false, err: "" };
     if (isKeysValid == 0)
       return {
         data: false,
