@@ -243,7 +243,7 @@ io.on("connection", socket => {
                 logFileString = fs.readFileSync('./systemLogs.log', 'utf8');
                 logArray = JSON.parse(logFileString);
             } catch (err) {
-                console.log("output file not created yet client",err)
+                console.log("output file not created yet client")
             }
             logArray = logArray.concat(payload);
             logArray.sort(function(a, b) {

@@ -8,6 +8,8 @@ const Mutex = require('async-mutex').Mutex;
 const mutex = new Mutex();
 
 const fs = require('fs')
+
+fs.openSync("systemLogs.log", 'w+')
 let masterLog = []
 const io = require("socket.io")(3000);
 
@@ -16,18 +18,21 @@ masterLog.push({
     timeStamp: Date.now(),
   });
 setInterval(()=>{
-    if(masterLog.length == 0) return;
     let logFileString;
     let logArray = [];
     try {
         logFileString = fs.readFileSync('./systemLogs.log', 'utf8');
         logArray = JSON.parse(logFileString);
     } catch (err) {
-        console.log("output file not created yet",err)
+        console.log("output file not yet intialized")
     }
     logArray = logArray.concat(masterLog);
+    logArray.sort(function(a, b) {
+        return a.timeStamp - b.timeStamp;
+    });
     masterLog=[]
-    fs.writeFile('systemLogs.log', JSON.stringify(logArray), err => {
+    var ArrFormated = JSON.stringify(logArray,null,2)
+    fs.writeFile('systemLogs.log', ArrFormated, err => {
         if (err) {
         console.error(err)
         return
@@ -295,13 +300,13 @@ io.on("connection", socket => {
                 logFileString = fs.readFileSync('./systemLogs.log', 'utf8');
                 logArray = JSON.parse(logFileString);
             } catch (err) {
-                console.log("output file not created yet client",err)
-            }
+                console.log("output file not yet intialized")            }
             logArray = logArray.concat(payload);
             logArray.sort(function(a, b) {
                 return a.timeStamp - b.timeStamp;
             });
-            fs.writeFile('systemLogs.log', JSON.stringify(logArray), err => {
+            var ArrFormated = JSON.stringify(logArray,null,2)
+            fs.writeFile('systemLogs.log', ArrFormated , err => {
                 if (err) {
                 console.error(err)
                 return
@@ -310,7 +315,25 @@ io.on("connection", socket => {
         });
     
         socket.on("tabletLogs", payload => {
-           
+            let logFileString;
+            let logArray = [];
+            try {
+                logFileString = fs.readFileSync('./systemLogs.log', 'utf8');
+                logArray = JSON.parse(logFileString);
+            } catch (err) {
+                console.log("output file not yet intialized")
+            }
+            logArray = logArray.concat(payload);
+            logArray.sort(function(a, b) {
+                return a.timeStamp - b.timeStamp;
+            });
+            var ArrFormated = JSON.stringify(logArray,null,2)
+            fs.writeFile('systemLogs.log', ArrFormated , err => {
+                if (err) {
+                console.error(err)
+                return
+                }
+            })    
         });
 });
 
