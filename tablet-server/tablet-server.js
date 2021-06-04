@@ -264,7 +264,7 @@ ioTablet.on("connection", function (socket) {
     });
     try {
       console.log("Add new Row");
-      const data = await AnimeService.createAnime(ClientData.Anime, 1);
+      const data = await AnimeService.createAnime(ClientData, 1);
       if (!data.data) {
         console.log(data.err);
         tabletLogs.push({
@@ -280,7 +280,7 @@ ioTablet.on("connection", function (socket) {
         const masterUpdateData = {
           tabletId: 1,
           updateType: "insert",
-          ids: [data.data.anime_id],
+          ids: data.data,
         };
         console.log(masterUpdateData);
         socketMaster.emit("tablet-update", masterUpdateData);

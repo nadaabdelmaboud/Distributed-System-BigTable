@@ -597,7 +597,7 @@ export default {
           members: this.addAnimeMembers,
         },
       };
-      this.socketTablet2.emit("AddRow", CreateRow);
+      this.socketTablet1.emit("AddRow", CreateRow);
 
       this.clientLogs.push({
         message: "Sending request to add new row to data",

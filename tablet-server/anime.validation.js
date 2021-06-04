@@ -35,7 +35,7 @@ const AnimeValidation = {
     });
     return schema.validate(Anime);
   },
-  async validateAddAnime(Anime) {
+  async validateAddAnimes(Animes) {
     const schema = Joi.object({
       name: Joi.string().min(3).required(),
       genre: Joi.string().required(),
@@ -44,11 +44,20 @@ const AnimeValidation = {
       rating: Joi.string().required(),
       members: Joi.string().required(),
     });
-    const result = schema.validate(Anime);
-    if (!result.error) {
-      Anime.anime_id = (metaData.tablet3KeyRange.end + 1).toString();
+    
+    var result = { error: { message :"No Anime Info Was Send"} };
+    var newId = metaData.tablet3KeyRange.end;
+    for(let i=0;i<Animes.length;i++){
+      result = schema.validate(Animes[i]);
+      if (!result.error) {
+        newId+=1;
+        Animes[i].anime_id = (newId).toString();
+      }
+      else{
+        return { isValidAnimes: result, newAnimes: Animes };    
+      }
     }
-    return { isValidAnime: result, newAnime: Anime };
+    return { isValidAnimes: result, newAnimes: Animes };
   },
 };
 
