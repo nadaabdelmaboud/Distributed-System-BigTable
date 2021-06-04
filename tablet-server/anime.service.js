@@ -33,6 +33,10 @@ const AnimeService = {
     const isAnimeValid = await AnimeValidation.validateUpdateAnime(updateAnime);
     if (isAnimeValid.error)
       return { data: false, err: isAnimeValid.error.message };
+    const DoesExist = await Anime.getAnimeById(rowKey,tabletNum);
+    if(!DoesExist || DoesExist.length==0){
+      return { data: false, err: "rowKey Doesn't Exist" }; 
+    }
     const result = await Anime.updateAnime(updateAnime, rowKey, tabletNum);
     if (!result || result.length == 0)
       return { data: false, err: "problem updating Anime" };
@@ -55,6 +59,10 @@ const AnimeService = {
         data: false,
         err: `this rowKey belongs to tablet number: ${isKeyValid}`,
       };
+    const DoesExist = await Anime.getAnimeById(rowKey,tabletNum);
+    if(!DoesExist || DoesExist.length==0){
+      return { data: false, err: "rowKey Doesn't Exist" }; 
+    }
     const result = await Anime.deleteCells(columnFamily, rowKey, tabletNum);
     if (!result || result.length == 0)
       return { data: false, err: "problem deleting cell" };
@@ -68,9 +76,15 @@ const AnimeService = {
         data: false,
         err: `this rowKey belongs to tablet number: ${isKeyValid}`,
       };
+    const DoesExist = await Anime.getAnimeById(rowKey,tabletNum);
+    if(!DoesExist || DoesExist.length==0){
+      return { data: false, err: "The row Key Doesn't Exist" }; 
+    }
     const result = await Anime.deleteRow(rowKey, tabletNum);
     if (!result || result.length == 0)
       return { data: false, err: "problem deleting Anime" };
+    if(result.deletedCount == 0)
+      return { data: false, err: "The row Key Doesn't Exist" };
     return { data: result, err: "" };
   },
 };

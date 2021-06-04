@@ -150,6 +150,8 @@ ioTablet.on("connection", function (socket) {
   });
 
   socket.on("Set", async function (ClientData) {
+    console.log("SET Request Is Send ........................");
+    console.log("///////////////",ClientData);
     console.log("acuiring master lock  ",MasterLock.isLocked());
     var before = new Date().getTime() / 1000;
     if(MasterLock.isLocked())
@@ -175,11 +177,13 @@ ioTablet.on("connection", function (socket) {
       //await new Promise((resolve) => setTimeout(resolve, 10000));
       console.log("Set the row with the updated data");
       tabletNumber = await AnimeValidation.validateRowKey(ClientData.rowKey);
+      console.log("///////////////tablet number: ",tabletNumber);
       const data = await AnimeService.updateAnime(
         ClientData.Anime,
         ClientData.rowKey,
         tabletNumber
       );
+      console.log("////////////////////data: ", data);
       if (!data.data) {
         console.log(data.err);
         tabletLogs.push({

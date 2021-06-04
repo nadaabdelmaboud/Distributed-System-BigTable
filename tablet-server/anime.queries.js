@@ -17,6 +17,8 @@ const Tablet = {
     },
     async updateAnime(Anime,rowKey,tabletNum){
         const updatedAnime = await AnimeModel[tabletNum-1].find({anime_id:rowKey});
+        if(!updatedAnime || updatedAnime.length==0)
+            return updatedAnime;
         const updatedRecord = updatedAnime[0];
         if(Anime.name) updatedRecord.name = Anime.name;
         if(Anime.genre) updatedRecord.genre = Anime.genre;
@@ -49,7 +51,12 @@ const Tablet = {
           { anime_id: rowKey },
           { $unset: fields }
         );
+        console.log(result);
         return result;
+    },
+    async getAnimeById(anime_id,tabletNum){
+        const data = await AnimeModel[tabletNum-1].find({anime_id:anime_id});
+        return data;
     },
     async deleteRow(rowKey,tabletNum){
         const result = await AnimeModel[tabletNum-1].deleteOne({anime_id:rowKey});
