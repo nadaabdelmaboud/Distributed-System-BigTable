@@ -6,6 +6,7 @@ const MetaData = require('./metaData');
 const tablet = require('./tablet-instance')
 const Mutex = require('async-mutex').Mutex;
 const mutex = new Mutex();
+
 const fs = require('fs')
 let masterLog = []
 const io = require("socket.io")(3000);
@@ -46,9 +47,31 @@ masterConnection.once('open',async function(){
     
 })
 
+
+
 const MasterData={
+   
+    async checkBalance(){
+        const metadata = await MetaData.getMetaData(masterConnection);
+        const docs1 = metadata.tablet1Documents;
+        const docs2 = metadata.tablet2Documents;
+        const docs3 = metadata.tablet3Documents;
+        const threshold = 50;
+        if(((docs1-docs2>=threshold)||(docs2-docs1>=threshold))((docs1-docs3>=threshold)||(docs3-docs1>=threshold))||((docs3-docs2>=threshold)||(docs2-docs3>=threshold)))
+        return true;
+
+        return false;
+
+    },
     async balanceData(){
         //drop 3 databases
+        const checkedBalance = await checkBalance();
+        if(!checkBalance){
+            return;
+        }
+        else{
+            await io.sockets.emit("Balance");
+        }
         const release = await mutex.acquire();
         try {
         const BigTableCollection = (await masterConnection).collection("BigTable");
@@ -86,6 +109,12 @@ const MasterData={
          await tablet.drop(3);
          await tablet.loadData(documentsTablet3,3);
          await MetaData.updateMetaData(masterConnection,tablet1KeyRange,tablet2KeyRange,tablet3KeyRange,documentsTablet,documentsTablet,documentsTablet);
+         await io.sockets.emit("End-Balance");
+            masterLog.push({
+                message: "master rebalanced the data",
+                timeStamp: Date.now(),
+              });
+
     } finally {
         release();
     }
@@ -131,8 +160,15 @@ const MasterData={
         if(tabletId==3){
             metadata.tablet3Documents -= ids.length;
         }
+        const release = await mutex.acquire();
+        try {
+        //lock
         await MetaData.updateMetaData(masterConnection,metadata.tablet1KeyRange,metadata.tablet2KeyRange,metadata.tablet3KeyRange,metadata.tablet1Documents,metadata.tablet2Documents,metadata.tablet3Documents)
-
+        //unlock
+        }
+        finally {
+            release();
+        }
     },
 
     
@@ -200,6 +236,7 @@ io.on("connection", socket => {
               });
 
         });
+      
         socket.on("tablet-update",async (payload)=>{
             console.log(payload);
             await tablet.connect(dbs["tablet"+payload.tabletId],payload.tabletId);
@@ -218,10 +255,7 @@ io.on("connection", socket => {
             }
             if(payload.updateType!='update'){
             await MasterData.balanceData();
-            masterLog.push({
-                message: "master rebalanced the data",
-                timeStamp: Date.now(),
-              });
+         
             const metadata =  await MetaData.getMetaData(masterConnection);
             await io.sockets.emit("GetMetaData", metadata);
             masterLog.push({
