@@ -57,12 +57,18 @@ socketMaster.on("connect", function () {
 
     //Balance
     socketMaster.on('Balance',async ()=>{
-        console.log("master is balancing");
+      tabletLogs.push({
+        message: "Tablet 1 blocked Requests as master is rebalancing",
+        timeStamp: Date.now(),
+      });
         MasterRelease = await MasterLock.acquire();
     });
 
     socketMaster.on('End-Balance', ()=>{
-        console.log("master finished balancing");
+      tabletLogs.push({
+        message: "master finished balancing, Tablet 1 removed block",
+        timeStamp: Date.now(),
+      });
         MasterRelease();
     });
 });
