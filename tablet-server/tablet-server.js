@@ -6,6 +6,8 @@ let set = metaData.set;
 let MasterUpdateD = [];
 
 let MUtexTablet1, MUtexTablet2;
+let M;
+let MasterRelease;
 fs = require('fs')
 let tabletLogs = []; 
 
@@ -42,12 +44,25 @@ tabletLogs.push({
 
 socketMaster.on("connect", function () {
   MUtexTablet1 = new Mutex();
+  M = new Mutex();
   console.log("connected to Master");
   socketMaster.emit("source", "tablet");
   socketMaster.on("GetMetaData", (data) => {
     console.log(data);
     set(data);
   });
+
+    //Balance
+    socketMaster.on('Balance',async ()=>{
+        console.log("master is balancing");
+        MasterRelease = await M.acquire();
+    });
+
+    socketMaster.on('End-Balance', ()=>{
+        console.log("master finished balancing");
+        MasterRelease();
+    });
+
   tabletLogs.push({
     message: "tablet number: 1 started and getting metadata",
     timeStamp: Date.now(),
@@ -96,35 +111,43 @@ ioTablet.on("connection", function (socket) {
 
   //check on each id and send to the appropriate tablet
   socket.on("ReadRows", async function (ClientData) { ///client
-    console.log("read request is send");
-    tabletLogs.push({
-      message: "client => id: " + socket.client.id + "requested data reterival",
-      timeStamp: Date.now(),
-    });
+    console.log("acuiring master lock  ",M.isLocked());
+    var before = new Date().getTime() / 1000;
+    MasterRelease = await M.acquire();
+    console.log("time taken to acquire : ",(new Date().getTime() / 1000)- before);
+    try{
+        console.log("read request is send");
+        tabletLogs.push({
+        message: "client => id: " + socket.client.id + "requested data reterival",
+        timeStamp: Date.now(),
+        });
 
-    tabletNumber = await AnimeValidation.validateRowKey(ClientData.rowKeys[0]);
-    console.log(tabletNumber);
-        //const tabletNumber = AnimeValidation.validateRowKey(ClientData.rowKeys);
-        if (tabletNumber == -1) {
-          console.log("row key doesn't exist");
-          tabletLogs.push({
-            message: "client => id: " + socket.client.id + "requested data reterival => Error: row key doesn't exist",
-            timeStamp: Date.now(),
-          });
+        tabletNumber = await AnimeValidation.validateRowKey(ClientData.rowKeys[0]);
+        console.log(tabletNumber);
+            //const tabletNumber = AnimeValidation.validateRowKey(ClientData.rowKeys);
+            if (tabletNumber == -1) {
+            console.log("row key doesn't exist");
+            tabletLogs.push({
+                message: "client => id: " + socket.client.id + "requested data reterival => Error: row key doesn't exist",
+                timeStamp: Date.now(),
+            });
+            }
+        const data = await AnimeService.findRows(ClientData.rowKeys, tabletNumber);
+        if (!data.data) {
+        console.log(data.err);
+        tabletLogs.push({
+        message: "client => id: " + socket.client.id + "requested data reterival => Error: " + data.err,
+        timeStamp: Date.now(),
+        });
         }
-    const data = await AnimeService.findRows(ClientData.rowKeys, tabletNumber);
-    if (!data.data) {
-      console.log(data.err);
-      tabletLogs.push({
-      message: "client => id: " + socket.client.id + "requested data reterival => Error: " + data.err,
-      timeStamp: Date.now(),
-    });
-  }
-    socket.emit("ReadRowsResponse", data);///tablet
-    tabletLogs.push({
-      message: "client => id: " + socket.client.id + "requested data reterival => Succeeded",
-      timeStamp: Date.now(),
-    });
+        socket.emit("ReadRowsResponse", data);///tablet
+        tabletLogs.push({
+        message: "client => id: " + socket.client.id + "requested data reterival => Succeeded",
+        timeStamp: Date.now(),
+        });
+    } finally {
+        MasterRelease();
+    }
   });
 
   socket.on("Set", async function (ClientData) {
