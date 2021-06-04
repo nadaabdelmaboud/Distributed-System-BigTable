@@ -56,8 +56,26 @@ const MasterData={
         const docs1 = metadata.tablet1Documents;
         const docs2 = metadata.tablet2Documents;
         const docs3 = metadata.tablet3Documents;
-        const threshold = 50;
-        if(((docs1-docs2>=threshold)||(docs2-docs1>=threshold))((docs1-docs3>=threshold)||(docs3-docs1>=threshold))||((docs3-docs2>=threshold)||(docs2-docs3>=threshold)))
+        const threshold = 1;
+        if(
+            (
+                (docs1-docs2>=threshold)
+                ||
+                (docs2-docs1>=threshold)
+            )
+            ||
+            (
+                (docs1-docs3>=threshold)
+                ||
+                (docs3-docs1>=threshold)
+            )
+            ||
+            (
+                (docs3-docs2>=threshold)
+                ||
+                (docs2-docs3>=threshold)
+            )
+        )
         return true;
 
         return false;
@@ -65,13 +83,14 @@ const MasterData={
     },
     async balanceData(){
         //drop 3 databases
-        const checkedBalance = await checkBalance();
-        if(!checkBalance){
+        const checkedBalance = await MasterData.checkBalance();
+        if(!checkedBalance){
             return;
         }
         else{
             await io.sockets.emit("Balance");
         }
+        await new Promise((resolve) => setTimeout(resolve, 10000));
         const release = await mutex.acquire();
         try {
         const BigTableCollection = (await masterConnection).collection("BigTable");

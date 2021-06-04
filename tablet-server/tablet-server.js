@@ -6,7 +6,7 @@ let set = metaData.set;
 let MasterUpdateD = [];
 
 let MUtexTablet1, MUtexTablet2;
-let M;
+let MasterLock;
 let MasterRelease;
 fs = require('fs')
 let tabletLogs = []; 
@@ -23,7 +23,6 @@ var socketMaster = ioMaster.connect("http://localhost:3000/", {
   reconnection: true,
 });
 setInterval(() => {
-  console.log("sending to master", tabletLogs);
   if(tabletLogs.length)
    {
     socketMaster.emit("tabletLogs", tabletLogs);
@@ -44,7 +43,7 @@ tabletLogs.push({
 
 socketMaster.on("connect", function () {
   MUtexTablet1 = new Mutex();
-  M = new Mutex();
+  MasterLock = new Mutex();
   console.log("connected to Master");
   socketMaster.emit("source", "tablet");
   socketMaster.on("GetMetaData", (data) => {
@@ -55,7 +54,7 @@ socketMaster.on("connect", function () {
     //Balance
     socketMaster.on('Balance',async ()=>{
         console.log("master is balancing");
-        MasterRelease = await M.acquire();
+        MasterRelease = await MasterLock.acquire();
     });
 
     socketMaster.on('End-Balance', ()=>{
@@ -111,46 +110,55 @@ ioTablet.on("connection", function (socket) {
 
   //check on each id and send to the appropriate tablet
   socket.on("ReadRows", async function (ClientData) { ///client
-    console.log("acuiring master lock  ",M.isLocked());
+    console.log("acuiring master lock  ",MasterLock.isLocked());
     var before = new Date().getTime() / 1000;
-    MasterRelease = await M.acquire();
+    if(MasterLock.isLocked())
+     {
+      MasterRelease = await MasterLock.acquire();
+      MasterRelease();
+     } 
     console.log("time taken to acquire : ",(new Date().getTime() / 1000)- before);
-    try{
-        console.log("read request is send");
-        tabletLogs.push({
-        message: "client => id: " + socket.client.id + "requested data reterival",
-        timeStamp: Date.now(),
-        });
+    console.log("read request is send");
+    tabletLogs.push({
+    message: "client => id: " + socket.client.id + "requested data reterival",
+    timeStamp: Date.now(),
+    });
 
-        tabletNumber = await AnimeValidation.validateRowKey(ClientData.rowKeys[0]);
-        console.log(tabletNumber);
-            //const tabletNumber = AnimeValidation.validateRowKey(ClientData.rowKeys);
-            if (tabletNumber == -1) {
-            console.log("row key doesn't exist");
-            tabletLogs.push({
-                message: "client => id: " + socket.client.id + "requested data reterival => Error: row key doesn't exist",
-                timeStamp: Date.now(),
-            });
-            }
-        const data = await AnimeService.findRows(ClientData.rowKeys, tabletNumber);
-        if (!data.data) {
-        console.log(data.err);
+    tabletNumber = await AnimeValidation.validateRowKey(ClientData.rowKeys[0]);
+    console.log(tabletNumber);
+        //const tabletNumber = AnimeValidation.validateRowKey(ClientData.rowKeys);
+        if (tabletNumber == -1) {
+        console.log("row key doesn't exist");
         tabletLogs.push({
-        message: "client => id: " + socket.client.id + "requested data reterival => Error: " + data.err,
-        timeStamp: Date.now(),
+            message: "client => id: " + socket.client.id + "requested data reterival => Error: row key doesn't exist",
+            timeStamp: Date.now(),
         });
         }
-        socket.emit("ReadRowsResponse", data);///tablet
-        tabletLogs.push({
-        message: "client => id: " + socket.client.id + "requested data reterival => Succeeded",
-        timeStamp: Date.now(),
-        });
-    } finally {
-        MasterRelease();
+    const data = await AnimeService.findRows(ClientData.rowKeys, tabletNumber);
+    if (!data.data) {
+    console.log(data.err);
+    tabletLogs.push({
+    message: "client => id: " + socket.client.id + "requested data reterival => Error: " + data.err,
+    timeStamp: Date.now(),
+    });
     }
+    socket.emit("ReadRowsResponse", data);///tablet
+    tabletLogs.push({
+    message: "client => id: " + socket.client.id + "requested data reterival => Succeeded",
+    timeStamp: Date.now(),
+    });
   });
 
   socket.on("Set", async function (ClientData) {
+    console.log("acuiring master lock  ",MasterLock.isLocked());
+    var before = new Date().getTime() / 1000;
+    if(MasterLock.isLocked())
+     {
+      MasterRelease = await MasterLock.acquire();
+      MasterRelease();
+     } 
+    console.log("time taken to acquire : ",(new Date().getTime() / 1000)- before);
+    
     console.log("Before aquire", MUtexTablet1.isLocked());
     tabletLogs.push({
       message: "client => id: " + socket.client.id + "requested data update",
@@ -197,6 +205,15 @@ ioTablet.on("connection", function (socket) {
   });
 
   socket.on("AddRow", async function (ClientData) {
+    console.log("acuiring master lock  ",MasterLock.isLocked());
+    var before = new Date().getTime() / 1000;
+    if(MasterLock.isLocked())
+     {
+      MasterRelease = await MasterLock.acquire();
+      MasterRelease();
+     } 
+    console.log("time taken to acquire : ",(new Date().getTime() / 1000)- before);
+
     tabletLogs.push({
       message: "client => id: " + socket.client.id + "requested to add new row",
       timeStamp: Date.now(),
@@ -247,6 +264,15 @@ ioTablet.on("connection", function (socket) {
   });
 
   socket.on("DeleteCells", async function (ClientData) {
+    console.log("acuiring master lock  ",MasterLock.isLocked());
+    var before = new Date().getTime() / 1000;
+    if(MasterLock.isLocked())
+     {
+      MasterRelease = await MasterLock.acquire();
+      MasterRelease();
+     } 
+    console.log("time taken to acquire : ",(new Date().getTime() / 1000)- before);
+
     tabletLogs.push({
       message: "client => id: " + socket.client.id + "requested Delete Cells",
       timeStamp: Date.now(),
@@ -288,6 +314,15 @@ ioTablet.on("connection", function (socket) {
   });
 
   socket.on("DeleteRow", async function (ClientData) {
+    console.log("acuiring master lock  ",MasterLock.isLocked());
+    var before = new Date().getTime() / 1000;
+    if(MasterLock.isLocked())
+     {
+      MasterRelease = await MasterLock.acquire();
+      MasterRelease();
+     } 
+    console.log("time taken to acquire : ",(new Date().getTime() / 1000)- before);
+
     tabletLogs.push({
       message: "client => id: " + socket.client.id + "requested Delete Row",
       timeStamp: Date.now(),
