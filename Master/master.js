@@ -90,7 +90,7 @@ const MasterData={
         else{
             await io.sockets.emit("Balance");
         }
-        await new Promise((resolve) => setTimeout(resolve, 10000));
+        //await new Promise((resolve) => setTimeout(resolve, 10000));
         const release = await mutex.acquire();
         try {
         const BigTableCollection = (await masterConnection).collection("BigTable");
