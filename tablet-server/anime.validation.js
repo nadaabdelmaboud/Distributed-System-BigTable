@@ -1,17 +1,28 @@
 const Joi = require("joi");
-const { metaData,set} = require("./tabletMetaData.js");
+const { metaData, set } = require("./tabletMetaData.js");
 const AnimeValidation = {
   async validateRowKey(rowKey) {
     return validateRowKey(rowKey);
   },
   async validateRowKeys(rowKeys) {
+    if(rowKeys.length==0)return -2;
     let tablet = await validateRowKey(rowKeys[0]);
     for (let i = 1; i < rowKeys.length; i++) {
       tabletNum = await validateRowKey(rowKeys[i]);
-      if(tabletNum == -1)return -1;
-      if(tabletNum != tablet)return 0;
+      if (tabletNum == -1) return -1;
+      if (tabletNum != tablet) return 0;
     }
     return tablet;
+  },
+  async seperateId(rowKeys) {
+    var ids1 = [];
+    var ids2 = [];
+    for (let i = 0; i < rowKeys.length; i++) {
+      tabletNum = await validateRowKey(rowKeys[i]);
+      if (tabletNum == 1) ids1.push(rowKeys[i]);
+      if (tabletNum == 2) ids2.push(rowKeys[i]);
+    }
+    return { ids1: ids1, ids2: ids2 };
   },
   async validateUpdateAnime(Anime) {
     const schema = Joi.object({
@@ -24,7 +35,7 @@ const AnimeValidation = {
     });
     return schema.validate(Anime);
   },
-  async validateAddAnime(Anime) {
+  async validateAddAnimes(Animes) {
     const schema = Joi.object({
       name: Joi.string().min(3).required(),
       genre: Joi.string().required(),
@@ -33,11 +44,20 @@ const AnimeValidation = {
       rating: Joi.string().required(),
       members: Joi.string().required(),
     });
-    const result = schema.validate(Anime);
-    if(!result.error){
-      Anime.anime_id = (metaData.tablet3KeyRange.end + 1).toString();
+    
+    var result = { error: { message :"No Anime Info Was Send"} };
+    var newId = metaData.tablet3KeyRange.end;
+    for(let i=0;i<Animes.length;i++){
+      result = schema.validate(Animes[i]);
+      if (!result.error) {
+        newId+=1;
+        Animes[i].anime_id = (newId).toString();
+      }
+      else{
+        return { isValidAnimes: result, newAnimes: Animes };    
+      }
     }
-    return {isValidAnime:result,newAnime:Anime};
+    return { isValidAnimes: result, newAnimes: Animes };
   },
 };
 

@@ -7,6 +7,7 @@ const AnimeService = {
   async findRows(rowKeys, tabletNum) {
     const isKeysValid = await AnimeValidation.validateRowKeys(rowKeys);
     if (isKeysValid == -1) return { data: false, err: "rowKey Doesn't Exist" };
+    if (isKeysValid == -2) return { data: false, err: "" };
     if (isKeysValid == 0)
       return {
         data: false,
@@ -42,12 +43,12 @@ const AnimeService = {
       return { data: false, err: "problem updating Anime" };
     return { data: result, err: "" };
   },
-  async createAnime(newAnime, tabletNum) {
-    const validResult = await AnimeValidation.validateAddAnime(newAnime);
-    if (validResult.isValidAnime.error)
-      return { data: false, err: validResult.isValidAnime.error.message };
-    const result = await Anime.createAnime(validResult.newAnime, tabletNum);
-    if (!result || result.length == 0)
+  async createAnime(newAnimes, tabletNum) {
+    const validResult = await AnimeValidation.validateAddAnimes(newAnimes);
+    if (validResult.isValidAnimes.error)
+      return { data: false, err: validResult.isValidAnimes.error.message };
+    const result = await Anime.createAnime(validResult.newAnimes, tabletNum);
+    if (result.length == 0)
       return { data: false, err: "problem creating Anime" };
     return { data: result, err: "" };
   },

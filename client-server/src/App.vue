@@ -42,6 +42,16 @@
             </div>
           </div>
         </div>
+        <div v-if="errorDetected">
+          <p>Error detected in row keys:</p>
+          <div v-for="error in errors" :key="error" class="errorList">
+            <div class="errorItems">
+              <div>
+                {{ error }}
+              </div>
+            </div>
+          </div>
+        </div>
         <div>
           <button type="submit">Get Animes</button>
         </div>
@@ -131,7 +141,7 @@
     <!--Add new anime-->
     <h2>Add new Anime</h2>
     <div class="container clientForm">
-      <form id="AddForm" v-on:submit.prevent="AddRowSubmit">
+      <form id="AddForm">
         <div>
           <label for="addAnimeName">Anime Name</label>
           <input
@@ -199,7 +209,7 @@
           />
         </div>
         <div>
-          <button type="submit">Submit</button>
+          <button @click="AddRowSubmit()">Submit</button>
           <button @click="addMultipleAnimes()">Add Animes</button>
         </div>
       </form>
@@ -378,6 +388,9 @@ input {
 .arrayItems {
   border: 2px solid #2c3e50;
 }
+.errorList {
+  display: inline-block;
+}
 #check {
   margin: 0;
   width: 20px;
@@ -448,12 +461,15 @@ export default {
       clientLogs: [],
       messageToast: "",
       addAnimes: [],
+      port: "",
+      errorDetected: false,
+      errors: [],
     };
   },
   beforeDestroy() {
     console.log("before destroy");
     this.clientLogs.push({
-      message: "client is disconnecting ",
+      message: `Client (${this.port}) is disconnecting `,
       timeStamp: Date.now(),
     });
     this.socketMaster.emit("clientLogs", this.clientLogs);
@@ -461,11 +477,14 @@ export default {
   },
   created() {
     //starting tablet socket connection
+    var p = window.location.href;
+    this.port = p.substring(p.length - 5, p.length - 1);
+    console.log(this.port);
     this.socketTablet1 = io.connect("http://localhost:8000/", {
       transports: ["websocket"],
     });
     this.clientLogs.push({
-      message: "Connected to tablet",
+      message: `Client (${this.port}) is Connecting to tablet`,
       timeStamp: Date.now(),
     });
     // this.socketTablet2 = io.connect("http://localhost:9000/", {
@@ -476,7 +495,7 @@ export default {
       transports: ["websocket"],
     });
     this.clientLogs.push({
-      message: "Connected to master",
+      message: `Client (${this.port})Connected to master`,
       timeStamp: Date.now(),
     });
     //Add listeners here
@@ -485,7 +504,8 @@ export default {
     this.socketMaster.on("GetMetaData", (data) => {
       this.metaData = data;
       this.clientLogs.push({
-        message: "Getting metadata successfully",
+        message: `Client (${this.port}) Got metadata successfully`,
+        metaData: data,
         timeStamp: Date.now(),
       });
       console.log("hihihihihi", this.metaData);
@@ -546,7 +566,8 @@ export default {
       this.updatedAnimeMembers = "";
 
       this.clientLogs.push({
-        message: "Updated data recieved",
+        message: `Client (${this.port}) :  Updated data successfully`,
+        UpdateData: UpdateData,
         timeStamp: Date.now(),
       });
     });
@@ -567,7 +588,8 @@ export default {
       }
 
       this.clientLogs.push({
-        message: "Delete cells finished successfully",
+        message: `Client (${this.port}) : Delete cells finished successfully`,
+        DeleteCells: DeleteCells,
         timeStamp: Date.now(),
       });
       this.deletedFamilyAnimeNumber = "";
@@ -587,11 +609,12 @@ export default {
         this.messageToast = DeleteRow.err;
       } else {
         this.showToast();
-        this.messageToast = "Row is deleted successfully";
+        this.messageToast = "Rows are deleted successfully";
       }
 
       this.clientLogs.push({
-        message: "Delete row finished successfully",
+        message: `Client (${this.port}) : Delete row finished successfully`,
+        DeleteRow: DeleteRow,
         timeStamp: Date.now(),
       });
       this.deletedAnimeNumber = "";
@@ -604,9 +627,22 @@ export default {
         this.showToast();
         this.messageToast = CreateRow.err;
       } else {
-        this.showToast();
-        this.messageToast =
-          "Adding new row succeeded with id: " + CreateRow.data.anime_id;
+        let outOfRange = [];
+        for (let i = 0; i < CreateRow.data.length; i++) {
+          outOfRange.push(CreateRow.data[i]);
+        }
+
+        if (outOfRange.length != 0) {
+          this.showToast();
+          this.messageToast = "Rows of id: ";
+          let len = outOfRange.length;
+          for (let i = 0; i < len - 1; i++) {
+            this.messageToast = this.messageToast + outOfRange[i] + ", ";
+          }
+          this.messageToast =
+            this.messageToast + outOfRange[len - 1] + " are added successfully";
+        }
+        outOfRange = [];
       }
 
       this.addAnimeName = "";
@@ -617,18 +653,25 @@ export default {
       this.addAnimeMembers = "";
 
       this.clientLogs.push({
-        message: "Row is added successfully",
+        message: `Client (${this.port}) : Row is added successfully`,
+        CreateRow: CreateRow,
         timeStamp: Date.now(),
       });
     });
     //Read Row
     this.socketTablet1.on("ReadRowsResponse", (data) => {
       var dataBack = data.data;
-      for (var a in dataBack) {
-        this.animes.push(dataBack[a]);
+      if (dataBack == false) {
+        this.errorDetected = true;
+        this.errors = data.errids;
+      } else {
+        for (var a in dataBack) {
+          this.animes.push(dataBack[a]);
+        }
       }
       this.clientLogs.push({
-        message: "Data retrieved successfully",
+        message: `Client (${this.port}) : Data retrieved successfully`,
+        RowRead: data,
         timeStamp: Date.now(),
       });
     });
@@ -636,7 +679,6 @@ export default {
     //Sending Client Logs to Master and Flushing this Logs
     //each five minutes
     setInterval(() => {
-      console.log("sending to master", this.clientLogs);
       if (this.clientLogs.length) {
         this.socketMaster.emit("clientLogs", this.clientLogs);
         this.clientLogs = [];
@@ -654,14 +696,12 @@ export default {
     },
     addMultipleAnimes() {
       var CreateRow = {
-        Anime: {
-          name: this.addAnimeName,
-          genre: this.addAnimeGenre,
-          type: this.addAnimeType,
-          episodes: this.addAnimeEpisodes,
-          rating: this.addAnimeRating,
-          members: this.addAnimeMembers,
-        },
+        name: this.addAnimeName,
+        genre: this.addAnimeGenre,
+        type: this.addAnimeType,
+        episodes: this.addAnimeEpisodes,
+        rating: this.addAnimeRating,
+        members: this.addAnimeMembers,
       };
 
       this.addAnimes.push(CreateRow);
@@ -708,6 +748,9 @@ export default {
       const tNum = this.validateRowKey(UpdateData.rowKey);
       if (tNum == 1 || tNum == 2) this.socketTablet1.emit("Set", UpdateData);
       if (tNum == 3) this.socketTablet2.emit("Set", UpdateData);
+      let t;
+      if (tNum == 1 || tNum == 2) t = 1;
+      else t = 2;
       if (tNum == -1) {
         this.showToast();
         this.messageToast =
@@ -715,23 +758,43 @@ export default {
       }
 
       this.clientLogs.push({
-        message: "Sending request to update data",
+        message: `Client (${this.port}) : Sending request to update data`,
+        TabletRequesed: t,
         timeStamp: Date.now(),
       });
     },
     ReadRowsSubmit() {
       var rowKeys = this.getAnimeNumber.split(" ");
-      let tablet1Rows,
+      let tablet1Rows = [],
         tablet2Rows = [];
+      let outOfRange = [];
+
       for (let i = 0; i < rowKeys.length; i++) {
         let t = this.validateRowKey(rowKeys[i]);
         if (t == 1 || t == 2) tablet1Rows.push(rowKeys[i]);
         else if (t == 3) tablet2Rows.push(rowKeys[i]);
+        if (t == -1) {
+          outOfRange.push(rowKeys[i]);
+        }
       }
+
+      if (outOfRange.length != 0) {
+        this.showToast();
+        this.messageToast = "Rows of id: ";
+        let len = outOfRange.length;
+        for (let i = 0; i < len - 1; i++) {
+          this.messageToast = this.messageToast + outOfRange[i] + ", ";
+        }
+        this.messageToast =
+          this.messageToast + outOfRange[len - 1] + " not in range";
+      }
+      outOfRange = [];
+      this.errorDetected = false;
 
       let data1 = {
         rowKeys: tablet1Rows,
       };
+      ///add TNum
 
       let data2 = {
         rowKeys: tablet2Rows,
@@ -763,7 +826,8 @@ export default {
       this.socketTablet1.emit("AddRow", this.addAnimes);
       this.addAnimes = [];
       this.clientLogs.push({
-        message: "Sending request to add new row to data",
+        message: `Client (${this.port}) : Sending request to add new row to data`,
+        //TabletRequesed: tNum,
         timeStamp: Date.now(),
       });
     },
@@ -784,6 +848,9 @@ export default {
       if (tNum == 1 || tNum == 2)
         this.socketTablet1.emit("DeleteCells", DeleteCells);
       if (tNum == 3) this.socketTablet2.emit("DeleteCells", DeleteCells);
+      let t;
+      if (tNum == 1 || tNum == 2) t = 1;
+      else t = 2;
       if (tNum == -1) {
         this.showToast();
         this.messageToast =
@@ -791,28 +858,66 @@ export default {
       }
 
       this.clientLogs.push({
-        message: "Sending request to delete cells from rows",
+        message: `Client (${this.port}) : Sending request to delete cells from rows`,
+        TabletRequesed: t,
         timeStamp: Date.now(),
       });
     },
     DeleteRowSubmit() {
-      var DeleteRow = {
-        rowKey: this.deletedAnimeNumber,
-      };
-      const tNum = this.validateRowKey(DeleteRow.rowKey);
-      console.log(tNum);
-      if (tNum == 1 || tNum == 2)
-        this.socketTablet1.emit("DeleteRow", DeleteRow);
-      if (tNum == 3) this.socketTablet2.emit("DeleteRow", DeleteRow);
-      if (tNum == -1) {
-        this.showToast();
-        this.messageToast =
-          "Row of id: " + DeleteRow.rowKey + " is not in range";
+      var rowKeys = this.deletedAnimeNumber.split(" ");
+      let tablet1Rows = [],
+        tablet2Rows = [];
+      let outOfRange = [];
+
+      for (let i = 0; i < rowKeys.length; i++) {
+        let t = this.validateRowKey(rowKeys[i]);
+        if (t == 1 || t == 2) tablet1Rows.push(rowKeys[i]);
+        else if (t == 3) tablet2Rows.push(rowKeys[i]);
+        if (t == -1) {
+          outOfRange.push(rowKeys[i]);
+        }
       }
-      this.clientLogs.push({
-        message: "Sending request to delete row from data",
-        timeStamp: Date.now(),
-      });
+
+      if (outOfRange.length != 0) {
+        this.showToast();
+        this.messageToast = "Rows of id: ";
+        let len = outOfRange.length;
+        for (let i = 0; i < len - 1; i++) {
+          this.messageToast = this.messageToast + outOfRange[i] + ", ";
+        }
+        this.messageToast =
+          this.messageToast + outOfRange[len - 1] + " not in range";
+      }
+      outOfRange = [];
+      this.errorDetected = false;
+
+      let data1 = {
+        rowKeys: tablet1Rows,
+      };
+      ///add TNum
+
+      let data2 = {
+        rowKeys: tablet2Rows,
+      };
+      if (data1.rowKeys.length) {
+        this.socketTablet1.emit("DeleteRow", data1);
+        this.clientLogs.push({
+          message:
+            `Client (${this.port}) : Sending request to delete row from data` +
+            data1.rowKeys,
+          timeStamp: Date.now(),
+        });
+      }
+
+      if (data2.rowKeys.length) {
+        this.socketTablet1.emit("DeleteRow", data2);
+        this.clientLogs.push({
+          message:
+            `Client (${this.port}) : Sending request to delete row from data` +
+            data2.rowKeys,
+          timeStamp: Date.now(),
+        });
+      }
     },
   },
 };

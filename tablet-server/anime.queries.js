@@ -11,7 +11,6 @@ const Tablet = {
     },
 
     async findRows(rowKeys,tabletNum){
-        console.log(tabletNum,AnimeModel,AnimeModel[tabletNum-1]);
         const data = await AnimeModel[tabletNum-1].find({anime_id:{$in : rowKeys}});
         return data;
     },
@@ -29,17 +28,14 @@ const Tablet = {
         const result = await updatedRecord.save();
         return result;
     },
-    async createAnime(Anime,tabletNum){
-        const newAnime = new AnimeModel[tabletNum-1]({
-            anime_id: Anime.anime_id,
-            name: Anime.name,
-            genre: Anime.genre,
-            type: Anime.type,
-            episodes: Anime.episodes,
-            rating: Anime.rating,
-            members: Anime.members                        
-        });
-        const result = await newAnime.save();
+    async createAnime(Animes,tabletNum){
+        const AnimesResult = await AnimeModel[tabletNum - 1].insertMany(Animes);
+        var result = [];
+        if (AnimesResult && AnimesResult.length != 0) {
+          for (var i = 0; i < AnimesResult.length; i++) {
+            result.push(AnimesResult[i].anime_id);
+          }
+        }
         return result;
     },
     async deleteCells(columnFamily,rowKey,tabletNum){
