@@ -1,118 +1,82 @@
 [
   {
-    "message": "Master started...",
-    "timeStamp": 1622853019366
+    "message": "client => id: 2aj0dbyNEbmMlUohAAAf disconnected from master",
+    "timeStamp": 1622856778541
   },
   {
-    "message": "Tablet 1 Connected to master",
-    "timeStamp": 1622853026973
+    "message": "client => id: _8DYjTGOM4fR-TGVAAAh disconnected from master",
+    "timeStamp": 1622856782539
   },
   {
-    "message": "Tablet 1 Listening to client...",
-    "timeStamp": 1622853027004
+    "message": "Sending request to Tablet 2 retrieve rows from data1786",
+    "timeStamp": 1622856811124
   },
   {
-    "message": "Tablet => id: Ou7Fns9HRmOF60zdAAAD connected to master",
-    "timeStamp": 1622853027031
+    "message": "client => id: gQ6QM_2iPEtpVmbCAAAA requested data reterival from Tablet 2 ",
+    "timeStamp": 1622856811127
   },
   {
-    "message": "Tablet 1 connected to client => id: eSN-FenNjWfjIX1bAAAA",
-    "timeStamp": 1622853027544
+    "message": "client => id: gQ6QM_2iPEtpVmbCAAAArequested data reterival => Error: problem retrieving data",
+    "timeStamp": 1622856811301
   },
   {
-    "message": "Tablet 1 got metadata",
-    "metaData": {
-      "_id": "60b81a7d41582a007878ca5b",
-      "tablet1Documents": 545,
-      "tablet2Documents": 545,
-      "tablet3Documents": 545,
-      "tablet1KeyRange": {
-        "start": 15,
-        "end": 591
-      },
-      "tablet2KeyRange": {
-        "start": 592,
-        "end": 1206
-      },
-      "tablet3KeyRange": {
-        "start": 1207,
-        "end": 1785
-      }
-    },
-    "timeStamp": 1622853032889
-  },
-  {
-    "message": "client => id: 6PoQyounlgceioD6AAAB disconnected from master",
-    "timeStamp": 1622853033917
-  },
-  {
-    "message": "Client (wwww) is Connecting to tablet",
-    "timeStamp": 1622853034491
-  },
-  {
-    "message": "Client (wwww)Connected to master",
-    "timeStamp": 1622853034492
-  },
-  {
-    "message": "Tablet 1 connected to client => id: wI5RHboXG4VfGGzNAAAC",
-    "timeStamp": 1622853034538
-  },
-  {
-    "message": "client => id: eYMkSgV0R3LG0qhAAAAF connected to master",
-    "timeStamp": 1622853034542
-  },
-  {
-    "message": "Client (wwww) Got metadata successfully",
-    "metaData": {
-      "_id": "60b81a7d41582a007878ca5b",
-      "tablet1Documents": 545,
-      "tablet2Documents": 545,
-      "tablet3Documents": 545,
-      "tablet1KeyRange": {
-        "start": 15,
-        "end": 591
-      },
-      "tablet2KeyRange": {
-        "start": 592,
-        "end": 1206
-      },
-      "tablet3KeyRange": {
-        "start": 1207,
-        "end": 1785
-      }
-    },
-    "timeStamp": 1622853034711
+    "message": "client => id: gQ6QM_2iPEtpVmbCAAAA requested data reterival from Tablet 2 => Succeeded",
+    "timeStamp": 1622856811304
   },
   {
     "message": "Sending request to Tablet 2 retrieve rows from data1785",
-    "timeStamp": 1622853036456
+    "timeStamp": 1622856916385
   },
   {
-    "message": "client => id: wI5RHboXG4VfGGzNAAAC requested data reterival from Tablet 1 ",
-    "timeStamp": 1622853036459
+    "message": "client => id: gQ6QM_2iPEtpVmbCAAAA requested data reterival from Tablet 2 ",
+    "timeStamp": 1622856916388
   },
   {
-    "message": "client => id: wI5RHboXG4VfGGzNAAACrequested data reterival => Error: ",
-    "timeStamp": 1622853036462
+    "message": "client => id: gQ6QM_2iPEtpVmbCAAAArequested data reterival => Error: problem retrieving data",
+    "timeStamp": 1622856917912
   },
   {
-    "message": "client => id: wI5RHboXG4VfGGzNAAACrequested data reterival => Error: ",
-    "timeStamp": 1622853036462
+    "message": "client => id: gQ6QM_2iPEtpVmbCAAAA requested data reterival from Tablet 2 => Succeeded",
+    "timeStamp": 1622856917913
   },
   {
-    "message": "client => id: wI5RHboXG4VfGGzNAAAC requested data reterival from Tablet 1 => Succeeded",
-    "timeStamp": 1622853036463
+    "message": "Sending request to Tablet 2 retrieve rows from data1211",
+    "timeStamp": 1622856940369
   },
   {
-    "message": "Client (wwww) : Data retrieved successfully",
-    "RowRead": {
-      "data": false,
-      "errids": []
-    },
-    "timeStamp": 1622853036464
+    "message": "client => id: gQ6QM_2iPEtpVmbCAAAA requested data reterival from Tablet 2 ",
+    "timeStamp": 1622856940372
   },
   {
-    "message": "client => id: Ou7Fns9HRmOF60zdAAAD disconnected from master",
-    "timeStamp": 1622853146519
+    "message": "client => id: gQ6QM_2iPEtpVmbCAAAA requested data reterival from Tablet 2 => Succeeded",
+    "timeStamp": 1622856942797
+  },
+  {
+    "message": "Sending request to Tablet 2 retrieve rows from data1219",
+    "timeStamp": 1622856987447
+  },
+  {
+    "message": "client => id: gQ6QM_2iPEtpVmbCAAAA requested data reterival from Tablet 2 ",
+    "timeStamp": 1622856987449
+  },
+  {
+    "message": "client => id: gQ6QM_2iPEtpVmbCAAAA requested data reterival from Tablet 2 => Succeeded",
+    "timeStamp": 1622856988228
+  },
+  {
+    "message": "Sending request to Tablet 2 retrieve rows from data1785",
+    "timeStamp": 1622857028161
+  },
+  {
+    "message": "client => id: gQ6QM_2iPEtpVmbCAAAA requested data reterival from Tablet 2 ",
+    "timeStamp": 1622857028163
+  },
+  {
+    "message": "client => id: gQ6QM_2iPEtpVmbCAAAArequested data reterival => Error: problem retrieving data",
+    "timeStamp": 1622857028359
+  },
+  {
+    "message": "client => id: gQ6QM_2iPEtpVmbCAAAA requested data reterival from Tablet 2 => Succeeded",
+    "timeStamp": 1622857028361
   }
 ]

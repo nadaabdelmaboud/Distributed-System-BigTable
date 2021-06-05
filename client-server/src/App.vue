@@ -487,9 +487,9 @@ export default {
       message: `Client (${this.port}) is Connecting to tablet`,
       timeStamp: Date.now(),
     });
-    // this.socketTablet2 = io.connect("http://localhost:9000/", {
-    //   transports: ["websocket"],
-    // });
+    this.socketTablet2 = io.connect("http://localhost:9000/", {
+      transports: ["websocket"],
+    });
     //starting master socket connection
     this.socketMaster = io.connect("http://localhost:3000/", {
       transports: ["websocket"],
@@ -510,34 +510,34 @@ export default {
       });
       console.log("hihihihihi", this.metaData);
     });
-    // //Tablet 2 listeners
-    // //Set
-    // this.socketTablet2.on("SetResponse", function (UpdateData) {
-    //   console.log("Data recieved in client (Update Row):", UpdateData);
-    // });
-    // //Delete cells
-    // this.socketTablet2.on("DeleteCellsResponse", function (DeleteCells) {
-    //   console.log(
-    //     "Row cells deleted in client (Delete row cells):",
-    //     DeleteCells
-    //   );
-    // });
-    // //Delete Row
-    // this.socketTablet2.on("DeleteRowResponse", function (DeleteRow) {
-    //   console.log("Row deleted in client (Delete Row):", DeleteRow);
-    // });
-    // //Add Row
-    // this.socketTablet2.on("AddRowResponse", function (CreateRow) {
-    //   console.log("Row Added in client (Add Row):", CreateRow);
-    // });
-    // //Read Row
-    // this.socketTablet2.on("ReadRowsResponse", (data) => {
-    //   var dataBack = data.data;
-    //
-    //   for (var a in dataBack) {
-    //     this.animes.push(dataBack[a]);
-    //   }
-    // });
+    //Tablet 2 listeners
+    //Set
+    this.socketTablet2.on("SetResponse", function (UpdateData) {
+      console.log("Data recieved in client (Update Row):", UpdateData);
+    });
+    //Delete cells
+    this.socketTablet2.on("DeleteCellsResponse", function (DeleteCells) {
+      console.log(
+        "Row cells deleted in client (Delete row cells):",
+        DeleteCells
+      );
+    });
+    //Delete Row
+    this.socketTablet2.on("DeleteRowResponse", function (DeleteRow) {
+      console.log("Row deleted in client (Delete Row):", DeleteRow);
+    });
+    //Add Row
+    this.socketTablet2.on("AddRowResponse", function (CreateRow) {
+      console.log("Row Added in client (Add Row):", CreateRow);
+    });
+    //Read Row
+    this.socketTablet2.on("ReadRowsResponse", (data) => {
+      var dataBack = data.data;
+   
+      for (var a in dataBack) {
+        this.animes.push(dataBack[a]);
+      }
+    });
 
     //Tablet 1 listeners
     //Set
@@ -810,7 +810,7 @@ export default {
       }
 
       if (data2.rowKeys.length) {
-        this.socketTablet1.emit("ReadRows", data2);
+        this.socketTablet2.emit("ReadRows", data2);
         this.clientLogs.push({
           message:
             "Sending request to Tablet 2 retrieve rows from data" +
@@ -823,7 +823,7 @@ export default {
     },
     AddRowSubmit() {
       console.log("MY array", this.addAnimes);
-      this.socketTablet1.emit("AddRow", this.addAnimes);
+      this.socketTablet2.emit("AddRow", this.addAnimes);
       this.addAnimes = [];
       this.clientLogs.push({
         message: `Client (${this.port}) : Sending request to add new row to data`,

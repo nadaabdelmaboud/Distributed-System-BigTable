@@ -11,7 +11,10 @@ const Tablet = {
     },
 
     async findRows(rowKeys,tabletNum){
+        console.log("rowKey:",rowKeys,"tabletNum:",tabletNum);
+        console.log("models:", AnimeModel);
         const data = await AnimeModel[tabletNum-1].find({anime_id:{$in : rowKeys}});
+        console.log("dataoutput",data);
         return data;
     },
     async updateAnime(Anime,rowKey,tabletNum){
