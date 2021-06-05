@@ -179,5 +179,355 @@
       "errids": []
     },
     "timeStamp": 1622856048396
+  },
+  {
+    "message": "Client (wwww) is disconnecting ",
+    "timeStamp": 1622856499548
+  },
+  {
+    "message": "Client (wwww) is disconnecting ",
+    "timeStamp": 1622856499548
+  },
+  {
+    "message": "Tablet 1 connected to client => id: hNESrmfzOLeEg2t1AAAI",
+    "timeStamp": 1622856499557
+  },
+  {
+    "message": "client => id: PnEy7oA9jfl0wJJpAAAL connected to master",
+    "timeStamp": 1622856499560
+  },
+  {
+    "message": "client => id: 5oPsDDOLJGXnYosPAAAJ disconnected from master",
+    "timeStamp": 1622856499821
+  },
+  {
+    "message": "client => id: PnEy7oA9jfl0wJJpAAAL disconnected from master",
+    "timeStamp": 1622856499823
+  },
+  {
+    "message": "Client (wwww) is Connecting to tablet",
+    "timeStamp": 1622856500138
+  },
+  {
+    "message": "Client (wwww)Connected to master",
+    "timeStamp": 1622856500145
+  },
+  {
+    "message": "Tablet 1 connected to client => id: oSS_BqooYgPEBWY6AAAK",
+    "timeStamp": 1622856500183
+  },
+  {
+    "message": "client => id: vMUsEHf7_wgKWvsjAAAN connected to master",
+    "timeStamp": 1622856500188
+  },
+  {
+    "message": "Client (wwww) Got metadata successfully",
+    "metaData": {
+      "_id": "60b81a7d41582a007878ca5b",
+      "tablet1Documents": 545,
+      "tablet2Documents": 545,
+      "tablet3Documents": 545,
+      "tablet1KeyRange": {
+        "start": 15,
+        "end": 591
+      },
+      "tablet2KeyRange": {
+        "start": 592,
+        "end": 1206
+      },
+      "tablet3KeyRange": {
+        "start": 1207,
+        "end": 1785
+      }
+    },
+    "timeStamp": 1622856500374
+  },
+  {
+    "message": "Sending request to Tablet 1 retrieve rows from data29,38,39,500",
+    "timeStamp": 1622856506570
+  },
+  {
+    "message": "client => id: oSS_BqooYgPEBWY6AAAK requested data reterival from Tablet 1 ",
+    "timeStamp": 1622856506571
+  },
+  {
+    "message": "client => id: oSS_BqooYgPEBWY6AAAKrequested data reterival => Error: ",
+    "timeStamp": 1622856506748
+  },
+  {
+    "message": "client => id: oSS_BqooYgPEBWY6AAAK requested data reterival from Tablet 1 => Succeeded",
+    "timeStamp": 1622856506752
+  },
+  {
+    "message": "Client (wwww) : Data retrieved successfully",
+    "RowRead": {
+      "data": [
+        {
+          "_id": "60b68d2f3ad7fa7cfc007b2c",
+          "anime_id": "29",
+          "name": "Nihal",
+          "genre": "Action- Drama- Historical- Military- Sci-Fi- Seinen",
+          "type": "TV",
+          "episodes": "26",
+          "rating": "7.56",
+          "members": "8630"
+        }
+      ],
+      "errids": []
+    },
+    "timeStamp": 1622856506752
+  },
+  {
+    "message": "Sending request to Tablet 1 retrieve rows from data512,513,514,515",
+    "timeStamp": 1622856518298
+  },
+  {
+    "message": "client => id: oSS_BqooYgPEBWY6AAAK requested data reterival from Tablet 1 ",
+    "timeStamp": 1622856518300
+  },
+  {
+    "message": "client => id: oSS_BqooYgPEBWY6AAAKrequested data reterival => Error: ",
+    "timeStamp": 1622856518442
+  },
+  {
+    "message": "client => id: oSS_BqooYgPEBWY6AAAK requested data reterival from Tablet 1 => Succeeded",
+    "timeStamp": 1622856518454
+  },
+  {
+    "message": "Client (wwww) : Data retrieved successfully",
+    "RowRead": {
+      "data": [
+        {
+          "_id": "60b68d2f3ad7fa7cfc007cf8",
+          "anime_id": "512",
+          "name": "Majo no Takkyuubin",
+          "genre": "Adventure- Comedy- Drama- Fantasy- Magic- Romance",
+          "type": "Movie",
+          "episodes": "1",
+          "rating": "8.27",
+          "members": "152331"
+        },
+        {
+          "_id": "60b68d2f3ad7fa7cfc007cf9",
+          "anime_id": "513",
+          "name": "Tenkuu no Shiro Laputa",
+          "genre": "Adventure- Fantasy- Romance- Sci-Fi",
+          "type": "Movie",
+          "episodes": "1",
+          "rating": "8.38",
+          "members": "151061"
+        },
+        {
+          "_id": "60b68d2f3ad7fa7cfc007cfa",
+          "anime_id": "514",
+          "name": "Cossette no Shouzou",
+          "genre": "Drama- Horror- Magic- Psychological- Romance- Supernatural",
+          "type": "OVA",
+          "episodes": "3",
+          "rating": "7",
+          "members": "40318"
+        },
+        {
+          "_id": "60b68d2f3ad7fa7cfc007cfb",
+          "anime_id": "515",
+          "name": "Hajimari no Boukensha-tachi: Legend of Crystania",
+          "genre": "Action- Adventure- Fantasy- Magic- Supernatural",
+          "type": "Movie",
+          "episodes": "1",
+          "rating": "6.15",
+          "members": "2893"
+        }
+      ],
+      "errids": []
+    },
+    "timeStamp": 1622856518455
+  },
+  {
+    "message": "client => id: vMUsEHf7_wgKWvsjAAAN disconnected from master",
+    "timeStamp": 1622856618538
+  },
+  {
+    "message": "Client (wwww) is Connecting to tablet",
+    "timeStamp": 1622856618806
+  },
+  {
+    "message": "Client (wwww)Connected to master",
+    "timeStamp": 1622856618811
+  },
+  {
+    "message": "Tablet 1 connected to client => id: hekHI5C2_l92XbOmAAAM",
+    "timeStamp": 1622856618853
+  },
+  {
+    "message": "client => id: Y03YiLMTog-lpyIQAAAP connected to master",
+    "timeStamp": 1622856618866
+  },
+  {
+    "message": "Client (wwww) Got metadata successfully",
+    "metaData": {
+      "_id": "60b81a7d41582a007878ca5b",
+      "tablet1Documents": 545,
+      "tablet2Documents": 545,
+      "tablet3Documents": 545,
+      "tablet1KeyRange": {
+        "start": 15,
+        "end": 591
+      },
+      "tablet2KeyRange": {
+        "start": 592,
+        "end": 1206
+      },
+      "tablet3KeyRange": {
+        "start": 1207,
+        "end": 1785
+      }
+    },
+    "timeStamp": 1622856619014
+  },
+  {
+    "message": "Sending request to Tablet 1 retrieve rows from data30,32,33,36,36",
+    "timeStamp": 1622856628929
+  },
+  {
+    "message": "client => id: hekHI5C2_l92XbOmAAAM requested data reterival from Tablet 1 ",
+    "timeStamp": 1622856628931
+  },
+  {
+    "message": "client => id: hekHI5C2_l92XbOmAAAMrequested data reterival => Error: ",
+    "timeStamp": 1622856629110
+  },
+  {
+    "message": "Client (wwww) : Data retrieved successfully",
+    "RowRead": {
+      "data": [
+        {
+          "_id": "60b68d2f3ad7fa7cfc007b2f",
+          "anime_id": "32",
+          "name": "Neon Genesis Evangelion: The End of Evangelion",
+          "genre": "Dementia- Drama- Mecha- Psychological- Sci-Fi",
+          "type": "Movie",
+          "episodes": "1",
+          "rating": "8.45",
+          "members": "215630"
+        },
+        {
+          "_id": "60b68d2f3ad7fa7cfc007b30",
+          "anime_id": "33",
+          "name": "Berserk",
+          "genre": "Action- Adventure- Demons- Drama- Fantasy- Horror- Military- Romance- Seinen- Supernatural",
+          "type": "TV",
+          "episodes": "25",
+          "rating": "8.4",
+          "members": "226430"
+        }
+      ],
+      "errids": []
+    },
+    "timeStamp": 1622856629116
+  },
+  {
+    "message": "client => id: hekHI5C2_l92XbOmAAAM requested data reterival from Tablet 1 => Succeeded",
+    "timeStamp": 1622856629116
+  },
+  {
+    "message": "Sending request to Tablet 1 retrieve rows from data16,34",
+    "timeStamp": 1622856639337
+  },
+  {
+    "message": "client => id: hekHI5C2_l92XbOmAAAM requested data reterival from Tablet 1 ",
+    "timeStamp": 1622856639339
+  },
+  {
+    "message": "client => id: hekHI5C2_l92XbOmAAAMrequested data reterival => Error: problem retrieving data",
+    "timeStamp": 1622856639480
+  },
+  {
+    "message": "client => id: hekHI5C2_l92XbOmAAAMrequested data reterival => Error: ",
+    "timeStamp": 1622856639480
+  },
+  {
+    "message": "Client (wwww) : Data retrieved successfully",
+    "RowRead": {
+      "data": false,
+      "errids": [
+        "16",
+        "34"
+      ]
+    },
+    "timeStamp": 1622856639481
+  },
+  {
+    "message": "client => id: hekHI5C2_l92XbOmAAAM requested data reterival from Tablet 1 => Succeeded",
+    "timeStamp": 1622856639481
+  },
+  {
+    "message": "Sending request to Tablet 1 retrieve rows from data15",
+    "timeStamp": 1622856644561
+  },
+  {
+    "message": "client => id: hekHI5C2_l92XbOmAAAM requested data reterival from Tablet 1 ",
+    "timeStamp": 1622856644563
+  },
+  {
+    "message": "client => id: hekHI5C2_l92XbOmAAAMrequested data reterival => Error: ",
+    "timeStamp": 1622856644704
+  },
+  {
+    "message": "Client (wwww) : Data retrieved successfully",
+    "RowRead": {
+      "data": [
+        {
+          "_id": "60b68d2f3ad7fa7cfc007b1e",
+          "anime_id": "15",
+          "name": "hjdks",
+          "genre": "Action- Comedy- Shounen- Sports",
+          "type": "TV",
+          "episodes": "145",
+          "rating": "8.08",
+          "members": "83648"
+        }
+      ],
+      "errids": []
+    },
+    "timeStamp": 1622856644707
+  },
+  {
+    "message": "client => id: hekHI5C2_l92XbOmAAAM requested data reterival from Tablet 1 => Succeeded",
+    "timeStamp": 1622856644707
+  },
+  {
+    "message": "Sending request to Tablet 1 retrieve rows from data15",
+    "timeStamp": 1622856655305
+  },
+  {
+    "message": "client => id: hekHI5C2_l92XbOmAAAM requested data reterival from Tablet 1 ",
+    "timeStamp": 1622856655308
+  },
+  {
+    "message": "client => id: hekHI5C2_l92XbOmAAAMrequested data reterival => Error: ",
+    "timeStamp": 1622856655464
+  },
+  {
+    "message": "Client (wwww) : Data retrieved successfully",
+    "RowRead": {
+      "data": [
+        {
+          "_id": "60b68d2f3ad7fa7cfc007b1e",
+          "anime_id": "15",
+          "name": "hjdks",
+          "genre": "Action- Comedy- Shounen- Sports",
+          "type": "TV",
+          "episodes": "145",
+          "rating": "8.08",
+          "members": "83648"
+        }
+      ],
+      "errids": []
+    },
+    "timeStamp": 1622856655467
+  },
+  {
+    "message": "client => id: hekHI5C2_l92XbOmAAAM requested data reterival from Tablet 1 => Succeeded",
+    "timeStamp": 1622856655467
   }
 ]

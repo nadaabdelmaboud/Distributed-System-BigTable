@@ -516,7 +516,7 @@ export default {
     });
     //Tablet 2 listeners
     //Set
-      this.socketTablet2.on("SetResponse", (UpdateData) => {
+    this.socketTablet2.on("SetResponse", (UpdateData) => {
       console.log("Data recieved in client (Update Row):", UpdateData);
 
       console.log("updated", UpdateData);
@@ -547,7 +547,7 @@ export default {
       });
     });
     // //Delete cells
-      this.socketTablet2.on("DeleteCellsResponse", (DeleteCells) => {
+    this.socketTablet2.on("DeleteCellsResponse", (DeleteCells) => {
       console.log(
         "Row cells deleted in client (Delete row cells):",
         DeleteCells
@@ -576,7 +576,7 @@ export default {
       this.animeMembers = "";
     });
     // //Delete Row
-      this.socketTablet2.on("DeleteRowResponse", (DeleteRow) => {
+    this.socketTablet2.on("DeleteRowResponse", (DeleteRow) => {
       console.log("Row deleted in client (Delete Row):", DeleteRow);
 
       if (DeleteRow.data == false) {
@@ -634,7 +634,7 @@ export default {
       });
     });
     // //Read Row
-     this.socketTablet2.on("ReadRowsResponse", (data) => {
+    this.socketTablet2.on("ReadRowsResponse", (data) => {
       var dataBack = data.data;
       if (dataBack == false) {
         this.errorDetected = true;
@@ -899,8 +899,8 @@ export default {
         }
         this.messageToast =
           this.messageToast + outOfRange[len - 1] + " not in range";
+        outOfRange = [];
       }
-      outOfRange = [];
       this.errorDetected = false;
 
       let data1 = {
@@ -999,8 +999,8 @@ export default {
         }
         this.messageToast =
           this.messageToast + outOfRange[len - 1] + " not in range";
+        outOfRange = [];
       }
-      outOfRange = [];
       this.errorDetected = false;
 
       let data1 = {
