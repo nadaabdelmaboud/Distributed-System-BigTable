@@ -45,6 +45,7 @@ socketMaster.on("connect", function () {
   console.log("connected to Master");
   socketMaster.emit("source", "tablet");
   socketMaster.on("GetMetaData", (data) => {
+    console.log(data);
     set(data);
     tabletLogs.push({
       message: "Tablet 2 got metadata",
@@ -352,6 +353,7 @@ ioTablet.on("connection", function (socket) {
   });
 
   socket.on("DeleteRow", async function (ClientData) {
+      console.log(ClientData);
     console.log("acuiring master lock  ", MasterLock.isLocked());
     var before = new Date().getTime() / 1000;
     if (MasterLock.isLocked()) {
@@ -374,9 +376,9 @@ ioTablet.on("connection", function (socket) {
     });
     try {
       console.log("Delete Row");
-      tabletNumber = await AnimeValidation.validateRowKey(ClientData.rowKey);
+      tabletNumber = await AnimeValidation.validateRowKey(ClientData.rowKeys[0]);
       const data = await AnimeService.deleteRow(
-        ClientData.rowKey,
+        ClientData.rowKeys[0],
         tabletNumber
       );
       if (!data.data) {
@@ -393,7 +395,7 @@ ioTablet.on("connection", function (socket) {
         const masterUpdateData = {
           tabletId: tabletNumber,
           updateType: "delete",
-          ids: [ClientData.rowKey],
+          ids: [ClientData.rowKeys[0]],
         };
         socketMaster.emit("tablet-update", masterUpdateData);
         tabletLogs.push({

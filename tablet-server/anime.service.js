@@ -70,6 +70,7 @@ const AnimeService = {
     return { data: result, err: "" };
   },
   async deleteRow(rowKey, tabletNum) {
+    console.log(rowKey);
     const isKeyValid = await AnimeValidation.validateRowKey(rowKey);
     if (isKeyValid == -1) return { data: false, err: "rowKey Doesn't Exist" };
     if (isKeyValid != tabletNum)

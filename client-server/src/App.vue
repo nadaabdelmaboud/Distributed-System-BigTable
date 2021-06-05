@@ -983,6 +983,7 @@ export default {
 
       for (let i = 0; i < rowKeys.length; i++) {
         let t = this.validateRowKey(rowKeys[i]);
+        console.log(t);
         if (t == 1 || t == 2) tablet1Rows.push(rowKeys[i]);
         else if (t == 3) tablet2Rows.push(rowKeys[i]);
         if (t == -1) {
@@ -1022,7 +1023,7 @@ export default {
       }
 
       if (data2.rowKeys.length) {
-        this.socketTablet1.emit("DeleteRow", data2);
+        this.socketTablet2.emit("DeleteRow", data2);
         this.clientLogs.push({
           message:
             `Client (${this.port}) : Sending request to delete row from data` +

@@ -373,9 +373,9 @@ ioTablet.on("connection", function (socket) {
     });
     try {
       console.log("Delete Row");
-      tabletNumber = await AnimeValidation.validateRowKey(ClientData.rowKey);
+      tabletNumber = await AnimeValidation.validateRowKey(ClientData.rowKeys[0]);
       const data = await AnimeService.deleteRow(
-        ClientData.rowKey,
+        ClientData.rowKeys[0],
         tabletNumber
       );
       if (!data.data) {
@@ -388,7 +388,7 @@ ioTablet.on("connection", function (socket) {
         const masterUpdateData = {
           tabletId: tabletNumber,
           updateType: "delete",
-          ids: [ClientData.rowKey],
+          ids: [ClientData.rowKeys[0]],
         };
         socketMaster.emit("tablet-update", masterUpdateData);
         tabletLogs.push({

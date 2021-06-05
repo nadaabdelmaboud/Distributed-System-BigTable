@@ -32,6 +32,7 @@ const Tablet = {
         return result;
     },
     async createAnime(Animes,tabletNum){
+        console.log(Animes);
         const AnimesResult = await AnimeModel[tabletNum - 1].insertMany(Animes);
         var result = [];
         if (AnimesResult && AnimesResult.length != 0) {
@@ -39,6 +40,7 @@ const Tablet = {
             result.push(AnimesResult[i].anime_id);
           }
         }
+        console.log(result);
         return result;
     },
     async deleteCells(columnFamily,rowKey,tabletNum){
