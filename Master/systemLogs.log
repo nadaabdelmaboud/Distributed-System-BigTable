@@ -1,23 +1,23 @@
 [
   {
     "message": "Master started...",
-    "timeStamp": 1622853019366
+    "timeStamp": 1622855123611
   },
   {
     "message": "Tablet 1 Connected to master",
-    "timeStamp": 1622853026973
+    "timeStamp": 1622855128628
   },
   {
     "message": "Tablet 1 Listening to client...",
-    "timeStamp": 1622853027004
+    "timeStamp": 1622855128661
   },
   {
-    "message": "Tablet => id: Ou7Fns9HRmOF60zdAAAD connected to master",
-    "timeStamp": 1622853027031
+    "message": "Tablet => id: gaspr2yBR4uIjQFzAAAD connected to master",
+    "timeStamp": 1622855128687
   },
   {
-    "message": "Tablet 1 connected to client => id: eSN-FenNjWfjIX1bAAAA",
-    "timeStamp": 1622853027544
+    "message": "Tablet 1 connected to client => id: vcn2vUEo1U8EhGKPAAAA",
+    "timeStamp": 1622855128778
   },
   {
     "message": "Tablet 1 got metadata",
@@ -39,27 +39,27 @@
         "end": 1785
       }
     },
-    "timeStamp": 1622853032889
+    "timeStamp": 1622855128828
   },
   {
-    "message": "client => id: 6PoQyounlgceioD6AAAB disconnected from master",
-    "timeStamp": 1622853033917
+    "message": "client => id: DfDb-cd2r3fsfxsfAAAB disconnected from master",
+    "timeStamp": 1622855267971
   },
   {
     "message": "Client (wwww) is Connecting to tablet",
-    "timeStamp": 1622853034491
+    "timeStamp": 1622855268567
   },
   {
     "message": "Client (wwww)Connected to master",
-    "timeStamp": 1622853034492
+    "timeStamp": 1622855268570
   },
   {
-    "message": "Tablet 1 connected to client => id: wI5RHboXG4VfGGzNAAAC",
-    "timeStamp": 1622853034538
+    "message": "Tablet 1 connected to client => id: gqIFRSFEKuoDDK8VAAAC",
+    "timeStamp": 1622855268614
   },
   {
-    "message": "client => id: eYMkSgV0R3LG0qhAAAAF connected to master",
-    "timeStamp": 1622853034542
+    "message": "client => id: -6ANc96soWG8sr58AAAF connected to master",
+    "timeStamp": 1622855268622
   },
   {
     "message": "Client (wwww) Got metadata successfully",
@@ -81,27 +81,132 @@
         "end": 1785
       }
     },
-    "timeStamp": 1622853034711
+    "timeStamp": 1622855268767
   },
   {
-    "message": "Sending request to Tablet 2 retrieve rows from data1785",
-    "timeStamp": 1622853036456
+    "message": "Sending request to Tablet 1 retrieve rows from data290",
+    "timeStamp": 1622855272548
   },
   {
-    "message": "client => id: wI5RHboXG4VfGGzNAAAC requested data reterival from Tablet 1 ",
-    "timeStamp": 1622853036459
+    "message": "client => id: gqIFRSFEKuoDDK8VAAAC requested data reterival from Tablet 1 ",
+    "timeStamp": 1622855272552
   },
   {
-    "message": "client => id: wI5RHboXG4VfGGzNAAACrequested data reterival => Error: ",
-    "timeStamp": 1622853036462
+    "message": "client => id: gqIFRSFEKuoDDK8VAAACrequested data reterival => Error: ",
+    "timeStamp": 1622855272758
   },
   {
-    "message": "client => id: wI5RHboXG4VfGGzNAAACrequested data reterival => Error: ",
-    "timeStamp": 1622853036462
+    "message": "client => id: gqIFRSFEKuoDDK8VAAAC requested data reterival from Tablet 1 => Succeeded",
+    "timeStamp": 1622855272763
   },
   {
-    "message": "client => id: wI5RHboXG4VfGGzNAAAC requested data reterival from Tablet 1 => Succeeded",
-    "timeStamp": 1622853036463
+    "message": "Client (wwww) : Data retrieved successfully",
+    "RowRead": {
+      "data": [
+        {
+          "_id": "60b68d2f3ad7fa7cfc007c23",
+          "anime_id": "290",
+          "name": "Seikai no Monshou",
+          "genre": "Action- Military- Romance- Sci-Fi- Space",
+          "type": "TV",
+          "episodes": "13",
+          "rating": "7.83",
+          "members": "26379"
+        }
+      ],
+      "errids": []
+    },
+    "timeStamp": 1622855272764
+  },
+  {
+    "message": "Sending request to Tablet 1 retrieve rows from data598",
+    "timeStamp": 1622855279708
+  },
+  {
+    "message": "client => id: gqIFRSFEKuoDDK8VAAAC requested data reterival from Tablet 1 ",
+    "timeStamp": 1622855279710
+  },
+  {
+    "message": "client => id: gqIFRSFEKuoDDK8VAAACrequested data reterival => Error: ",
+    "timeStamp": 1622855279851
+  },
+  {
+    "message": "client => id: gqIFRSFEKuoDDK8VAAAC requested data reterival from Tablet 1 => Succeeded",
+    "timeStamp": 1622855279854
+  },
+  {
+    "message": "Client (wwww) : Data retrieved successfully",
+    "RowRead": {
+      "data": [
+        {
+          "_id": "60b68d2f3ad7fa7cfc007d4a",
+          "anime_id": "598",
+          "name": "Jinzou Ningen Kikaider The Animation",
+          "genre": "Action- Drama- Mecha- Sci-Fi- Shounen",
+          "type": "TV",
+          "episodes": "13",
+          "rating": "7.09",
+          "members": "5881"
+        }
+      ],
+      "errids": []
+    },
+    "timeStamp": 1622855279855
+  },
+  {
+    "message": "Sending request to Tablet 1 retrieve rows from data599",
+    "timeStamp": 1622855283684
+  },
+  {
+    "message": "client => id: gqIFRSFEKuoDDK8VAAAC requested data reterival from Tablet 1 ",
+    "timeStamp": 1622855283686
+  },
+  {
+    "message": "client => id: gqIFRSFEKuoDDK8VAAACrequested data reterival => Error: ",
+    "timeStamp": 1622855283826
+  },
+  {
+    "message": "client => id: gqIFRSFEKuoDDK8VAAAC requested data reterival from Tablet 1 => Succeeded",
+    "timeStamp": 1622855283829
+  },
+  {
+    "message": "Client (wwww) : Data retrieved successfully",
+    "RowRead": {
+      "data": [
+        {
+          "_id": "60b68d2f3ad7fa7cfc007d4b",
+          "anime_id": "599",
+          "name": "Yuugen Kaisha",
+          "genre": "Action- Adventure- Comedy- Magic- Super Power- Supernatural",
+          "type": "OVA",
+          "episodes": "4",
+          "rating": "6.57",
+          "members": "2370"
+        }
+      ],
+      "errids": []
+    },
+    "timeStamp": 1622855283830
+  },
+  {
+    "message": "Sending request to Tablet 2 retrieve rows from data1700",
+    "timeStamp": 1622855298004
+  },
+  {
+    "message": "client => id: gqIFRSFEKuoDDK8VAAAC requested data reterival from Tablet 1 ",
+    "timeStamp": 1622855298006
+  },
+  {
+    "message": "client => id: gqIFRSFEKuoDDK8VAAACrequested data reterival => Error: ",
+    "timeStamp": 1622855298007
+  },
+  {
+    "message": "client => id: gqIFRSFEKuoDDK8VAAACrequested data reterival => Error: ",
+    "timeStamp": 1622855298008
+  },
+  {
+    "message": "client => id: gqIFRSFEKuoDDK8VAAAC requested data reterival from Tablet 1 => Succeeded",
+    "timeStamp": 1622855298008
   },
   {
     "message": "Client (wwww) : Data retrieved successfully",
@@ -109,10 +214,22 @@
       "data": false,
       "errids": []
     },
-    "timeStamp": 1622853036464
+    "timeStamp": 1622855298009
   },
   {
-    "message": "client => id: Ou7Fns9HRmOF60zdAAAD disconnected from master",
-    "timeStamp": 1622853146519
+    "message": "Client (wwww) is disconnecting ",
+    "timeStamp": 1622855730960
+  },
+  {
+    "message": "Client (wwww) is disconnecting ",
+    "timeStamp": 1622855730960
+  },
+  {
+    "message": "Tablet 1 connected to client => id: N2Ez1ATSsMt45O9XAAAE",
+    "timeStamp": 1622855730971
+  },
+  {
+    "message": "client => id: CqD_iNQgRB6EiVThAAAH connected to master",
+    "timeStamp": 1622855730973
   }
 ]

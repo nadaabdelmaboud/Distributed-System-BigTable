@@ -510,34 +510,142 @@ export default {
       });
       console.log("hihihihihi", this.metaData);
     });
-    // //Tablet 2 listeners
-    // //Set
-    // this.socketTablet2.on("SetResponse", function (UpdateData) {
-    //   console.log("Data recieved in client (Update Row):", UpdateData);
-    // });
+    //Tablet 2 listeners
+    //Set
+      this.socketTablet2.on("SetResponse", (UpdateData) => {
+      console.log("Data recieved in client (Update Row):", UpdateData);
+
+      console.log("updated", UpdateData);
+      if (UpdateData.data == false) {
+        this.showToast();
+        console.log("inside error");
+        this.messageToast = UpdateData.err;
+      } else {
+        this.showToast();
+        this.messageToast =
+          "Updating row of id: " +
+          UpdateData.data.anime_id +
+          " is done successfully";
+      }
+
+      this.updatedAnimeNumber = "";
+      this.updatedAnimeName = "";
+      this.updatedAnimeGenre = "";
+      this.updatedAnimeType = "";
+      this.updatedAnimeEpisodes = "";
+      this.updatedAnimeRating = "";
+      this.updatedAnimeMembers = "";
+
+      this.clientLogs.push({
+        message: `Client (${this.port}) :  Updated data successfully`,
+        UpdateData: UpdateData,
+        timeStamp: Date.now(),
+      });
+    });
     // //Delete cells
-    // this.socketTablet2.on("DeleteCellsResponse", function (DeleteCells) {
-    //   console.log(
-    //     "Row cells deleted in client (Delete row cells):",
-    //     DeleteCells
-    //   );
-    // });
+      this.socketTablet2.on("DeleteCellsResponse", (DeleteCells) => {
+      console.log(
+        "Row cells deleted in client (Delete row cells):",
+        DeleteCells
+      );
+
+      console.log("DeleteCells", DeleteCells);
+      if (DeleteCells.data == false) {
+        this.showToast();
+        this.messageToast = DeleteCells.err;
+      } else {
+        this.showToast();
+        this.messageToast = "Selected cells are deleted successfully";
+      }
+
+      this.clientLogs.push({
+        message: `Client (${this.port}) : Delete cells finished successfully`,
+        DeleteCells: DeleteCells,
+        timeStamp: Date.now(),
+      });
+      this.deletedFamilyAnimeNumber = "";
+      this.animeName = "";
+      this.animeGenre = "";
+      this.animeType = "";
+      this.animeEpisodes = "";
+      this.animeRating = "";
+      this.animeMembers = "";
+    });
     // //Delete Row
-    // this.socketTablet2.on("DeleteRowResponse", function (DeleteRow) {
-    //   console.log("Row deleted in client (Delete Row):", DeleteRow);
-    // });
+      this.socketTablet2.on("DeleteRowResponse", (DeleteRow) => {
+      console.log("Row deleted in client (Delete Row):", DeleteRow);
+
+      if (DeleteRow.data == false) {
+        this.showToast();
+        this.messageToast = DeleteRow.err;
+      } else {
+        this.showToast();
+        this.messageToast = "Rows are deleted successfully";
+      }
+
+      this.clientLogs.push({
+        message: `Client (${this.port}) : Delete row finished successfully`,
+        DeleteRow: DeleteRow,
+        timeStamp: Date.now(),
+      });
+      this.deletedAnimeNumber = "";
+    });
     // //Add Row
-    // this.socketTablet2.on("AddRowResponse", function (CreateRow) {
-    //   console.log("Row Added in client (Add Row):", CreateRow);
-    // });
+    this.socketTablet2.on("AddRowResponse", (CreateRow) => {
+      console.log("Row Added in client (Add Row):", CreateRow);
+
+      if (CreateRow.data == false) {
+        this.showToast();
+        this.messageToast = CreateRow.err;
+      } else {
+        let outOfRange = [];
+        for (let i = 0; i < CreateRow.data.length; i++) {
+          outOfRange.push(CreateRow.data[i]);
+        }
+
+        if (outOfRange.length != 0) {
+          this.showToast();
+          this.messageToast = "Rows of id: ";
+          let len = outOfRange.length;
+          for (let i = 0; i < len - 1; i++) {
+            this.messageToast = this.messageToast + outOfRange[i] + ", ";
+          }
+          this.messageToast =
+            this.messageToast + outOfRange[len - 1] + " are added successfully";
+        }
+        outOfRange = [];
+      }
+
+      this.addAnimeName = "";
+      this.addAnimeGenre = "";
+      this.addAnimeType = "";
+      this.addAnimeEpisodes = "";
+      this.addAnimeRating = "";
+      this.addAnimeMembers = "";
+
+      this.clientLogs.push({
+        message: `Client (${this.port}) : Row is added successfully`,
+        CreateRow: CreateRow,
+        timeStamp: Date.now(),
+      });
+    });
     // //Read Row
-    // this.socketTablet2.on("ReadRowsResponse", (data) => {
-    //   var dataBack = data.data;
-    //
-    //   for (var a in dataBack) {
-    //     this.animes.push(dataBack[a]);
-    //   }
-    // });
+     this.socketTablet2.on("ReadRowsResponse", (data) => {
+      var dataBack = data.data;
+      if (dataBack == false) {
+        this.errorDetected = true;
+        this.errors = data.errids;
+      } else {
+        for (var a in dataBack) {
+          this.animes.push(dataBack[a]);
+        }
+      }
+      this.clientLogs.push({
+        message: `Client (${this.port}) : Data retrieved successfully`,
+        RowRead: data,
+        timeStamp: Date.now(),
+      });
+    });
 
     //Tablet 1 listeners
     //Set
