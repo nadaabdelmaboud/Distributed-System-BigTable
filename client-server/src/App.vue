@@ -16,6 +16,10 @@
         </div>
         <div v-for="anime in animes" :key="anime.anime_id">
           <div class="arrayItems">
+            <div v-if="anime.anime_id">
+              <h4>Anime Number</h4>
+              <p>{{ anime.anime_id }}</p>
+            </div>
             <div v-if="anime.name">
               <h4>Anime Name</h4>
               <p>{{ anime.name }}</p>
@@ -487,9 +491,9 @@ export default {
       message: `Client (${this.port}) is Connecting to tablet`,
       timeStamp: Date.now(),
     });
-    // this.socketTablet2 = io.connect("http://localhost:9000/", {
-    //   transports: ["websocket"],
-    // });
+    this.socketTablet2 = io.connect("http://localhost:9000/", {
+      transports: ["websocket"],
+    });
     //starting master socket connection
     this.socketMaster = io.connect("http://localhost:3000/", {
       transports: ["websocket"],
