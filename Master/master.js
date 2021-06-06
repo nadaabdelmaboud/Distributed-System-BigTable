@@ -101,6 +101,10 @@ const MasterData={
         //await new Promise((resolve) => setTimeout(resolve, 10000));
         const release = await mutex.acquire();
         try {
+        masterLog.push({
+            message: "Master acquires the lock for balancing",
+            timeStamp: Date.now(),
+            });
         const BigTableCollection = (await masterConnection).collection("BigTable");
         let totalMasterDocuments = await BigTableCollection.countDocuments({});
         let documentsTablet=parseInt(totalMasterDocuments/3);
@@ -144,13 +148,20 @@ const MasterData={
 
     } finally {
         release();
+        masterLog.push({
+            message: "Master released the lock after finishing balancing",
+            timeStamp: Date.now(),
+          });
     }
         },
     //lock
     async insert(animeDocuments){
         const release = await mutex.acquire();
         try {
-
+            masterLog.push({
+                message: "Master acquires the lock to insert documents",
+                timeStamp: Date.now(),
+              });
             const BigTableCollection = (await masterConnection).collection("BigTable");
             const metadata = await MetaData.getMetaData(masterConnection);
             let id = metadata.tablet3KeyRange.end+1;
@@ -167,6 +178,10 @@ const MasterData={
         } 
         finally {
             release();
+            masterLog.push({
+                message: "Master released the lock after inserting documents",
+                timeStamp: Date.now(),
+              });
         }
        
     },
@@ -189,12 +204,20 @@ const MasterData={
         }
         const release = await mutex.acquire();
         try {
+        masterLog.push({
+            message: "Master acquired the lock to delete documents",
+            timeStamp: Date.now(),
+          });
         //lock
         await MetaData.updateMetaData(masterConnection,metadata.tablet1KeyRange,metadata.tablet2KeyRange,metadata.tablet3KeyRange,metadata.tablet1Documents,metadata.tablet2Documents,metadata.tablet3Documents)
         //unlock
         }
         finally {
             release();
+            masterLog.push({
+                message: "Master released the lock after deleting documents",
+                timeStamp: Date.now(),
+              });
         }
     },
 

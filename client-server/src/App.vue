@@ -973,7 +973,7 @@ export default {
         this.socketTablet1.emit("ReadRows", data1);
         this.clientLogs.push({
           message:
-            "Sending request to Tablet 1 retrieve rows from data" +
+            "Sending request to Tablet 1 retrieve rows with ids: " +
             data1.rowKeys,
           timeStamp: Date.now(),
         });
@@ -983,7 +983,7 @@ export default {
         this.socketTablet2.emit("ReadRows", data2);
         this.clientLogs.push({
           message:
-            "Sending request to Tablet 2 retrieve rows from data" +
+            "Sending request to Tablet 2 retrieve rows with ids: " +
             data2.rowKeys,
           timeStamp: Date.now(),
         });
@@ -1077,7 +1077,7 @@ export default {
         this.socketTablet1.emit("DeleteRow", data1);
         this.clientLogs.push({
           message:
-            `Client (${this.port}) : Sending request to delete row from data` +
+            `Client (${this.port}) : Sending request to delete row from data ` +
             data1.rowKeys,
           timeStamp: Date.now(),
         });
