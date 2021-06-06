@@ -1,0 +1,31 @@
+{
+  "name": "bigtable",
+  "version": "1.0.0",
+  "description": "",
+  "main": "masterMimic.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start-master": "node masterMimic.js",
+    "start-tablet": "node tablet-server.js",
+    "start": "node tablet-server2.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nadaabdelmaboud/BigTable.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nadaabdelmaboud/BigTable/issues"
+  },
+  "homepage": "https://github.com/nadaabdelmaboud/BigTable#readme",
+  "dependencies": {
+    "async-mutex": "^0.3.1",
+    "express": "^4.17.1",
+    "joi": "^17.4.0",
+    "mongoose": "^5.12.12",
+    "socker.io": "0.0.0-alpha-beta",
+    "socket.io": "^4.1.2",
+    "socket.io-client": "^4.1.2"
+  }
+}
