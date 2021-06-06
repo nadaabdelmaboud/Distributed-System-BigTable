@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start-master": "node masterMimic.js",
-    "start-tablet": "node tablet-server.js"
+    "start-tablet": "node tablet-server.js",
+    "start": "node tablet-server1.js"
   },
   "repository": {
     "type": "git",

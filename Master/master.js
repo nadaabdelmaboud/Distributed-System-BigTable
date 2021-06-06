@@ -6,38 +6,23 @@ const MetaData = require('./metaData');
 const tablet = require('./tablet-instance')
 const Mutex = require('async-mutex').Mutex;
 const mutex = new Mutex();
-
 const fs = require('fs')
-
 fs.openSync("systemLogs.log", 'w+')
 let masterLog = []
-const io = require("socket.io")(3000);
+
+const MASTER_PORT=3000;
+const PORT = process.env.PORT || MASTER_PORT
+const server = express().get("/",(req, res) => res.send("HELLO FROM MASTER"))
+  .listen(PORT , () => console.log(`Listening on ${PORT}`));
+const io = new require("socket.io")(server);
 
 masterLog.push({
     message: "Master started...",
     timeStamp: Date.now(),
   });
-setInterval(()=>{
-    let logFileString;
-    let logArray = [];
-    try {
-        logFileString = fs.readFileSync('./systemLogs.log', 'utf8');
-        logArray = JSON.parse(logFileString);
-    } catch (err) {
-        console.log("output file not yet intialized")
-    }
-    logArray = logArray.concat(masterLog);
-    logArray.sort(function(a, b) {
-        return a.timeStamp - b.timeStamp;
-    });
-    masterLog=[]
-    var ArrFormated = JSON.stringify(logArray,null,2)
-    fs.writeFile('systemLogs.log', ArrFormated, err => {
-        if (err) {
-        console.error(err)
-        return
-        }
-    })
+setInterval(async ()=>{
+   await io.sockets.emit("out-file",masterLog);
+   masterLog=[];
 },3000)
 masterConnection.once('open',async function(){
 
@@ -250,6 +235,7 @@ io.on("connection", socket => {
                     message: "client => id: " + socket.id + " connected to master",
                     timeStamp: Date.now(),
                   });
+                  console.log("Client Connected");
             }
             else if (payload == "tablet")
             {
@@ -258,8 +244,8 @@ io.on("connection", socket => {
                     message: "Tablet => id: " + socket.id + " connected to master",
                     timeStamp: Date.now(),
                   });
+                  console.log("Tablet Connected");
             }
-            console.log("Tablet Connected");
             await socket.emit('GetMetaData',await MetaData.getMetaData(masterConnection));
         });
 

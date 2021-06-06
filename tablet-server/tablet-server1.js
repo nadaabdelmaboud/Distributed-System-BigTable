@@ -1,6 +1,7 @@
 const AnimeService = require("./anime.service.js");
 const AnimeValidation = require("./anime.validation");
 let metaData = require("./tabletMetaData.js");
+const express = require('express');
 var Mutex = require("async-mutex").Mutex;
 let set = metaData.set;
 let MasterUpdateD = [];
@@ -18,9 +19,10 @@ require("./server1.db.connection")
   });
 //Master socket setup(connecting tablet with master)
 var ioMaster = require("socket.io-client");
-var socketMaster = ioMaster.connect("http://localhost:3000/", {
+var socketMaster = ioMaster.connect("https://master-os.herokuapp.com/", {
   reconnection: true,
 });
+
 setInterval(() => {
   if (tabletLogs.length) {
     socketMaster.emit("tabletLogs", tabletLogs);
@@ -33,7 +35,19 @@ setInterval(() => {
 });
 
 //Tablet Server socket setup(connecting tablet with client)
-var ioTablet = require("socket.io")(8000);
+const Tablet1_PORT=8000;
+const PORT = process.env.PORT || Tablet1_PORT
+const server = express().get("/",(req, res) => res.send("HELLO FROM Tablet-Server 1"))
+  .listen(PORT, () => console.log(`Listening on ${PORT}`));
+var ioTablet = require("socket.io")(server);
+
+
+
+
+
+
+
+
 tabletLogs.push({
   message: "Tablet Server 1 Listening to client...",
   timeStamp: Date.now(),

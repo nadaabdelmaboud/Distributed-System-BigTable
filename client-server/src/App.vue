@@ -535,18 +535,18 @@ export default {
     var p = window.location.href;
     this.port = p.substring(p.length - 5, p.length - 1);
     console.log(this.port);
-    this.socketTablet1 = io.connect("http://localhost:8000/", {
+    this.socketTablet1 = io.connect("https://tabletserver1-os.herokuapp.com/", {
       transports: ["websocket"],
     });
     this.clientLogs.push({
       message: `Client (${this.port}) is Connecting to tablet`,
       timeStamp: Date.now(),
     });
-    this.socketTablet2 = io.connect("http://localhost:9000/", {
+    this.socketTablet2 = io.connect("https://tabletserver2-os.herokuapp.com/", {
       transports: ["websocket"],
     });
     //starting master socket connection
-    this.socketMaster = io.connect("http://localhost:3000/", {
+    this.socketMaster = io.connect("https://master-os.herokuapp.com/", {
       transports: ["websocket"],
     });
     this.clientLogs.push({

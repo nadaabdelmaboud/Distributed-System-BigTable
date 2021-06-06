@@ -4,7 +4,8 @@
   "description": "",
   "main": "master.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node master.js"
   },
   "repository": {
     "type": "git",
@@ -19,6 +20,7 @@
   "dependencies": {
     "async-mutex": "^0.3.1",
     "express": "^4.17.1",
+    "fs": "0.0.1-security",
     "mongoose": "^5.12.11",
     "nodemon": "^2.0.7",
     "socket.io": "^4.1.2"
