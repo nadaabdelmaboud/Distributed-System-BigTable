@@ -32,12 +32,13 @@ const Tablet = {
         return result;
     },
     async createAnime(Animes,tabletNum){
-        console.log(Animes);
-        const AnimesResult = await AnimeModel[tabletNum - 1].insertMany(Animes);
+        console.log("animes inside queries",Animes);
+        const AnimesResult = await AnimeModel[tabletNum - 1].collection.insertMany(Animes);
+        console.log("reuslt from db", AnimesResult.ops); 
         var result = [];
-        if (AnimesResult && AnimesResult.length != 0) {
-          for (var i = 0; i < AnimesResult.length; i++) {
-            result.push(AnimesResult[i].anime_id);
+        if (AnimesResult.ops && AnimesResult.ops.length != 0) {
+          for (var i = 0; i < AnimesResult.ops.length; i++) {
+            result.push(AnimesResult.ops[i].anime_id);
           }
         }
         console.log(result);

@@ -1,10 +1,1607 @@
 [
   {
-    "message": "client => id: qujuWkkILz2vAte2AAA9 disconnected from master",
-    "timeStamp": 1622859188514
+    "message": "Master started...",
+    "timeStamp": 1622936377800
   },
   {
-    "message": "client => id: rskBYATWNAhOKEFtAAA_ disconnected from master",
-    "timeStamp": 1622859188529
+    "message": "Tablet => id: TmHtzw0u7zEZBPl_AAAB connected to master",
+    "timeStamp": 1622936377929
+  },
+  {
+    "message": "Tablet => id: c58EFlGrpkFtAUckAAAN connected to master",
+    "timeStamp": 1622936379042
+  },
+  {
+    "message": "Tablet 1 got metadata",
+    "metaData": {
+      "_id": "60bbfcbfacb5c534a0eaade2",
+      "tablet1Documents": 610,
+      "tablet2Documents": 610,
+      "tablet3Documents": 608,
+      "tablet1KeyRange": {
+        "start": 1,
+        "end": 651
+      },
+      "tablet2KeyRange": {
+        "start": 652,
+        "end": 1349
+      },
+      "tablet3KeyRange": {
+        "start": 1350,
+        "end": 2008
+      }
+    },
+    "timeStamp": 1622936381570
+  },
+  {
+    "message": "Tablet 1 got metadata",
+    "metaData": {
+      "_id": "60bbfcbfacb5c534a0eaade2",
+      "tablet1Documents": 610,
+      "tablet2Documents": 610,
+      "tablet3Documents": 608,
+      "tablet1KeyRange": {
+        "start": 1,
+        "end": 651
+      },
+      "tablet2KeyRange": {
+        "start": 652,
+        "end": 1349
+      },
+      "tablet3KeyRange": {
+        "start": 1350,
+        "end": 2008
+      }
+    },
+    "timeStamp": 1622936381570
+  },
+  {
+    "message": "Tablet 2 got metadata",
+    "metaData": {
+      "_id": "60bbfcbfacb5c534a0eaade2",
+      "tablet1Documents": 610,
+      "tablet2Documents": 610,
+      "tablet3Documents": 608,
+      "tablet1KeyRange": {
+        "start": 1,
+        "end": 651
+      },
+      "tablet2KeyRange": {
+        "start": 652,
+        "end": 1349
+      },
+      "tablet3KeyRange": {
+        "start": 1350,
+        "end": 2008
+      }
+    },
+    "timeStamp": 1622936381767
+  },
+  {
+    "message": "Tablet 2 got metadata",
+    "metaData": {
+      "_id": "60bbfcbfacb5c534a0eaade2",
+      "tablet1Documents": 610,
+      "tablet2Documents": 610,
+      "tablet3Documents": 608,
+      "tablet1KeyRange": {
+        "start": 1,
+        "end": 651
+      },
+      "tablet2KeyRange": {
+        "start": 652,
+        "end": 1349
+      },
+      "tablet3KeyRange": {
+        "start": 1350,
+        "end": 2008
+      }
+    },
+    "timeStamp": 1622936381769
+  },
+  {
+    "message": "client => id: LbYC5uS4JtwoecyLAAAP disconnected from master",
+    "timeStamp": 1622936390687
+  },
+  {
+    "message": "Client (8081) is Connecting to tablet",
+    "timeStamp": 1622936391561
+  },
+  {
+    "message": "Client (8081)Connected to master",
+    "timeStamp": 1622936391565
+  },
+  {
+    "message": "Tablet 1 connected to client => id: ek4tGnFENuv4WweoAAAi",
+    "timeStamp": 1622936391692
+  },
+  {
+    "message": "Tablet 2 connected to client => id: GM8MxBHFOU1qq52xAAAi",
+    "timeStamp": 1622936391693
+  },
+  {
+    "message": "client => id: H0rDBP97ytgJgEyOAAAR connected to master",
+    "timeStamp": 1622936391823
+  },
+  {
+    "message": "Client (8081) Got metadata successfully",
+    "metaData": {
+      "_id": "60bbfcbfacb5c534a0eaade2",
+      "tablet1Documents": 610,
+      "tablet2Documents": 610,
+      "tablet3Documents": 608,
+      "tablet1KeyRange": {
+        "start": 1,
+        "end": 651
+      },
+      "tablet2KeyRange": {
+        "start": 652,
+        "end": 1349
+      },
+      "tablet3KeyRange": {
+        "start": 1350,
+        "end": 2008
+      }
+    },
+    "timeStamp": 1622936392022
+  },
+  {
+    "message": "Sending request to Tablet 2 retrieve rows from data1700",
+    "timeStamp": 1622936395827
+  },
+  {
+    "message": "Sending request to Tablet 1 retrieve rows from data1,2,1347",
+    "timeStamp": 1622936395827
+  },
+  {
+    "message": "client => id: GM8MxBHFOU1qq52xAAAi requested data reterival from Tablet 2 ",
+    "timeStamp": 1622936395830
+  },
+  {
+    "message": "client => id: ek4tGnFENuv4WweoAAAi requested data reterival from Tablet 1 ",
+    "timeStamp": 1622936395830
+  },
+  {
+    "message": "client => id: GM8MxBHFOU1qq52xAAAirequested data reterival => Error: problem retrieving data",
+    "timeStamp": 1622936396048
+  },
+  {
+    "message": "client => id: GM8MxBHFOU1qq52xAAAi requested data reterival from Tablet 2 => Succeeded",
+    "timeStamp": 1622936396049
+  },
+  {
+    "message": "Client (8081) : Data retrieved successfully",
+    "RowRead": {
+      "data": false,
+      "err": "problem retrieving data"
+    },
+    "timeStamp": 1622936396051
+  },
+  {
+    "message": "client => id: ek4tGnFENuv4WweoAAAi requested data reterival from Tablet 1 => Succeeded",
+    "timeStamp": 1622936396285
+  },
+  {
+    "message": "Client (8081) : Data retrieved successfully",
+    "RowRead": {
+      "data": [
+        {
+          "_id": "60bbfbe96122eb32f006184b",
+          "anime_id": "1",
+          "name": "Cowboy Bebop",
+          "genre": "Action",
+          "type": "TV",
+          "episodes": "26",
+          "rating": "8.82",
+          "members": "486824"
+        },
+        {
+          "_id": "60bbfbed6122eb32f0061d0c",
+          "anime_id": "1347",
+          "name": "Bubblegum Crisis",
+          "genre": "Adventure- Mecha- Sci-Fi- Shounen",
+          "type": "OVA",
+          "episodes": "8",
+          "rating": "7.36",
+          "members": "17268"
+        }
+      ],
+      "errids": []
+    },
+    "timeStamp": 1622936396286
+  },
+  {
+    "message": "Sending request to Tablet 2 retrieve rows from data1700",
+    "timeStamp": 1622936471085
+  },
+  {
+    "message": "Sending request to Tablet 1 retrieve rows from data1,2,1347",
+    "timeStamp": 1622936471085
+  },
+  {
+    "message": "client => id: GM8MxBHFOU1qq52xAAAi requested data reterival from Tablet 2 ",
+    "timeStamp": 1622936471088
+  },
+  {
+    "message": "client => id: ek4tGnFENuv4WweoAAAi requested data reterival from Tablet 1 ",
+    "timeStamp": 1622936471088
+  },
+  {
+    "message": "client => id: GM8MxBHFOU1qq52xAAAirequested data reterival => Error: problem retrieving data",
+    "timeStamp": 1622936471313
+  },
+  {
+    "message": "client => id: GM8MxBHFOU1qq52xAAAi requested data reterival from Tablet 2 => Succeeded",
+    "timeStamp": 1622936471315
+  },
+  {
+    "message": "Client (8081) : Data retrieved successfully",
+    "RowRead": {
+      "data": false,
+      "err": "problem retrieving data"
+    },
+    "timeStamp": 1622936471316
+  },
+  {
+    "message": "client => id: ek4tGnFENuv4WweoAAAi requested data reterival from Tablet 1 => Succeeded",
+    "timeStamp": 1622936471560
+  },
+  {
+    "message": "Client (8081) : Data retrieved successfully",
+    "RowRead": {
+      "data": [
+        {
+          "_id": "60bbfbe96122eb32f006184b",
+          "anime_id": "1",
+          "name": "Cowboy Bebop",
+          "genre": "Action",
+          "type": "TV",
+          "episodes": "26",
+          "rating": "8.82",
+          "members": "486824"
+        },
+        {
+          "_id": "60bbfbed6122eb32f0061d0c",
+          "anime_id": "1347",
+          "name": "Bubblegum Crisis",
+          "genre": "Adventure- Mecha- Sci-Fi- Shounen",
+          "type": "OVA",
+          "episodes": "8",
+          "rating": "7.36",
+          "members": "17268"
+        }
+      ],
+      "errids": []
+    },
+    "timeStamp": 1622936471560
+  },
+  {
+    "message": "Sending request to Tablet 1 retrieve rows from data1,2,1347",
+    "timeStamp": 1622936583718
+  },
+  {
+    "message": "Sending request to Tablet 2 retrieve rows from data1700",
+    "timeStamp": 1622936583719
+  },
+  {
+    "message": "client => id: GM8MxBHFOU1qq52xAAAi requested data reterival from Tablet 2 ",
+    "timeStamp": 1622936583721
+  },
+  {
+    "message": "client => id: ek4tGnFENuv4WweoAAAi requested data reterival from Tablet 1 ",
+    "timeStamp": 1622936583721
+  },
+  {
+    "message": "client => id: GM8MxBHFOU1qq52xAAAirequested data reterival => Error: problem retrieving data",
+    "timeStamp": 1622936583924
+  },
+  {
+    "message": "client => id: GM8MxBHFOU1qq52xAAAi requested data reterival from Tablet 2 => Succeeded",
+    "timeStamp": 1622936583925
+  },
+  {
+    "message": "Client (8081) : Data retrieved successfully",
+    "RowRead": {
+      "data": false,
+      "err": "problem retrieving data"
+    },
+    "timeStamp": 1622936583925
+  },
+  {
+    "message": "client => id: ek4tGnFENuv4WweoAAAi requested data reterival from Tablet 1 => Succeeded",
+    "timeStamp": 1622936584138
+  },
+  {
+    "message": "Client (8081) : Data retrieved successfully",
+    "RowRead": {
+      "data": [
+        {
+          "_id": "60bbfbe96122eb32f006184b",
+          "anime_id": "1",
+          "name": "Cowboy Bebop",
+          "genre": "Action",
+          "type": "TV",
+          "episodes": "26",
+          "rating": "8.82",
+          "members": "486824"
+        },
+        {
+          "_id": "60bbfbed6122eb32f0061d0c",
+          "anime_id": "1347",
+          "name": "Bubblegum Crisis",
+          "genre": "Adventure- Mecha- Sci-Fi- Shounen",
+          "type": "OVA",
+          "episodes": "8",
+          "rating": "7.36",
+          "members": "17268"
+        }
+      ],
+      "errids": []
+    },
+    "timeStamp": 1622936584139
+  },
+  {
+    "message": "client => id: H0rDBP97ytgJgEyOAAAR disconnected from master",
+    "timeStamp": 1622936591932
+  },
+  {
+    "message": "Client (8081) is Connecting to tablet",
+    "timeStamp": 1622936593058
+  },
+  {
+    "message": "Client (8081)Connected to master",
+    "timeStamp": 1622936593069
+  },
+  {
+    "message": "Tablet 2 connected to client => id: hhIJOhzmUFY-1RiDAAAk",
+    "timeStamp": 1622936593292
+  },
+  {
+    "message": "Tablet 1 connected to client => id: orlAN4sDwSLv9Wn7AAAk",
+    "timeStamp": 1622936593292
+  },
+  {
+    "message": "client => id: HXjGheivCozKz734AAAT connected to master",
+    "timeStamp": 1622936593408
+  },
+  {
+    "message": "Client (8081) Got metadata successfully",
+    "metaData": {
+      "_id": "60bbfcbfacb5c534a0eaade2",
+      "tablet1Documents": 610,
+      "tablet2Documents": 610,
+      "tablet3Documents": 608,
+      "tablet1KeyRange": {
+        "start": 1,
+        "end": 651
+      },
+      "tablet2KeyRange": {
+        "start": 652,
+        "end": 1349
+      },
+      "tablet3KeyRange": {
+        "start": 1350,
+        "end": 2008
+      }
+    },
+    "timeStamp": 1622936593629
+  },
+  {
+    "message": "Sending request to Tablet 1 retrieve rows from data1,2,1347",
+    "timeStamp": 1622936596714
+  },
+  {
+    "message": "Sending request to Tablet 2 retrieve rows from data1700",
+    "timeStamp": 1622936596715
+  },
+  {
+    "message": "client => id: hhIJOhzmUFY-1RiDAAAk requested data reterival from Tablet 2 ",
+    "timeStamp": 1622936596718
+  },
+  {
+    "message": "client => id: orlAN4sDwSLv9Wn7AAAk requested data reterival from Tablet 1 ",
+    "timeStamp": 1622936596723
+  },
+  {
+    "message": "client => id: hhIJOhzmUFY-1RiDAAAkrequested data reterival => Error: problem retrieving data",
+    "timeStamp": 1622936596927
+  },
+  {
+    "message": "client => id: hhIJOhzmUFY-1RiDAAAk requested data reterival from Tablet 2 => Succeeded",
+    "timeStamp": 1622936596929
+  },
+  {
+    "message": "Client (8081) : Data retrieved successfully",
+    "RowRead": {
+      "data": false,
+      "err": "problem retrieving data"
+    },
+    "timeStamp": 1622936596930
+  },
+  {
+    "message": "Client (8081) : Data retrieved successfully",
+    "RowRead": {
+      "data": [
+        {
+          "_id": "60bbfbe96122eb32f006184b",
+          "anime_id": "1",
+          "name": "Cowboy Bebop",
+          "genre": "Action",
+          "type": "TV",
+          "episodes": "26",
+          "rating": "8.82",
+          "members": "486824"
+        },
+        {
+          "_id": "60bbfbed6122eb32f0061d0c",
+          "anime_id": "1347",
+          "name": "Bubblegum Crisis",
+          "genre": "Adventure- Mecha- Sci-Fi- Shounen",
+          "type": "OVA",
+          "episodes": "8",
+          "rating": "7.36",
+          "members": "17268"
+        }
+      ],
+      "errids": []
+    },
+    "timeStamp": 1622936597184
+  },
+  {
+    "message": "client => id: orlAN4sDwSLv9Wn7AAAk requested data reterival from Tablet 1 => Succeeded",
+    "timeStamp": 1622936597184
+  },
+  {
+    "message": "client => id: HXjGheivCozKz734AAAT disconnected from master",
+    "timeStamp": 1622936823737
+  },
+  {
+    "message": "Client (8081) is Connecting to tablet",
+    "timeStamp": 1622936824813
+  },
+  {
+    "message": "Client (8081)Connected to master",
+    "timeStamp": 1622936824818
+  },
+  {
+    "message": "Tablet 1 connected to client => id: z8svafU7Nirt4a3qAAAm",
+    "timeStamp": 1622936824989
+  },
+  {
+    "message": "Tablet 2 connected to client => id: 9fm1rnC3-iNjAELxAAAm",
+    "timeStamp": 1622936824990
+  },
+  {
+    "message": "client => id: xQ1Afr5tpWQF6hMgAAAV connected to master",
+    "timeStamp": 1622936825102
+  },
+  {
+    "message": "Client (8081) Got metadata successfully",
+    "metaData": {
+      "_id": "60bbfcbfacb5c534a0eaade2",
+      "tablet1Documents": 610,
+      "tablet2Documents": 610,
+      "tablet3Documents": 608,
+      "tablet1KeyRange": {
+        "start": 1,
+        "end": 651
+      },
+      "tablet2KeyRange": {
+        "start": 652,
+        "end": 1349
+      },
+      "tablet3KeyRange": {
+        "start": 1350,
+        "end": 2008
+      }
+    },
+    "timeStamp": 1622936825295
+  },
+  {
+    "message": "Sending request to Tablet 1 retrieve rows from data1,2,1347",
+    "timeStamp": 1622936828973
+  },
+  {
+    "message": "Sending request to Tablet 2 retrieve rows from data1700",
+    "timeStamp": 1622936828974
+  },
+  {
+    "message": "client => id: z8svafU7Nirt4a3qAAAm requested data reterival from Tablet 1 ",
+    "timeStamp": 1622936828975
+  },
+  {
+    "message": "client => id: 9fm1rnC3-iNjAELxAAAm requested data reterival from Tablet 2 ",
+    "timeStamp": 1622936828976
+  },
+  {
+    "message": "client => id: 9fm1rnC3-iNjAELxAAAmrequested data reterival => Error: problem retrieving data",
+    "timeStamp": 1622936829182
+  },
+  {
+    "message": "client => id: 9fm1rnC3-iNjAELxAAAm requested data reterival from Tablet 2 => Succeeded",
+    "timeStamp": 1622936829183
+  },
+  {
+    "message": "Client (8081) : Data retrieved successfully",
+    "RowRead": {
+      "data": false,
+      "err": "problem retrieving data"
+    },
+    "timeStamp": 1622936829185
+  },
+  {
+    "message": "client => id: z8svafU7Nirt4a3qAAAm requested data reterival from Tablet 1 => Succeeded",
+    "timeStamp": 1622936829395
+  },
+  {
+    "message": "Client (8081) : Data retrieved successfully",
+    "RowRead": {
+      "data": [
+        {
+          "_id": "60bbfbe96122eb32f006184b",
+          "anime_id": "1",
+          "name": "Cowboy Bebop",
+          "genre": "Action",
+          "type": "TV",
+          "episodes": "26",
+          "rating": "8.82",
+          "members": "486824"
+        },
+        {
+          "_id": "60bbfbed6122eb32f0061d0c",
+          "anime_id": "1347",
+          "name": "Bubblegum Crisis",
+          "genre": "Adventure- Mecha- Sci-Fi- Shounen",
+          "type": "OVA",
+          "episodes": "8",
+          "rating": "7.36",
+          "members": "17268"
+        }
+      ],
+      "errids": []
+    },
+    "timeStamp": 1622936829397
+  },
+  {
+    "message": "Client (8081) is Connecting to tablet",
+    "timeStamp": 1622936979264
+  },
+  {
+    "message": "Client (8081) is Connecting to tablet",
+    "timeStamp": 1622936979264
+  },
+  {
+    "message": "Client (8081)Connected to master",
+    "timeStamp": 1622936979265
+  },
+  {
+    "message": "Client (8081)Connected to master",
+    "timeStamp": 1622936979265
+  },
+  {
+    "message": "Client (8081) is disconnecting ",
+    "timeStamp": 1622936979292
+  },
+  {
+    "message": "Client (8081) is disconnecting ",
+    "timeStamp": 1622936979292
+  },
+  {
+    "message": "Tablet 2 connected to client => id: x7xplhKFGKIZz9qjAAAo",
+    "timeStamp": 1622936979317
+  },
+  {
+    "message": "Tablet 1 connected to client => id: sHalk6KHxa7SvkuGAAAo",
+    "timeStamp": 1622936979317
+  },
+  {
+    "message": "client => id: EzreKGJcfPVd49FPAAAX connected to master",
+    "timeStamp": 1622936979321
+  },
+  {
+    "message": "Client (8081) Got metadata successfully",
+    "metaData": {
+      "_id": "60bbfcbfacb5c534a0eaade2",
+      "tablet1Documents": 610,
+      "tablet2Documents": 610,
+      "tablet3Documents": 608,
+      "tablet1KeyRange": {
+        "start": 1,
+        "end": 651
+      },
+      "tablet2KeyRange": {
+        "start": 652,
+        "end": 1349
+      },
+      "tablet3KeyRange": {
+        "start": 1350,
+        "end": 2008
+      }
+    },
+    "timeStamp": 1622936979502
+  },
+  {
+    "message": "Client (8081) Got metadata successfully",
+    "metaData": {
+      "_id": "60bbfcbfacb5c534a0eaade2",
+      "tablet1Documents": 610,
+      "tablet2Documents": 610,
+      "tablet3Documents": 608,
+      "tablet1KeyRange": {
+        "start": 1,
+        "end": 651
+      },
+      "tablet2KeyRange": {
+        "start": 652,
+        "end": 1349
+      },
+      "tablet3KeyRange": {
+        "start": 1350,
+        "end": 2008
+      }
+    },
+    "timeStamp": 1622936979502
+  },
+  {
+    "message": "Client (8081) is Connecting to tablet",
+    "timeStamp": 1622936981066
+  },
+  {
+    "message": "Client (8081)Connected to master",
+    "timeStamp": 1622936981069
+  },
+  {
+    "message": "Client (8081) is disconnecting ",
+    "timeStamp": 1622936981076
+  },
+  {
+    "message": "Client (8081) is disconnecting ",
+    "timeStamp": 1622936981076
+  },
+  {
+    "message": "Tablet 2 connected to client => id: 0wM5AST6u2zxAu9aAAAq",
+    "timeStamp": 1622936981087
+  },
+  {
+    "message": "Tablet 1 connected to client => id: x1gUq4iHEPNvL6PyAAAq",
+    "timeStamp": 1622936981087
+  },
+  {
+    "message": "client => id: YP7eX40H715oDp_7AAAZ connected to master",
+    "timeStamp": 1622936981088
+  },
+  {
+    "message": "Client (8081) Got metadata successfully",
+    "metaData": {
+      "_id": "60bbfcbfacb5c534a0eaade2",
+      "tablet1Documents": 610,
+      "tablet2Documents": 610,
+      "tablet3Documents": 608,
+      "tablet1KeyRange": {
+        "start": 1,
+        "end": 651
+      },
+      "tablet2KeyRange": {
+        "start": 652,
+        "end": 1349
+      },
+      "tablet3KeyRange": {
+        "start": 1350,
+        "end": 2008
+      }
+    },
+    "timeStamp": 1622936981303
+  },
+  {
+    "message": "Sending request to Tablet 1 retrieve rows from data16,34",
+    "timeStamp": 1622937103904
+  },
+  {
+    "message": "client => id: x1gUq4iHEPNvL6PyAAAq requested data reterival from Tablet 1 ",
+    "timeStamp": 1622937103907
+  },
+  {
+    "message": "client => id: x1gUq4iHEPNvL6PyAAAqrequested data reterival => Error: ",
+    "timeStamp": 1622937104113
+  },
+  {
+    "message": "client => id: x1gUq4iHEPNvL6PyAAAq requested data reterival from Tablet 1 => Succeeded",
+    "timeStamp": 1622937104118
+  },
+  {
+    "message": "Client (8081) : Data retrieved successfully",
+    "RowRead": {
+      "data": [
+        {
+          "_id": "60bbfbe96122eb32f0061851",
+          "anime_id": "16",
+          "name": "Hachimitsu to Clover",
+          "genre": "Comedy- Drama- Josei- Romance",
+          "type": "TV",
+          "episodes": "24",
+          "rating": "8.18",
+          "members": "130646"
+        }
+      ],
+      "errids": []
+    },
+    "timeStamp": 1622937104120
+  },
+  {
+    "message": "client => id: TmHtzw0u7zEZBPl_AAAB disconnected from master",
+    "timeStamp": 1622937363988
+  },
+  {
+    "message": "Tablet 1 Connected to master",
+    "timeStamp": 1622937365840
+  },
+  {
+    "message": "Tablet 1 Listening to client...",
+    "timeStamp": 1622937365910
+  },
+  {
+    "message": "Tablet => id: w-maVlObAUS1IwsrAAAb connected to master",
+    "timeStamp": 1622937365956
+  },
+  {
+    "message": "Tablet 1 connected to client => id: fzgGqnoCmb9LBUbEAAAA",
+    "timeStamp": 1622937366140
+  },
+  {
+    "message": "Tablet 1 connected to client => id: Ln7qrCTbdLlcuvlzAAAC",
+    "timeStamp": 1622937366149
+  },
+  {
+    "message": "Tablet 1 connected to client => id: G1JxZdE_pWlg8wYMAAAD",
+    "timeStamp": 1622937366150
+  },
+  {
+    "message": "Tablet 1 connected to client => id: PMMBf5CmLHOV7a8mAAAG",
+    "timeStamp": 1622937366163
+  },
+  {
+    "message": "Tablet 1 got metadata",
+    "metaData": {
+      "_id": "60bbfcbfacb5c534a0eaade2",
+      "tablet1Documents": 610,
+      "tablet2Documents": 610,
+      "tablet3Documents": 608,
+      "tablet1KeyRange": {
+        "start": 1,
+        "end": 651
+      },
+      "tablet2KeyRange": {
+        "start": 652,
+        "end": 1349
+      },
+      "tablet3KeyRange": {
+        "start": 1350,
+        "end": 2008
+      }
+    },
+    "timeStamp": 1622937366164
+  },
+  {
+    "message": "Tablet 1 connected to client => id: 0ZbcQYIRF9Utpc53AAAH",
+    "timeStamp": 1622937366165
+  },
+  {
+    "message": "Tablet 1 connected to client => id: 05z0uCPNTjpybrtTAAAK",
+    "timeStamp": 1622937366189
+  },
+  {
+    "message": "Tablet 1 connected to client => id: 8PorVFWP8V1Ofw2TAAAL",
+    "timeStamp": 1622937366192
+  },
+  {
+    "message": "Tablet 1 connected to client => id: sf7MPWLAJkbDjzndAAAO",
+    "timeStamp": 1622937366203
+  },
+  {
+    "message": "client => id: c58EFlGrpkFtAUckAAAN disconnected from master",
+    "timeStamp": 1622937367131
+  },
+  {
+    "message": "Tablet 2 Connected to master",
+    "timeStamp": 1622937369043
+  },
+  {
+    "message": "Tablet 2 Listening to client...",
+    "timeStamp": 1622937369100
+  },
+  {
+    "message": "Tablet => id: rJPOdh1ZqMPlCopKAAAd connected to master",
+    "timeStamp": 1622937369143
+  },
+  {
+    "message": "Tablet 2 got metadata",
+    "metaData": {
+      "_id": "60bbfcbfacb5c534a0eaade2",
+      "tablet1Documents": 610,
+      "tablet2Documents": 610,
+      "tablet3Documents": 608,
+      "tablet1KeyRange": {
+        "start": 1,
+        "end": 651
+      },
+      "tablet2KeyRange": {
+        "start": 652,
+        "end": 1349
+      },
+      "tablet3KeyRange": {
+        "start": 1350,
+        "end": 2008
+      }
+    },
+    "timeStamp": 1622937369360
+  },
+  {
+    "message": "Tablet 2 connected to client => id: VYT-dhOtfXCUbtn5AAAA",
+    "timeStamp": 1622937369430
+  },
+  {
+    "message": "Tablet 2 connected to client => id: tt7cGeVG6cOC2--yAAAC",
+    "timeStamp": 1622937369438
+  },
+  {
+    "message": "Tablet 2 connected to client => id: 5_XtqVngfmT7mpPNAAAD",
+    "timeStamp": 1622937369440
+  },
+  {
+    "message": "Tablet 2 connected to client => id: TfPkPjl3T0xrDgN6AAAG",
+    "timeStamp": 1622937369463
+  },
+  {
+    "message": "Tablet 2 connected to client => id: WE-F4ST1TBVv-1eqAAAH",
+    "timeStamp": 1622937369466
+  },
+  {
+    "message": "Tablet 2 connected to client => id: _F_DTo0CCn6YG8BMAAAJ",
+    "timeStamp": 1622937369470
+  },
+  {
+    "message": "Tablet 2 connected to client => id: dXWalpY2KKfu4ZbfAAAL",
+    "timeStamp": 1622937369472
+  },
+  {
+    "message": "Tablet 2 connected to client => id: uVk4VpRZ1ol7kaKkAAAO",
+    "timeStamp": 1622937369482
+  },
+  {
+    "message": "Client (8080) is Connecting to tablet",
+    "timeStamp": 1622937396155
+  },
+  {
+    "message": "Client (8080)Connected to master",
+    "timeStamp": 1622937396157
+  },
+  {
+    "message": "Tablet 1 connected to client => id: NvvP5-MpJFkZmAtiAAAQ",
+    "timeStamp": 1622937396285
+  },
+  {
+    "message": "Tablet 2 connected to client => id: 0qXHoVbMlroevL7NAAAQ",
+    "timeStamp": 1622937396286
+  },
+  {
+    "message": "client => id: SPF7FnIW2r8of6OXAAAf connected to master",
+    "timeStamp": 1622937396370
+  },
+  {
+    "message": "Client (8080) Got metadata successfully",
+    "metaData": {
+      "_id": "60bbfcbfacb5c534a0eaade2",
+      "tablet1Documents": 610,
+      "tablet2Documents": 610,
+      "tablet3Documents": 608,
+      "tablet1KeyRange": {
+        "start": 1,
+        "end": 651
+      },
+      "tablet2KeyRange": {
+        "start": 652,
+        "end": 1349
+      },
+      "tablet3KeyRange": {
+        "start": 1350,
+        "end": 2008
+      }
+    },
+    "timeStamp": 1622937396546
+  },
+  {
+    "message": "Sending request to Tablet 2 retrieve rows from data1700",
+    "timeStamp": 1622937400863
+  },
+  {
+    "message": "Sending request to Tablet 1 retrieve rows from data1,2,1347",
+    "timeStamp": 1622937400863
+  },
+  {
+    "message": "client => id: 0qXHoVbMlroevL7NAAAQ requested data reterival from Tablet 2 ",
+    "timeStamp": 1622937400867
+  },
+  {
+    "message": "client => id: NvvP5-MpJFkZmAtiAAAQ requested data reterival from Tablet 1 ",
+    "timeStamp": 1622937400868
+  },
+  {
+    "message": "client => id: 0qXHoVbMlroevL7NAAAQrequested data reterival => Error: problem retrieving data",
+    "timeStamp": 1622937401070
+  },
+  {
+    "message": "client => id: 0qXHoVbMlroevL7NAAAQ requested data reterival from Tablet 2 => Succeeded",
+    "timeStamp": 1622937401071
+  },
+  {
+    "message": "Client (8080) : Data retrieved successfully",
+    "RowRead": {
+      "data": false,
+      "err": "problem retrieving data"
+    },
+    "timeStamp": 1622937401071
+  },
+  {
+    "message": "Client (8080) : Data retrieved successfully",
+    "RowRead": {
+      "data": [
+        {
+          "_id": "60bbfbe96122eb32f006184b",
+          "anime_id": "1"
+        },
+        {
+          "_id": "60bbfbed6122eb32f0061d0c",
+          "anime_id": "1347"
+        }
+      ],
+      "err": []
+    },
+    "timeStamp": 1622937401292
+  },
+  {
+    "message": "client => id: NvvP5-MpJFkZmAtiAAAQ requested data reterival from Tablet 1 => Succeeded",
+    "timeStamp": 1622937401292
+  },
+  {
+    "message": "client => id: w-maVlObAUS1IwsrAAAb disconnected from master",
+    "timeStamp": 1622937428801
+  },
+  {
+    "message": "Tablet 1 Connected to master",
+    "timeStamp": 1622937430225
+  },
+  {
+    "message": "Tablet 1 Listening to client...",
+    "timeStamp": 1622937430270
+  },
+  {
+    "message": "Tablet => id: ohIiLnRYRBSlA44hAAAh connected to master",
+    "timeStamp": 1622937430324
+  },
+  {
+    "message": "Tablet 1 connected to client => id: 3IX7dhyN0K5dyGTwAAAA",
+    "timeStamp": 1622937430397
+  },
+  {
+    "message": "Tablet 1 got metadata",
+    "metaData": {
+      "_id": "60bbfcbfacb5c534a0eaade2",
+      "tablet1Documents": 610,
+      "tablet2Documents": 610,
+      "tablet3Documents": 608,
+      "tablet1KeyRange": {
+        "start": 1,
+        "end": 651
+      },
+      "tablet2KeyRange": {
+        "start": 652,
+        "end": 1349
+      },
+      "tablet3KeyRange": {
+        "start": 1350,
+        "end": 2008
+      }
+    },
+    "timeStamp": 1622937430495
+  },
+  {
+    "message": "Tablet 1 connected to client => id: eu3y0tcsogcOSurhAAAC",
+    "timeStamp": 1622937430579
+  },
+  {
+    "message": "Tablet 1 connected to client => id: w2b7lzWnDD1qIKa6AAAE",
+    "timeStamp": 1622937430593
+  },
+  {
+    "message": "Tablet 1 connected to client => id: O430sjM-yCVU3lU3AAAG",
+    "timeStamp": 1622937430606
+  },
+  {
+    "message": "Tablet 1 connected to client => id: EZ8vQgXTQhpRWAGEAAAI",
+    "timeStamp": 1622937430616
+  },
+  {
+    "message": "Tablet 1 connected to client => id: mpzf08jL7LOB_UM5AAAK",
+    "timeStamp": 1622937430628
+  },
+  {
+    "message": "Tablet 1 connected to client => id: iITYB9pVbooZcRSZAAAM",
+    "timeStamp": 1622937430645
+  },
+  {
+    "message": "Tablet 1 connected to client => id: 6-qXBz9U_I7QacFTAAAO",
+    "timeStamp": 1622937430657
+  },
+  {
+    "message": "Tablet 1 connected to client => id: t-fxMDYpwYAwbLV6AAAQ",
+    "timeStamp": 1622937430668
+  },
+  {
+    "message": "client => id: rJPOdh1ZqMPlCopKAAAd disconnected from master",
+    "timeStamp": 1622937431576
+  },
+  {
+    "message": "Tablet 2 Connected to master",
+    "timeStamp": 1622937433017
+  },
+  {
+    "message": "Tablet 2 Listening to client...",
+    "timeStamp": 1622937433056
+  },
+  {
+    "message": "Tablet => id: DM_nORpr8JtGjMXCAAAj connected to master",
+    "timeStamp": 1622937433114
+  },
+  {
+    "message": "Tablet 2 connected to client => id: t8K9hAENQ1NzgMw2AAAA",
+    "timeStamp": 1622937433116
+  },
+  {
+    "message": "Tablet 2 connected to client => id: DQF_pMB1D0Di-46PAAAC",
+    "timeStamp": 1622937433122
+  },
+  {
+    "message": "Tablet 2 connected to client => id: N9gpsa1NPsThYUnGAAAE",
+    "timeStamp": 1622937433125
+  },
+  {
+    "message": "Tablet 2 connected to client => id: LddoH1B5s-KNBcrvAAAG",
+    "timeStamp": 1622937433132
+  },
+  {
+    "message": "Tablet 2 connected to client => id: 9ThERaWmJQ7TH_JwAAAI",
+    "timeStamp": 1622937433138
+  },
+  {
+    "message": "Tablet 2 connected to client => id: sq7BtihfRg0MILpYAAAK",
+    "timeStamp": 1622937433145
+  },
+  {
+    "message": "Tablet 2 got metadata",
+    "metaData": {
+      "_id": "60bbfcbfacb5c534a0eaade2",
+      "tablet1Documents": 610,
+      "tablet2Documents": 610,
+      "tablet3Documents": 608,
+      "tablet1KeyRange": {
+        "start": 1,
+        "end": 651
+      },
+      "tablet2KeyRange": {
+        "start": 652,
+        "end": 1349
+      },
+      "tablet3KeyRange": {
+        "start": 1350,
+        "end": 2008
+      }
+    },
+    "timeStamp": 1622937433304
+  },
+  {
+    "message": "Tablet 2 connected to client => id: J0lvfp8FxMAwSo61AAAM",
+    "timeStamp": 1622937433573
+  },
+  {
+    "message": "Tablet 2 connected to client => id: cW1xu83OpxHZ_7EHAAAO",
+    "timeStamp": 1622937433584
+  },
+  {
+    "message": "Tablet 2 connected to client => id: 2mjbvKTtE_BWPHCRAAAQ",
+    "timeStamp": 1622937433599
+  },
+  {
+    "message": "Sending request to Tablet 2 retrieve rows from data1700",
+    "timeStamp": 1622937435804
+  },
+  {
+    "message": "Sending request to Tablet 1 retrieve rows from data1,2,1347",
+    "timeStamp": 1622937435804
+  },
+  {
+    "message": "client => id: t-fxMDYpwYAwbLV6AAAQ requested data reterival from Tablet 1 ",
+    "timeStamp": 1622937435807
+  },
+  {
+    "message": "client => id: 9ThERaWmJQ7TH_JwAAAI requested data reterival from Tablet 2 ",
+    "timeStamp": 1622937435808
+  },
+  {
+    "message": "client => id: 9ThERaWmJQ7TH_JwAAAIrequested data reterival => Error: problem retrieving data",
+    "timeStamp": 1622937436037
+  },
+  {
+    "message": "Client (8080) : Data retrieved successfully",
+    "RowRead": {
+      "data": false,
+      "err": "problem retrieving data"
+    },
+    "timeStamp": 1622937436038
+  },
+  {
+    "message": "client => id: 9ThERaWmJQ7TH_JwAAAI requested data reterival from Tablet 2 => Succeeded",
+    "timeStamp": 1622937436038
+  },
+  {
+    "message": "client => id: t-fxMDYpwYAwbLV6AAAQ requested data reterival from Tablet 1 => Succeeded",
+    "timeStamp": 1622937436220
+  },
+  {
+    "message": "Client (8080) : Data retrieved successfully",
+    "RowRead": {
+      "data": [
+        {
+          "anime_id": "1"
+        },
+        {
+          "anime_id": "1347"
+        }
+      ],
+      "err": []
+    },
+    "timeStamp": 1622937436220
+  },
+  {
+    "message": "client => id: ohIiLnRYRBSlA44hAAAh disconnected from master",
+    "timeStamp": 1622937600052
+  },
+  {
+    "message": "Tablet 1 Connected to master",
+    "timeStamp": 1622937602140
+  },
+  {
+    "message": "Tablet 1 Listening to client...",
+    "timeStamp": 1622937602205
+  },
+  {
+    "message": "Tablet => id: Wh4Ox5-X9XD8ndMWAAAl connected to master",
+    "timeStamp": 1622937602257
+  },
+  {
+    "message": "Tablet 1 connected to client => id: 8n8Z1GRw7691574IAAAA",
+    "timeStamp": 1622937602407
+  },
+  {
+    "message": "Tablet 1 connected to client => id: LZ2BezKQTWaUEnseAAAC",
+    "timeStamp": 1622937602414
+  },
+  {
+    "message": "Tablet 1 connected to client => id: 7w1GdY5H0_PQtCK-AAAD",
+    "timeStamp": 1622937602416
+  },
+  {
+    "message": "Tablet 1 got metadata",
+    "metaData": {
+      "_id": "60bbfcbfacb5c534a0eaade2",
+      "tablet1Documents": 610,
+      "tablet2Documents": 610,
+      "tablet3Documents": 608,
+      "tablet1KeyRange": {
+        "start": 1,
+        "end": 651
+      },
+      "tablet2KeyRange": {
+        "start": 652,
+        "end": 1349
+      },
+      "tablet3KeyRange": {
+        "start": 1350,
+        "end": 2008
+      }
+    },
+    "timeStamp": 1622937602426
+  },
+  {
+    "message": "Tablet 1 connected to client => id: PEFPOqHpStzN2_KMAAAG",
+    "timeStamp": 1622937602428
+  },
+  {
+    "message": "Tablet 1 connected to client => id: 8p37LliAFhjJ5WqZAAAH",
+    "timeStamp": 1622937602430
+  },
+  {
+    "message": "Tablet 1 connected to client => id: lazRbRd7lJaHRVu_AAAK",
+    "timeStamp": 1622937602440
+  },
+  {
+    "message": "Tablet 1 connected to client => id: DtiMX5hvQjaKApHRAAAM",
+    "timeStamp": 1622937602444
+  },
+  {
+    "message": "Tablet 1 connected to client => id: B7ohleLsQMxgOhM6AAAO",
+    "timeStamp": 1622937602451
+  },
+  {
+    "message": "Tablet 1 connected to client => id: Dj9ZfU989_fhRjtcAAAQ",
+    "timeStamp": 1622937602459
+  },
+  {
+    "message": "client => id: DM_nORpr8JtGjMXCAAAj disconnected from master",
+    "timeStamp": 1622937604754
+  },
+  {
+    "message": "Tablet 2 Connected to master",
+    "timeStamp": 1622937615636
+  },
+  {
+    "message": "Tablet 2 Listening to client...",
+    "timeStamp": 1622937615680
+  },
+  {
+    "message": "Tablet => id: l7HUP9oyeRG6GkJ5AAAn connected to master",
+    "timeStamp": 1622937615737
+  },
+  {
+    "message": "Tablet 2 connected to client => id: hcz7fr9WKhOPjP3RAAAA",
+    "timeStamp": 1622937615865
+  },
+  {
+    "message": "Tablet 2 connected to client => id: SFQZ9pv9_zHFxNODAAAC",
+    "timeStamp": 1622937615871
+  },
+  {
+    "message": "Tablet 2 connected to client => id: UFXDiRPUodlViiGnAAAE",
+    "timeStamp": 1622937615875
+  },
+  {
+    "message": "Tablet 2 connected to client => id: vUFqPcvvCnWOu95LAAAG",
+    "timeStamp": 1622937615882
+  },
+  {
+    "message": "Tablet 2 connected to client => id: hJhk5r_wj-DiW480AAAI",
+    "timeStamp": 1622937615890
+  },
+  {
+    "message": "Tablet 2 connected to client => id: oAYAI2amW4bLzXvyAAAK",
+    "timeStamp": 1622937615895
+  },
+  {
+    "message": "Tablet 2 connected to client => id: 4-wgyGZl0ngve1fMAAAM",
+    "timeStamp": 1622937615901
+  },
+  {
+    "message": "Tablet 2 connected to client => id: XxnOendT_wDTod9TAAAO",
+    "timeStamp": 1622937615910
+  },
+  {
+    "message": "Tablet 2 got metadata",
+    "metaData": {
+      "_id": "60bbfcbfacb5c534a0eaade2",
+      "tablet1Documents": 610,
+      "tablet2Documents": 610,
+      "tablet3Documents": 608,
+      "tablet1KeyRange": {
+        "start": 1,
+        "end": 651
+      },
+      "tablet2KeyRange": {
+        "start": 652,
+        "end": 1349
+      },
+      "tablet3KeyRange": {
+        "start": 1350,
+        "end": 2008
+      }
+    },
+    "timeStamp": 1622937615937
+  },
+  {
+    "message": "Tablet 2 connected to client => id: i1H4dddv1zPJkX-1AAAQ",
+    "timeStamp": 1622937617577
+  },
+  {
+    "message": "Sending request to Tablet 2 retrieve rows from data1700",
+    "timeStamp": 1622937621491
+  },
+  {
+    "message": "Sending request to Tablet 1 retrieve rows from data1,2,1347",
+    "timeStamp": 1622937621491
+  },
+  {
+    "message": "client => id: SFQZ9pv9_zHFxNODAAAC requested data reterival from Tablet 2 ",
+    "timeStamp": 1622937621494
+  },
+  {
+    "message": "client => id: Dj9ZfU989_fhRjtcAAAQ requested data reterival from Tablet 1 ",
+    "timeStamp": 1622937621495
+  },
+  {
+    "message": "client => id: SFQZ9pv9_zHFxNODAAACrequested data reterival => Error: problem retrieving data",
+    "timeStamp": 1622937621705
+  },
+  {
+    "message": "client => id: SFQZ9pv9_zHFxNODAAAC requested data reterival from Tablet 2 => Succeeded",
+    "timeStamp": 1622937621707
+  },
+  {
+    "message": "Client (8080) : Data retrieved successfully",
+    "RowRead": {
+      "data": false,
+      "err": "problem retrieving data"
+    },
+    "timeStamp": 1622937621707
+  },
+  {
+    "message": "client => id: Dj9ZfU989_fhRjtcAAAQ requested data reterival from Tablet 1 => Succeeded",
+    "timeStamp": 1622937621949
+  },
+  {
+    "message": "Client (8080) : Data retrieved successfully",
+    "RowRead": {
+      "data": [
+        {
+          "_id": "60bbfbe96122eb32f006184b",
+          "anime_id": "1",
+          "name": "Cowboy Bebop",
+          "genre": "Action",
+          "type": "TV",
+          "episodes": "26",
+          "rating": "8.82",
+          "members": "486824"
+        },
+        {
+          "_id": "60bbfbed6122eb32f0061d0c",
+          "anime_id": "1347",
+          "name": "Bubblegum Crisis",
+          "genre": "Adventure- Mecha- Sci-Fi- Shounen",
+          "type": "OVA",
+          "episodes": "8",
+          "rating": "7.36",
+          "members": "17268"
+        }
+      ],
+      "err": []
+    },
+    "timeStamp": 1622937621950
+  },
+  {
+    "message": "client => id: SPF7FnIW2r8of6OXAAAf disconnected from master",
+    "timeStamp": 1622937626493
+  },
+  {
+    "message": "Client (8080) is Connecting to tablet",
+    "timeStamp": 1622937627115
+  },
+  {
+    "message": "Client (8080)Connected to master",
+    "timeStamp": 1622937627117
+  },
+  {
+    "message": "Tablet 2 connected to client => id: TssEKUqOz0VlN6dPAAAS",
+    "timeStamp": 1622937627202
+  },
+  {
+    "message": "Tablet 1 connected to client => id: frKnYsN88YcoHkEOAAAS",
+    "timeStamp": 1622937627202
+  },
+  {
+    "message": "client => id: bII_7RpRnUL-H654AAAp connected to master",
+    "timeStamp": 1622937627288
+  },
+  {
+    "message": "Client (8080) Got metadata successfully",
+    "metaData": {
+      "_id": "60bbfcbfacb5c534a0eaade2",
+      "tablet1Documents": 610,
+      "tablet2Documents": 610,
+      "tablet3Documents": 608,
+      "tablet1KeyRange": {
+        "start": 1,
+        "end": 651
+      },
+      "tablet2KeyRange": {
+        "start": 652,
+        "end": 1349
+      },
+      "tablet3KeyRange": {
+        "start": 1350,
+        "end": 2008
+      }
+    },
+    "timeStamp": 1622937627473
+  },
+  {
+    "message": "Sending request to Tablet 2 retrieve rows from data1700",
+    "timeStamp": 1622937629800
+  },
+  {
+    "message": "Sending request to Tablet 1 retrieve rows from data1,2,1347",
+    "timeStamp": 1622937629800
+  },
+  {
+    "message": "client => id: TssEKUqOz0VlN6dPAAAS requested data reterival from Tablet 2 ",
+    "timeStamp": 1622937629804
+  },
+  {
+    "message": "client => id: frKnYsN88YcoHkEOAAAS requested data reterival from Tablet 1 ",
+    "timeStamp": 1622937629804
+  },
+  {
+    "message": "client => id: TssEKUqOz0VlN6dPAAASrequested data reterival => Error: problem retrieving data",
+    "timeStamp": 1622937629980
+  },
+  {
+    "message": "client => id: TssEKUqOz0VlN6dPAAAS requested data reterival from Tablet 2 => Succeeded",
+    "timeStamp": 1622937629982
+  },
+  {
+    "message": "Client (8080) : Data retrieved successfully",
+    "RowRead": {
+      "data": false,
+      "err": "problem retrieving data"
+    },
+    "timeStamp": 1622937629983
+  },
+  {
+    "message": "Client (8080) : Data retrieved successfully",
+    "RowRead": {
+      "data": [
+        {
+          "_id": "60bbfbe96122eb32f006184b",
+          "anime_id": "1",
+          "name": "Cowboy Bebop",
+          "genre": "Action",
+          "type": "TV",
+          "episodes": "26",
+          "rating": "8.82",
+          "members": "486824"
+        },
+        {
+          "_id": "60bbfbed6122eb32f0061d0c",
+          "anime_id": "1347",
+          "name": "Bubblegum Crisis",
+          "genre": "Adventure- Mecha- Sci-Fi- Shounen",
+          "type": "OVA",
+          "episodes": "8",
+          "rating": "7.36",
+          "members": "17268"
+        }
+      ],
+      "err": []
+    },
+    "timeStamp": 1622937630204
+  },
+  {
+    "message": "client => id: frKnYsN88YcoHkEOAAAS requested data reterival from Tablet 1 => Succeeded",
+    "timeStamp": 1622937630204
+  },
+  {
+    "message": "client => id: bII_7RpRnUL-H654AAAp disconnected from master",
+    "timeStamp": 1622937815873
+  },
+  {
+    "message": "Client (8080) is Connecting to tablet",
+    "timeStamp": 1622937816645
+  },
+  {
+    "message": "Client (8080)Connected to master",
+    "timeStamp": 1622937816649
+  },
+  {
+    "message": "Tablet 1 connected to client => id: 7INF85Hw-Hi7LZ0aAAAU",
+    "timeStamp": 1622937816760
+  },
+  {
+    "message": "Tablet 2 connected to client => id: _blx1hDVkX3P0j7NAAAU",
+    "timeStamp": 1622937816762
+  },
+  {
+    "message": "client => id: QNsohj2T1QR17NfnAAAr connected to master",
+    "timeStamp": 1622937816906
+  },
+  {
+    "message": "Client (8080) Got metadata successfully",
+    "metaData": {
+      "_id": "60bbfcbfacb5c534a0eaade2",
+      "tablet1Documents": 610,
+      "tablet2Documents": 610,
+      "tablet3Documents": 608,
+      "tablet1KeyRange": {
+        "start": 1,
+        "end": 651
+      },
+      "tablet2KeyRange": {
+        "start": 652,
+        "end": 1349
+      },
+      "tablet3KeyRange": {
+        "start": 1350,
+        "end": 2008
+      }
+    },
+    "timeStamp": 1622937817080
+  },
+  {
+    "message": "Sending request to Tablet 1 retrieve rows from data1,2,1347",
+    "timeStamp": 1622937819091
+  },
+  {
+    "message": "Sending request to Tablet 2 retrieve rows from data1700",
+    "timeStamp": 1622937819092
+  },
+  {
+    "message": "client => id: _blx1hDVkX3P0j7NAAAU requested data reterival from Tablet 2 ",
+    "timeStamp": 1622937819095
+  },
+  {
+    "message": "client => id: 7INF85Hw-Hi7LZ0aAAAU requested data reterival from Tablet 1 ",
+    "timeStamp": 1622937819095
+  },
+  {
+    "message": "client => id: _blx1hDVkX3P0j7NAAAUrequested data reterival => Error: problem retrieving data",
+    "timeStamp": 1622937819284
+  },
+  {
+    "message": "client => id: _blx1hDVkX3P0j7NAAAU requested data reterival from Tablet 2 => Succeeded",
+    "timeStamp": 1622937819285
+  },
+  {
+    "message": "Client (8080) : Data retrieved successfully",
+    "RowRead": {
+      "data": false,
+      "err": "problem retrieving data"
+    },
+    "timeStamp": 1622937819286
+  },
+  {
+    "message": "client => id: 7INF85Hw-Hi7LZ0aAAAU requested data reterival from Tablet 1 => Succeeded",
+    "timeStamp": 1622937819551
+  },
+  {
+    "message": "Client (8080) : Data retrieved successfully",
+    "RowRead": {
+      "data": [
+        {
+          "_id": "60bbfbe96122eb32f006184b",
+          "anime_id": "1",
+          "name": "Cowboy Bebop",
+          "genre": "Action",
+          "type": "TV",
+          "episodes": "26",
+          "rating": "8.82",
+          "members": "486824"
+        },
+        {
+          "_id": "60bbfbed6122eb32f0061d0c",
+          "anime_id": "1347",
+          "name": "Bubblegum Crisis",
+          "genre": "Adventure- Mecha- Sci-Fi- Shounen",
+          "type": "OVA",
+          "episodes": "8",
+          "rating": "7.36",
+          "members": "17268"
+        }
+      ],
+      "err": []
+    },
+    "timeStamp": 1622937819552
+  },
+  {
+    "message": "client => id: Wh4Ox5-X9XD8ndMWAAAl disconnected from master",
+    "timeStamp": 1622938173917
+  },
+  {
+    "message": "client => id: l7HUP9oyeRG6GkJ5AAAn disconnected from master",
+    "timeStamp": 1622938175852
   }
 ]

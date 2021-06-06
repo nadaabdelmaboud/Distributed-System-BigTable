@@ -61,7 +61,7 @@ const MasterData={
         const docs1 = metadata.tablet1Documents;
         const docs2 = metadata.tablet2Documents;
         const docs3 = metadata.tablet3Documents;
-        const threshold = 1;
+        const threshold = 4;
         if(
             (
                 (docs1-docs2>=threshold)
@@ -79,6 +79,9 @@ const MasterData={
                 (docs3-docs2>=threshold)
                 ||
                 (docs2-docs3>=threshold)
+            )||
+            (
+                (docs1 == 0 && docs2 == 0 && docs3 == 0)
             )
         )
         return true;
@@ -152,7 +155,7 @@ const MasterData={
             const metadata = await MetaData.getMetaData(masterConnection);
             let id = metadata.tablet3KeyRange.end+1;
             animeDocuments.forEach(anime => {
-                anime.anime_id=id;
+                anime.anime_id=id.toString();
                 id+=1;
             });
             console.log(animeDocuments);

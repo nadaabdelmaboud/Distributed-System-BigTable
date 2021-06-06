@@ -636,9 +636,11 @@ export default {
     // //Read Row
     this.socketTablet2.on("ReadRowsResponse", (data) => {
       var dataBack = data.data;
+      console.log("data2", data);
       if (dataBack == false) {
         this.errorDetected = true;
-        this.errors = data.errids;
+        console.log("error" , data.err);
+        this.errors = data.err;
       } else {
         for (var a in dataBack) {
           this.animes.push(dataBack[a]);
@@ -773,9 +775,11 @@ export default {
     //Read Row
     this.socketTablet1.on("ReadRowsResponse", (data) => {
       var dataBack = data.data;
+      console.log("data1", data);
       if (dataBack == false) {
         this.errorDetected = true;
-        this.errors = data.errids;
+        console.log("error" , data.err);
+        this.errors = data.err;
       } else {
         for (var a in dataBack) {
           this.animes.push(dataBack[a]);
@@ -890,6 +894,7 @@ export default {
         }
       }
 
+      console.log("out of range",outOfRange);
       if (outOfRange.length != 0) {
         this.showToast();
         this.messageToast = "Rows of id: ";
@@ -898,7 +903,7 @@ export default {
           this.messageToast = this.messageToast + outOfRange[i] + ", ";
         }
         this.messageToast =
-          this.messageToast + outOfRange[len - 1] + " not in range";
+        this.messageToast + outOfRange[len - 1] + " not in range";
         outOfRange = [];
       }
       this.errorDetected = false;

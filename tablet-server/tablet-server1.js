@@ -164,7 +164,7 @@ ioTablet.on("connection", function (socket) {
         : data1.data != false
         ? data1.data
         : data2.data;
-    data.errids =
+    data.err =
       data1.data == false && data2.data == false
         ? ids.ids1.concat(ids.ids2)
         : data1.data == false
