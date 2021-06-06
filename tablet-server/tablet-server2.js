@@ -97,10 +97,9 @@ ioTablet.on("connection", function (socket) {
     message: "Tablet 2 connected to client => id: " + socket.client.id,
     timeStamp: Date.now(),
   });
-  //Tablet queries from client
 
-  //the client must send the tablet number that contains the data
-  let tabletNumber; //tablet not tablet server
+  //Tablet queries from client
+  let tabletNumber;
 
   //check on each id and send to the appropriate tablet
   socket.on("ReadRows", async function (ClientData) {
@@ -123,21 +122,20 @@ ioTablet.on("connection", function (socket) {
         " requested data reterival from Tablet 2 ",
       timeStamp: Date.now(),
     });
-    console.log("ClientDatarowKeys", ClientData.rowKeys);
     const data = await AnimeService.findRows(ClientData.rowKeys, 3);
 
-    if (!data.data) {
-      console.log(data.err);
+    if (data.data.length==0) {
+      console.log(data.myerr);
       tabletLogs.push({
         message:
           "client => id: " +
           socket.client.id +
           "requested data reterival => Error: " +
-          data.err,
+          data.myerr,
         timeStamp: Date.now(),
       });
     }
-    console.log(data);
+    console.log("data from tablet 2 : ",data);
     socket.emit("ReadRowsResponse", data); ///tablet
     tabletLogs.push({
       message:

@@ -6,22 +6,22 @@ const AnimeService = {
   },
   async findRows(rowKeys, tabletNum) {
     const isKeysValid = await AnimeValidation.validateRowKeys(rowKeys);
-    if (isKeysValid == -1) return { data: false, err: "rowKey Doesn't Exist" };
-    if (isKeysValid == -2) return { data: false, err: "" };
+    if (isKeysValid == -1) return { data: [], myerr: "rowKey Doesn't Exist" ,err:[] };
+    if (isKeysValid == -2) return { data: [], myerr: "",err:[] };
     if (isKeysValid == 0)
       return {
-        data: false,
-        err: `not all the rowKeys belong to tabletNo: ${tabletNum}`,
+        data: [],
+        myerr: `not all the rowKeys belong to tabletNo: ${tabletNum}`,
+        err:[]
       };
     if (isKeysValid != tabletNum)
       return {
-        data: false,
-        err: `this rowKeys belongs to tablet number: ${isKeysValid}`,
+        data: [],
+        myerr: `this rowKeys belongs to tablet number: ${isKeysValid}`,
+        err:[]
       };
     const result = await Anime.findRows(rowKeys, tabletNum);
-    if (!result || result.length == 0)
-      return { data: false, err: "problem retrieving data" };
-    return { data: result, err: "" };
+    return result;
   },
   async updateAnime(updateAnime, rowKey, tabletNum) {
     const isKeyValid = await AnimeValidation.validateRowKey(rowKey);

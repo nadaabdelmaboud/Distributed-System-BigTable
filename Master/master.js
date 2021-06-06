@@ -61,7 +61,7 @@ const MasterData={
         const docs1 = metadata.tablet1Documents;
         const docs2 = metadata.tablet2Documents;
         const docs3 = metadata.tablet3Documents;
-        const threshold = 4;
+        const threshold = 50;
         if(
             (
                 (docs1-docs2>=threshold)

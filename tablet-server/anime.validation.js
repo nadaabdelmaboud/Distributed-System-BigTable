@@ -58,9 +58,6 @@ const AnimeValidation = {
       }
     }
     metaData.tablet3KeyRange.end = newId;
-    //console.log("before set",metaData);
-    //set(metaData);
-    //console.log("after set", metaData);
     return { isValidAnimes: result, newAnimes: Animes };
   },
 };

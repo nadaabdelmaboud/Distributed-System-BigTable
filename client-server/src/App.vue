@@ -46,12 +46,29 @@
             </div>
           </div>
         </div>
-        <div v-if="errorDetected">
+        <div v-if="errors1.length != 0 || errors2.length != 0">
           <p>Error detected in row keys:</p>
-          <div v-for="error in errors" :key="error" class="errorList">
-            <div class="errorItems">
-              <div>
-                {{ error }}
+          <div v-if="errors1.length != 0">
+            <p>Tablet1 RowKey Errors:</p>
+            <div v-for="error in errors1" :key="error" class="errorList">
+              <div class="errorItems">
+                <div>
+                  {{ error }}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div v-if="errors2.length != 0">
+            <p>Tablet2 RowKey Errors:</p>
+            <div
+              v-for="errorData in errors2"
+              :key="errorData"
+              class="errorList"
+            >
+              <div class="errorItems">
+                <div>
+                  {{ errorData }}
+                </div>
               </div>
             </div>
           </div>
@@ -466,8 +483,9 @@ export default {
       messageToast: "",
       addAnimes: [],
       port: "",
-      errorDetected: false,
-      errors: [],
+      //errorDetected: false,
+      errors1: [],
+      errors2: [],
     };
   },
   beforeDestroy() {
@@ -637,11 +655,12 @@ export default {
     this.socketTablet2.on("ReadRowsResponse", (data) => {
       var dataBack = data.data;
       console.log("data2", data);
-      if (dataBack == false) {
-        this.errorDetected = true;
-        console.log("error" , data.err);
-        this.errors = data.err;
-      } else {
+      if (data.err.length != 0) {
+        //this.errorDetected = true;
+        console.log("error", data.err);
+        this.errors2 = data.err;
+      }
+      if (dataBack.length != 0) {
         for (var a in dataBack) {
           this.animes.push(dataBack[a]);
         }
@@ -776,11 +795,12 @@ export default {
     this.socketTablet1.on("ReadRowsResponse", (data) => {
       var dataBack = data.data;
       console.log("data1", data);
-      if (dataBack == false) {
-        this.errorDetected = true;
-        console.log("error" , data.err);
-        this.errors = data.err;
-      } else {
+      if (data.err.length != 0) {
+        //this.errorDetected = true;
+        console.log("error", data.err);
+        this.errors1 = data.err;
+      }
+      if (dataBack.length != 0) {
         for (var a in dataBack) {
           this.animes.push(dataBack[a]);
         }
@@ -894,7 +914,7 @@ export default {
         }
       }
 
-      console.log("out of range",outOfRange);
+      console.log("out of range", outOfRange);
       if (outOfRange.length != 0) {
         this.showToast();
         this.messageToast = "Rows of id: ";
@@ -903,10 +923,10 @@ export default {
           this.messageToast = this.messageToast + outOfRange[i] + ", ";
         }
         this.messageToast =
-        this.messageToast + outOfRange[len - 1] + " not in range";
+          this.messageToast + outOfRange[len - 1] + " not in range";
         outOfRange = [];
       }
-      this.errorDetected = false;
+      //this.errorDetected = false;
 
       let data1 = {
         rowKeys: tablet1Rows,
@@ -1007,7 +1027,7 @@ export default {
           this.messageToast + outOfRange[len - 1] + " not in range";
         outOfRange = [];
       }
-      this.errorDetected = false;
+      //this.errorDetected = false;
 
       let data1 = {
         rowKeys: tablet1Rows,

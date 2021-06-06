@@ -129,50 +129,48 @@ ioTablet.on("connection", function (socket) {
     message: "client => id: " + socket.client.id + " requested data reterival from Tablet 1 ",
     timeStamp: Date.now(),
     });
-    console.log("ClientDatarowKeys",ClientData.rowKeys);
     const ids = await AnimeValidation.seperateId(ClientData.rowKeys);
     const data1 = await AnimeService.findRows(ids.ids1, 1);
     const data2 = await AnimeService.findRows(ids.ids2, 2);
     console.log("after",ids);
 
-    if (!data1.data) {
-      console.log(data1.err);
+    if (data1.data.length==0) {
+      console.log(data1.myerr);
       tabletLogs.push({
         message:
           "client => id: " +
           socket.client.id +
           "requested data reterival => Error: " +
-          data1.err,
+          data1.myerr,
         timeStamp: Date.now(),
       });
     }
-    if (!data2.data) {
-      console.log(data2.err);
+    if (data2.data.length==0) {
+      console.log(data2.myerr);
       tabletLogs.push({
         message:
           "client => id: " +
           socket.client.id +
           "requested data reterival => Error: " +
-          data2.err,
+          data2.myerr,
         timeStamp: Date.now(),
       });
     }
     var data = {};
     data.data =
-      data1.data != false && data2.data !=false
+      data1.data.length != 0 && data2.data.length !=0
         ? data1.data.concat(data2.data)
-        : data1.data != false
+        : data1.data.length != 0
         ? data1.data
         : data2.data;
     data.err =
-      data1.data == false && data2.data == false
-        ? ids.ids1.concat(ids.ids2)
-        : data1.data == false
-        ? ids.ids1
-        : data2.data == false
-        ? ids.ids2
-        : [];
-    console.log(data);
+      data1.err.length != 0 && data2.err.length !=0
+        ? data1.err.concat(data2.err)
+        : data1.err.length != 0
+        ? data1.err
+        : data2.err;
+    console.log("////////////////////");
+    console.log("data send to client from read:",data);
     socket.emit("ReadRowsResponse", data); ///tablet
     tabletLogs.push({
     message: "client => id: " + socket.client.id + " requested data reterival from Tablet 1 => Succeeded",
