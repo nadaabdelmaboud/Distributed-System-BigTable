@@ -48,7 +48,7 @@ socketMaster.on("connect", function () {
     console.log(data);
     set(data);
     tabletLogs.push({
-      message: "Tablet Server 2 got metadata",
+      message: "Tablet Server 2 got metadata from master",
       metaData: data,
       timeStamp: Date.now(),
     });
@@ -57,7 +57,7 @@ socketMaster.on("connect", function () {
   //Balance
   socketMaster.on("Balance", async () => {
     tabletLogs.push({
-      message: "Tablet Server 2 blocked Requests as master is rebalancing",
+      message: "Tablet Server 2 blocked Requests as master is balancing",
       timeStamp: Date.now(),
     });
     MasterRelease = await MasterLock.acquire();
@@ -119,7 +119,7 @@ ioTablet.on("connection", function (socket) {
       message:
         "client => id: " +
         socket.client.id +
-        " requested data reterival from Tablet Server 2 ",
+        " requested data reterival of ids:"+ClientData.rowKeys+" from Tablet Server 2 ",
       timeStamp: Date.now(),
     });
     const data = await AnimeService.findRows(ClientData.rowKeys, 3);
@@ -130,7 +130,7 @@ ioTablet.on("connection", function (socket) {
         message:
           "client => id: " +
           socket.client.id +
-          "requested data reterival => Error: " +
+          "requested data reterival => Error: Problem retrieving data from Tablet Server 2" +
           data.myerr,
         timeStamp: Date.now(),
       });
@@ -163,7 +163,7 @@ ioTablet.on("connection", function (socket) {
       message:
         "client => id: " +
         socket.client.id +
-        " requested data update from Tablet Server 2 ",
+        " requested data update for id: "+ClientData.rowKey+" from Tablet Server 2 ",
       timeStamp: Date.now(),
     });
 
@@ -172,7 +172,7 @@ ioTablet.on("connection", function (socket) {
       message:
         "client => id: " +
         socket.client.id +
-        " acquired the lock from Tablet Server 2 ",
+        " acquired the lock from Tablet Server 2 to update row with id: "+ClientData.rowKey,
       timeStamp: Date.now(),
     });
     try {
@@ -234,12 +234,12 @@ ioTablet.on("connection", function (socket) {
 
     tabletLogs.push({
       message:
-        "client => id: " + socket.client.id + " requested to add new row ",
+        "client => id: " + socket.client.id + " requested to add new rows to Tablet Server 2 ",
       timeStamp: Date.now(),
     });
     const release = await MUtexTablet1.acquire();
     tabletLogs.push({
-      message: "client => id: " + socket.client.id + " acquired the lock ",
+      message: "client => id: " + socket.client.id + " acquired the lock from Tablet Server 2 to add rows",
       timeStamp: Date.now(),
     });
     try {
@@ -253,7 +253,7 @@ ioTablet.on("connection", function (socket) {
           message:
             "client => id: " +
             socket.client.id +
-            " requested add new row from Tablet Server 2 => Error: " +
+            " requested add new row to Tablet Server 2 => Error: " +
             data.err,
           timeStamp: Date.now(),
         });
@@ -279,7 +279,7 @@ ioTablet.on("connection", function (socket) {
         message:
           "client => id: " +
           socket.client.id +
-          " requested add new row to client from Tablet Server 2  => Succeeded ",
+          " requested add new row to client from Tablet Server 2  => Succeeded , ids: "+data.data +" are added",
         timeStamp: Date.now(),
       });
     } finally {
@@ -304,12 +304,15 @@ ioTablet.on("connection", function (socket) {
     );
 
     tabletLogs.push({
-      message: "client => id: " + socket.client.id + " requested Delete Cells ",
+      message: "client => id: " + socket.client.id + " requested Delete Cells for id: " +
+        ClientData.rowKey + " from Tablet Server 2",
       timeStamp: Date.now(),
     });
     const release = await MUtexTablet1.acquire();
     tabletLogs.push({
-      message: "client => id: " + socket.client.id + " acquired the lock ",
+      message: "client => id: " + socket.client.id + " acquired the lock for Deleting Cells for id: " +
+        ClientData.rowKey +
+        " from Tablet Server 2",
       timeStamp: Date.now(),
     });
     try {
@@ -364,12 +367,20 @@ ioTablet.on("connection", function (socket) {
     );
 
     tabletLogs.push({
-      message: "client => id: " + socket.client.id + " requested Delete Row ",
+      message:
+        "client => id: " +
+        socket.client.id +
+        " requested Delete Rows of ids: " +
+        ClientData.rowKeys+" from Tablet Server 2",
       timeStamp: Date.now(),
     });
     const release = await MUtexTablet1.acquire();
     tabletLogs.push({
-      message: "client => id: " + socket.client.id + " acquired the lock ",
+      message:
+        "client => id: " +
+        socket.client.id +
+        " acquired the lock on Tablet server 2 for deleting rows with ids: " +
+        ClientData.rowKeys,
       timeStamp: Date.now(),
     });
     try {
@@ -382,7 +393,7 @@ ioTablet.on("connection", function (socket) {
           message:
             "client => id: " +
             socket.client.id +
-            " requested Delete Row from Tablet Server 2  => Error: No Anime Was Deleted ",
+            " requested Delete Rows from Tablet Server 2  => Error: No Anime Was Deleted ",
           timeStamp: Date.now(),
         });
       } else {
@@ -397,7 +408,7 @@ ioTablet.on("connection", function (socket) {
           message:
             "client => id: " +
             socket.client.id +
-            " requested Delete Row to master from Tablet Server 2 => Succeeded",
+            " requested Delete Rows to master from Tablet Server 2 => Succeeded",
           timeStamp: Date.now(),
         });
       }
@@ -407,13 +418,16 @@ ioTablet.on("connection", function (socket) {
         message:
           "client => id: " +
           socket.client.id +
-          " requested Delete Row to client from Tablet Server 2  => Succeeded",
+          " requested Delete Rows to client from Tablet Server 2  => Succeeded , rows with ids: "+data.ids+" was deleted",
         timeStamp: Date.now(),
       });
     } finally {
       release();
       tabletLogs.push({
-        message: "client => id: " + socket.client.id + " released the lock ",
+        message:
+          "client => id: " +
+          socket.client.id +
+          " released the lock from Tablet Server 2",
         timeStamp: Date.now(),
       });
     }

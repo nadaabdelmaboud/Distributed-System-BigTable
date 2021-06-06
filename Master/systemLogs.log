@@ -1,26 +1,26 @@
 [
   {
-    "message": "Master acquired the lock to delete documents",
-    "timeStamp": 1623006552912
+    "message": "client => id: -bBxcZUOnGYzznRVAAAd disconnected from master",
+    "timeStamp": 1623012250287
   },
   {
-    "message": "Master released the lock after deleting documents",
-    "timeStamp": 1623006553084
+    "message": "Tablet Server 1 Connected to master",
+    "timeStamp": 1623012252048
   },
   {
-    "message": "Master acquired the lock to delete documents",
-    "timeStamp": 1623006553084
+    "message": "Tablet Server 1 Listening to client...",
+    "timeStamp": 1623012252090
   },
   {
-    "message": "Master released the lock after deleting documents",
-    "timeStamp": 1623006553258
+    "message": "Tablet => id: gYkLPiJYhI8h-313AAAf connected to master",
+    "timeStamp": 1623012252126
   },
   {
-    "message": "Tablet Server 1 got metadata",
+    "message": "Tablet Server 1 recieved metadata from master",
     "metaData": {
       "_id": "60bbfcbfacb5c534a0eaade2",
       "tablet1Documents": 583,
-      "tablet2Documents": 599,
+      "tablet2Documents": 597,
       "tablet3Documents": 612,
       "tablet1KeyRange": {
         "start": 1,
@@ -32,21 +32,87 @@
       },
       "tablet3KeyRange": {
         "start": 1346,
-        "end": 2014
+        "end": 2017
       }
     },
-    "timeStamp": 1623006553419
+    "timeStamp": 1623012252308
   },
   {
-    "message": "master updated and re-emitted the metadata",
-    "timeStamp": 1623006553419
+    "message": "Tablet Server 1 connected to client => id: 9WyWj4D_UQ1tb1_NAAAA",
+    "timeStamp": 1623012252405
+  },
+  {
+    "message": "client => id: zBZi0AsOsi4t5H0kAAAX disconnected from master",
+    "timeStamp": 1623012253374
+  },
+  {
+    "message": "Tablet Server 2 Connected to master",
+    "timeStamp": 1623012255369
+  },
+  {
+    "message": "Tablet Server 2 Listening to client...",
+    "timeStamp": 1623012255410
+  },
+  {
+    "message": "Tablet => id: RqxQrhFlhd1l1PnLAAAh connected to master",
+    "timeStamp": 1623012255451
+  },
+  {
+    "message": "Tablet Server 2 connected to client => id: HNVQNVBmKW1gieEPAAAA",
+    "timeStamp": 1623012255584
+  },
+  {
+    "message": "Tablet Server 2 got metadata from master",
+    "metaData": {
+      "_id": "60bbfcbfacb5c534a0eaade2",
+      "tablet1Documents": 583,
+      "tablet2Documents": 597,
+      "tablet3Documents": 612,
+      "tablet1KeyRange": {
+        "start": 1,
+        "end": 649
+      },
+      "tablet2KeyRange": {
+        "start": 650,
+        "end": 1345
+      },
+      "tablet3KeyRange": {
+        "start": 1346,
+        "end": 2017
+      }
+    },
+    "timeStamp": 1623012255623
+  },
+  {
+    "message": "client => id: 3o8a617DHLQaiBIkAAAb disconnected from master",
+    "timeStamp": 1623012288384
+  },
+  {
+    "message": "Client (8080) is Connecting to tablet",
+    "timeStamp": 1623012289236
+  },
+  {
+    "message": "Client (8080)Connected to master",
+    "timeStamp": 1623012289238
+  },
+  {
+    "message": "Tablet Server 1 connected to client => id: UQzgYLfobT2oSRqIAAAC",
+    "timeStamp": 1623012289371
+  },
+  {
+    "message": "Tablet Server 2 connected to client => id: OyAMXZXbwQcj6pbBAAAC",
+    "timeStamp": 1623012289371
+  },
+  {
+    "message": "client => id: 2iVc8KgiU3G3pZ3hAAAj connected to master",
+    "timeStamp": 1623012289457
   },
   {
     "message": "Client (8080) Got metadata successfully",
     "metaData": {
       "_id": "60bbfcbfacb5c534a0eaade2",
       "tablet1Documents": 583,
-      "tablet2Documents": 599,
+      "tablet2Documents": 597,
       "tablet3Documents": 612,
       "tablet1KeyRange": {
         "start": 1,
@@ -58,146 +124,149 @@
       },
       "tablet3KeyRange": {
         "start": 1346,
-        "end": 2014
+        "end": 2017
       }
     },
-    "timeStamp": 1623006553420
+    "timeStamp": 1623012289628
   },
   {
-    "message": "Tablet Server 2 got metadata",
-    "metaData": {
-      "_id": "60bbfcbfacb5c534a0eaade2",
-      "tablet1Documents": 583,
-      "tablet2Documents": 599,
-      "tablet3Documents": 612,
-      "tablet1KeyRange": {
-        "start": 1,
-        "end": 649
-      },
-      "tablet2KeyRange": {
-        "start": 650,
-        "end": 1345
-      },
-      "tablet3KeyRange": {
-        "start": 1346,
-        "end": 2014
-      }
+    "message": "Sending request to Tablet 2 retrieve rows with ids: 1400,1500",
+    "timeStamp": 1623012332719
+  },
+  {
+    "message": "Sending request to Tablet 1 retrieve rows with ids: 20,21,23,500,501",
+    "timeStamp": 1623012332719
+  },
+  {
+    "message": "client => id: OyAMXZXbwQcj6pbBAAAC requested data reterival of ids:1400,1500 from Tablet Server 2 ",
+    "timeStamp": 1623012332722
+  },
+  {
+    "message": "client => id: UQzgYLfobT2oSRqIAAAC requested data reterival of ids:20,21,23,500,501 from Tablet Server 1",
+    "timeStamp": 1623012332723
+  },
+  {
+    "message": "client => id: UQzgYLfobT2oSRqIAAAC requested data reterival => Error: Problem retrieving data from Tablet Server 1 Tablet 2",
+    "timeStamp": 1623012332907
+  },
+  {
+    "message": "client => id: UQzgYLfobT2oSRqIAAAC requested data reterival from Tablet Server 1 => Succeeded",
+    "timeStamp": 1623012332915
+  },
+  {
+    "message": "Client (8080) : Data retrieved successfully",
+    "RowRead": {
+      "data": [
+        {
+          "_id": "60bbfbe96122eb32f0061856",
+          "anime_id": "21",
+          "name": "One Piece",
+          "genre": "Action- Adventure- Comedy- Drama- Fantasy- Shounen- Super Power",
+          "type": "TV",
+          "episodes": "Unknown",
+          "rating": "8.58",
+          "members": "504862"
+        },
+        {
+          "_id": "60bbfbe96122eb32f0061a1f",
+          "anime_id": "501",
+          "name": "Doraemon",
+          "genre": "Adventure- Comedy- Fantasy- Kids- Shounen",
+          "type": "TV",
+          "episodes": "26",
+          "rating": "7.49",
+          "members": "9366"
+        }
+      ],
+      "err": [
+        "20",
+        "23",
+        "500"
+      ]
     },
-    "timeStamp": 1623006553422
+    "timeStamp": 1623012332917
   },
   {
-    "message": "Tablet Server 1 got metadata",
-    "metaData": {
-      "_id": "60bbfcbfacb5c534a0eaade2",
-      "tablet1Documents": 583,
-      "tablet2Documents": 599,
-      "tablet3Documents": 612,
-      "tablet1KeyRange": {
-        "start": 1,
-        "end": 649
-      },
-      "tablet2KeyRange": {
-        "start": 650,
-        "end": 1345
-      },
-      "tablet3KeyRange": {
-        "start": 1346,
-        "end": 2014
-      }
+    "message": "client => id: OyAMXZXbwQcj6pbBAAAC requested data reterival from Tablet Server 2 => Succeeded",
+    "timeStamp": 1623012332918
+  },
+  {
+    "message": "Client (8080) : Data retrieved successfully",
+    "RowRead": {
+      "data": [
+        {
+          "_id": "60bbfbed6122eb32f0061d40",
+          "anime_id": "1400",
+          "name": "Macross 7 Movie: Ginga ga Ore wo Yondeiru!",
+          "genre": "Action- Adventure- Comedy- Drama- Mecha- Music- Sci-Fi- Shounen",
+          "type": "Movie",
+          "episodes": "1",
+          "rating": "7.05",
+          "members": "5270"
+        },
+        {
+          "_id": "60bbfbed6122eb32f0061d9d",
+          "anime_id": "1500",
+          "name": "Teizokurei Daydream",
+          "genre": "Comedy- Drama- Ecchi- Horror- Supernatural",
+          "type": "OVA",
+          "episodes": "4",
+          "rating": "6.4",
+          "members": "5305"
+        }
+      ],
+      "err": [],
+      "myerr": ""
     },
-    "timeStamp": 1623006553598
+    "timeStamp": 1623012332926
   },
   {
-    "message": "master updated and re-emitted the metadata",
-    "timeStamp": 1623006553598
+    "message": "Client (8080) : Sending request to delete row from data 501,20,23",
+    "timeStamp": 1623013361642
   },
   {
-    "message": "Client (8080) Got metadata successfully",
-    "metaData": {
-      "_id": "60bbfcbfacb5c534a0eaade2",
-      "tablet1Documents": 583,
-      "tablet2Documents": 599,
-      "tablet3Documents": 612,
-      "tablet1KeyRange": {
-        "start": 1,
-        "end": 649
-      },
-      "tablet2KeyRange": {
-        "start": 650,
-        "end": 1345
-      },
-      "tablet3KeyRange": {
-        "start": 1346,
-        "end": 2014
-      }
-    },
-    "timeStamp": 1623006553599
+    "message": "client => id: UQzgYLfobT2oSRqIAAAC requested Delete Rows with ids: 501,20,23 from Tablet Server 1 ",
+    "timeStamp": 1623013361645
   },
   {
-    "message": "Tablet Server 2 got metadata",
-    "metaData": {
-      "_id": "60bbfcbfacb5c534a0eaade2",
-      "tablet1Documents": 583,
-      "tablet2Documents": 599,
-      "tablet3Documents": 612,
-      "tablet1KeyRange": {
-        "start": 1,
-        "end": 649
-      },
-      "tablet2KeyRange": {
-        "start": 650,
-        "end": 1345
-      },
-      "tablet3KeyRange": {
-        "start": 1346,
-        "end": 2014
-      }
-    },
-    "timeStamp": 1623006553601
+    "message": "client => id: UQzgYLfobT2oSRqIAAAC acquired the lock on Tablet Server 1 Tablet 1 for deleting rows with ids: 501,20,23",
+    "timeStamp": 1623013361648
   },
   {
-    "message": "client => id: rETTbZu0-2QjOD81AAAC acquired the lock on Tablet server 1 tablet 2",
-    "timeStamp": 1623006570532
+    "message": "client => id: UQzgYLfobT2oSRqIAAAC requested Delete Row to master from Tablet Server 1 Tablet 1 => Succeeded",
+    "timeStamp": 1623013363232
   },
   {
-    "message": "client => id: rETTbZu0-2QjOD81AAAC released the lock on Tablet 2 ",
-    "timeStamp": 1623006570867
+    "message": "client => id: UQzgYLfobT2oSRqIAAAC released the lock from Tablet Server 1 Tablet 1",
+    "timeStamp": 1623013363233
   },
   {
-    "message": "client => id: rETTbZu0-2QjOD81AAAC requested Delete Row to master from Tablet Server 1 Tablet 2 => Succeeded",
-    "timeStamp": 1623006570867
-  },
-  {
-    "message": "client => id: rETTbZu0-2QjOD81AAAC requested Delete Row to client from Tablet Server 1  => Succeeded",
-    "timeStamp": 1623006570869
+    "message": "client => id: UQzgYLfobT2oSRqIAAAC requested Delete Rows to client from Tablet Server 1  => Succeeded",
+    "timeStamp": 1623013363235
   },
   {
     "message": "Client (8080) : Delete row finished successfully",
     "DeleteRow": {
       "err": [
-        "19",
-        "20"
+        "20",
+        "23"
       ]
     },
-    "timeStamp": 1623006570870
+    "timeStamp": 1623013363236
   },
   {
     "message": "Master acquired the lock to delete documents",
-    "timeStamp": 1623006573170
+    "timeStamp": 1623013368959
   },
   {
     "message": "Master released the lock after deleting documents",
-    "timeStamp": 1623006573328
+    "timeStamp": 1623013369126
   },
   {
-    "message": "master updated and re-emitted the metadata",
-    "timeStamp": 1623006573658
-  },
-  {
-    "message": "Client (8081) Got metadata successfully",
+    "message": "Tablet Server 1 recieved metadata from master",
     "metaData": {
       "_id": "60bbfcbfacb5c534a0eaade2",
-      "tablet1Documents": 583,
+      "tablet1Documents": 582,
       "tablet2Documents": 597,
       "tablet3Documents": 612,
       "tablet1KeyRange": {
@@ -210,16 +279,16 @@
       },
       "tablet3KeyRange": {
         "start": 1346,
-        "end": 2014
+        "end": 2017
       }
     },
-    "timeStamp": 1623006573659
+    "timeStamp": 1623013369478
   },
   {
     "message": "Client (8080) Got metadata successfully",
     "metaData": {
       "_id": "60bbfcbfacb5c534a0eaade2",
-      "tablet1Documents": 583,
+      "tablet1Documents": 582,
       "tablet2Documents": 597,
       "tablet3Documents": 612,
       "tablet1KeyRange": {
@@ -232,38 +301,20 @@
       },
       "tablet3KeyRange": {
         "start": 1346,
-        "end": 2014
+        "end": 2017
       }
     },
-    "timeStamp": 1623006573659
+    "timeStamp": 1623013369478
   },
   {
-    "message": "Tablet Server 1 got metadata",
-    "metaData": {
-      "_id": "60bbfcbfacb5c534a0eaade2",
-      "tablet1Documents": 583,
-      "tablet2Documents": 597,
-      "tablet3Documents": 612,
-      "tablet1KeyRange": {
-        "start": 1,
-        "end": 649
-      },
-      "tablet2KeyRange": {
-        "start": 650,
-        "end": 1345
-      },
-      "tablet3KeyRange": {
-        "start": 1346,
-        "end": 2014
-      }
-    },
-    "timeStamp": 1623006573659
+    "message": "master updated and re-emitted the metadata",
+    "timeStamp": 1623013369478
   },
   {
-    "message": "Tablet Server 2 got metadata",
+    "message": "Tablet Server 2 got metadata from master",
     "metaData": {
       "_id": "60bbfcbfacb5c534a0eaade2",
-      "tablet1Documents": 583,
+      "tablet1Documents": 582,
       "tablet2Documents": 597,
       "tablet3Documents": 612,
       "tablet1KeyRange": {
@@ -276,9 +327,642 @@
       },
       "tablet3KeyRange": {
         "start": 1346,
-        "end": 2014
+        "end": 2017
       }
     },
-    "timeStamp": 1623006573661
+    "timeStamp": 1623013369481
+  },
+  {
+    "message": "Client (8080) : Sending request to delete row from data2000,2001,2002",
+    "timeStamp": 1623013444906
+  },
+  {
+    "message": "client => id: OyAMXZXbwQcj6pbBAAAC requested Delete Rows of ids: 2000,2001,2002 from Tablet Server 2",
+    "timeStamp": 1623013444907
+  },
+  {
+    "message": "client => id: OyAMXZXbwQcj6pbBAAAC acquired the lock on Tablet server 2 for deleting rows with ids: 2000,2001,2002",
+    "timeStamp": 1623013444908
+  },
+  {
+    "message": "Client (8080) : Sending request to delete row from data2000,2001,2002",
+    "timeStamp": 1623013447817
+  },
+  {
+    "message": "client => id: OyAMXZXbwQcj6pbBAAAC requested Delete Rows of ids: 2000,2001,2002 from Tablet Server 2",
+    "timeStamp": 1623013447819
+  },
+  {
+    "message": "Client (8080) : Sending request to delete row from data2000,2001,2002",
+    "timeStamp": 1623013459833
+  },
+  {
+    "message": "client => id: OyAMXZXbwQcj6pbBAAAC requested Delete Rows of ids: 2000,2001,2002 from Tablet Server 2",
+    "timeStamp": 1623013459835
+  },
+  {
+    "message": "client => id: OyAMXZXbwQcj6pbBAAAC acquired the lock on Tablet server 2 for deleting rows with ids: 2000,2001,2002",
+    "timeStamp": 1623013474915
+  },
+  {
+    "message": "client => id: OyAMXZXbwQcj6pbBAAAC released the lock from Tablet Server 2",
+    "timeStamp": 1623013474915
+  },
+  {
+    "message": "client => id: OyAMXZXbwQcj6pbBAAAC released the lock from Tablet Server 2",
+    "timeStamp": 1623013504931
+  },
+  {
+    "message": "client => id: OyAMXZXbwQcj6pbBAAAC acquired the lock on Tablet server 2 for deleting rows with ids: 2000,2001,2002",
+    "timeStamp": 1623013504931
+  },
+  {
+    "message": "client => id: RqxQrhFlhd1l1PnLAAAh disconnected from master",
+    "timeStamp": 1623013517983
+  },
+  {
+    "message": "Tablet Server 2 Connected to master",
+    "timeStamp": 1623013519739
+  },
+  {
+    "message": "Tablet Server 2 Listening to client...",
+    "timeStamp": 1623013519778
+  },
+  {
+    "message": "Tablet => id: _7Lm436FV86VpjEhAAAl connected to master",
+    "timeStamp": 1623013519811
+  },
+  {
+    "message": "Tablet Server 2 connected to client => id: bfBgbu9dHpMajrzuAAAA",
+    "timeStamp": 1623013519887
+  },
+  {
+    "message": "client => id: _7Lm436FV86VpjEhAAAl disconnected from master",
+    "timeStamp": 1623013545119
+  },
+  {
+    "message": "Tablet Server 2 Connected to master",
+    "timeStamp": 1623013549103
+  },
+  {
+    "message": "Tablet Server 2 Listening to client...",
+    "timeStamp": 1623013549139
+  },
+  {
+    "message": "Tablet => id: enDo-OcrF6Bn0xJDAAAn connected to master",
+    "timeStamp": 1623013549172
+  },
+  {
+    "message": "Tablet Server 2 connected to client => id: fuj9xdJwoeL10BbaAAAA",
+    "timeStamp": 1623013550585
+  },
+  {
+    "message": "Tablet Server 2 got metadata from master",
+    "metaData": {
+      "_id": "60bbfcbfacb5c534a0eaade2",
+      "tablet1Documents": 582,
+      "tablet2Documents": 597,
+      "tablet3Documents": 612,
+      "tablet1KeyRange": {
+        "start": 1,
+        "end": 649
+      },
+      "tablet2KeyRange": {
+        "start": 650,
+        "end": 1345
+      },
+      "tablet3KeyRange": {
+        "start": 1346,
+        "end": 2017
+      }
+    },
+    "timeStamp": 1623013571602
+  },
+  {
+    "message": "client => id: enDo-OcrF6Bn0xJDAAAn disconnected from master",
+    "timeStamp": 1623013579572
+  },
+  {
+    "message": "Tablet Server 2 Connected to master",
+    "timeStamp": 1623013582783
+  },
+  {
+    "message": "Tablet Server 2 Listening to client...",
+    "timeStamp": 1623013582824
+  },
+  {
+    "message": "Tablet => id: XsRoLM37HAEZoiRoAAAp connected to master",
+    "timeStamp": 1623013582855
+  },
+  {
+    "message": "Tablet Server 2 connected to client => id: FfbTVoBXfbCFpEu1AAAA",
+    "timeStamp": 1623013582916
+  },
+  {
+    "message": "Tablet Server 2 got metadata from master",
+    "metaData": {
+      "_id": "60bbfcbfacb5c534a0eaade2",
+      "tablet1Documents": 582,
+      "tablet2Documents": 597,
+      "tablet3Documents": 612,
+      "tablet1KeyRange": {
+        "start": 1,
+        "end": 649
+      },
+      "tablet2KeyRange": {
+        "start": 650,
+        "end": 1345
+      },
+      "tablet3KeyRange": {
+        "start": 1346,
+        "end": 2017
+      }
+    },
+    "timeStamp": 1623013583036
+  },
+  {
+    "message": "Client (8080) : Sending request to delete row from data2000,2001,2002",
+    "timeStamp": 1623013593900
+  },
+  {
+    "message": "client => id: FfbTVoBXfbCFpEu1AAAA requested Delete Rows of ids: 2000,2001,2002 from Tablet Server 2",
+    "timeStamp": 1623013593904
+  },
+  {
+    "message": "client => id: FfbTVoBXfbCFpEu1AAAA acquired the lock on Tablet server 2 for deleting rows with ids: 2000,2001,2002",
+    "timeStamp": 1623013593905
+  },
+  {
+    "message": "client => id: FfbTVoBXfbCFpEu1AAAA requested Delete Rows to master from Tablet Server 2 => Succeeded",
+    "timeStamp": 1623013594272
+  },
+  {
+    "message": "client => id: FfbTVoBXfbCFpEu1AAAA released the lock from Tablet Server 2",
+    "timeStamp": 1623013594273
+  },
+  {
+    "message": "client => id: FfbTVoBXfbCFpEu1AAAA requested Delete Rows to client from Tablet Server 2  => Succeeded , rows with ids: 2002,2002 was deleted",
+    "timeStamp": 1623013594273
+  },
+  {
+    "message": "Client (8080) : Delete row finished successfully",
+    "DeleteRow": {
+      "ids": [
+        "2002",
+        "2002"
+      ],
+      "err": [
+        "2000",
+        "2001"
+      ]
+    },
+    "timeStamp": 1623013594274
+  },
+  {
+    "message": "Master acquired the lock to delete documents",
+    "timeStamp": 1623013596568
+  },
+  {
+    "message": "Master released the lock after deleting documents",
+    "timeStamp": 1623013596738
+  },
+  {
+    "message": "Client (8080) Got metadata successfully",
+    "metaData": {
+      "_id": "60bbfcbfacb5c534a0eaade2",
+      "tablet1Documents": 582,
+      "tablet2Documents": 597,
+      "tablet3Documents": 610,
+      "tablet1KeyRange": {
+        "start": 1,
+        "end": 649
+      },
+      "tablet2KeyRange": {
+        "start": 650,
+        "end": 1345
+      },
+      "tablet3KeyRange": {
+        "start": 1346,
+        "end": 2017
+      }
+    },
+    "timeStamp": 1623013597079
+  },
+  {
+    "message": "Tablet Server 1 recieved metadata from master",
+    "metaData": {
+      "_id": "60bbfcbfacb5c534a0eaade2",
+      "tablet1Documents": 582,
+      "tablet2Documents": 597,
+      "tablet3Documents": 610,
+      "tablet1KeyRange": {
+        "start": 1,
+        "end": 649
+      },
+      "tablet2KeyRange": {
+        "start": 650,
+        "end": 1345
+      },
+      "tablet3KeyRange": {
+        "start": 1346,
+        "end": 2017
+      }
+    },
+    "timeStamp": 1623013597079
+  },
+  {
+    "message": "master updated and re-emitted the metadata",
+    "timeStamp": 1623013597079
+  },
+  {
+    "message": "Tablet Server 2 got metadata from master",
+    "metaData": {
+      "_id": "60bbfcbfacb5c534a0eaade2",
+      "tablet1Documents": 582,
+      "tablet2Documents": 597,
+      "tablet3Documents": 610,
+      "tablet1KeyRange": {
+        "start": 1,
+        "end": 649
+      },
+      "tablet2KeyRange": {
+        "start": 650,
+        "end": 1345
+      },
+      "tablet3KeyRange": {
+        "start": 1346,
+        "end": 2017
+      }
+    },
+    "timeStamp": 1623013597082
+  },
+  {
+    "message": "Client (8080) : Sending request to add new row to data",
+    "timeStamp": 1623013666839
+  },
+  {
+    "message": "client => id: FfbTVoBXfbCFpEu1AAAA requested to add new rows to Tablet Server 2 ",
+    "timeStamp": 1623013666841
+  },
+  {
+    "message": "client => id: FfbTVoBXfbCFpEu1AAAA acquired the lock from Tablet Server 2 to add rows",
+    "timeStamp": 1623013666841
+  },
+  {
+    "message": "client => id: FfbTVoBXfbCFpEu1AAAA released the lock ",
+    "timeStamp": 1623013667041
+  },
+  {
+    "message": "client => id: FfbTVoBXfbCFpEu1AAAA requested add new row to master from Tablet Server 2 => Succeeded ",
+    "timeStamp": 1623013667041
+  },
+  {
+    "message": "client => id: FfbTVoBXfbCFpEu1AAAA requested add new row to client from Tablet Server 2  => Succeeded , ids: 2018 are added",
+    "timeStamp": 1623013667041
+  },
+  {
+    "message": "Client (8080) : Row is added successfully",
+    "CreateRow": {
+      "data": [
+        "2018"
+      ],
+      "err": ""
+    },
+    "timeStamp": 1623013667042
+  },
+  {
+    "message": "Master acquires the lock to insert documents",
+    "timeStamp": 1623013671415
+  },
+  {
+    "message": "Master released the lock after inserting documents",
+    "timeStamp": 1623013672029
+  },
+  {
+    "message": "Tablet Server 1 recieved metadata from master",
+    "metaData": {
+      "_id": "60bbfcbfacb5c534a0eaade2",
+      "tablet1Documents": 582,
+      "tablet2Documents": 597,
+      "tablet3Documents": 611,
+      "tablet1KeyRange": {
+        "start": 1,
+        "end": 649
+      },
+      "tablet2KeyRange": {
+        "start": 650,
+        "end": 1345
+      },
+      "tablet3KeyRange": {
+        "start": 1346,
+        "end": 2018
+      }
+    },
+    "timeStamp": 1623013672461
+  },
+  {
+    "message": "Client (8080) Got metadata successfully",
+    "metaData": {
+      "_id": "60bbfcbfacb5c534a0eaade2",
+      "tablet1Documents": 582,
+      "tablet2Documents": 597,
+      "tablet3Documents": 611,
+      "tablet1KeyRange": {
+        "start": 1,
+        "end": 649
+      },
+      "tablet2KeyRange": {
+        "start": 650,
+        "end": 1345
+      },
+      "tablet3KeyRange": {
+        "start": 1346,
+        "end": 2018
+      }
+    },
+    "timeStamp": 1623013672462
+  },
+  {
+    "message": "master updated and re-emitted the metadata",
+    "timeStamp": 1623013672462
+  },
+  {
+    "message": "Tablet Server 2 got metadata from master",
+    "metaData": {
+      "_id": "60bbfcbfacb5c534a0eaade2",
+      "tablet1Documents": 582,
+      "tablet2Documents": 597,
+      "tablet3Documents": 611,
+      "tablet1KeyRange": {
+        "start": 1,
+        "end": 649
+      },
+      "tablet2KeyRange": {
+        "start": 650,
+        "end": 1345
+      },
+      "tablet3KeyRange": {
+        "start": 1346,
+        "end": 2018
+      }
+    },
+    "timeStamp": 1623013672464
+  },
+  {
+    "message": "Client (8080) : Sending request to add new row to data",
+    "timeStamp": 1623013685291
+  },
+  {
+    "message": "client => id: FfbTVoBXfbCFpEu1AAAA acquired the lock from Tablet Server 2 to add rows",
+    "timeStamp": 1623013685293
+  },
+  {
+    "message": "client => id: FfbTVoBXfbCFpEu1AAAA requested to add new rows to Tablet Server 2 ",
+    "timeStamp": 1623013685293
+  },
+  {
+    "message": "client => id: FfbTVoBXfbCFpEu1AAAA requested add new row to client from Tablet Server 2  => Succeeded , ids: 2019,2020 are added",
+    "timeStamp": 1623013685465
+  },
+  {
+    "message": "client => id: FfbTVoBXfbCFpEu1AAAA requested add new row to master from Tablet Server 2 => Succeeded ",
+    "timeStamp": 1623013685465
+  },
+  {
+    "message": "client => id: FfbTVoBXfbCFpEu1AAAA released the lock ",
+    "timeStamp": 1623013685465
+  },
+  {
+    "message": "Client (8080) : Row is added successfully",
+    "CreateRow": {
+      "data": [
+        "2019",
+        "2020"
+      ],
+      "err": ""
+    },
+    "timeStamp": 1623013685466
+  },
+  {
+    "message": "Master acquires the lock to insert documents",
+    "timeStamp": 1623013687656
+  },
+  {
+    "message": "Master released the lock after inserting documents",
+    "timeStamp": 1623013688169
+  },
+  {
+    "message": "master updated and re-emitted the metadata",
+    "timeStamp": 1623013688584
+  },
+  {
+    "message": "Client (8080) Got metadata successfully",
+    "metaData": {
+      "_id": "60bbfcbfacb5c534a0eaade2",
+      "tablet1Documents": 582,
+      "tablet2Documents": 597,
+      "tablet3Documents": 613,
+      "tablet1KeyRange": {
+        "start": 1,
+        "end": 649
+      },
+      "tablet2KeyRange": {
+        "start": 650,
+        "end": 1345
+      },
+      "tablet3KeyRange": {
+        "start": 1346,
+        "end": 2020
+      }
+    },
+    "timeStamp": 1623013688584
+  },
+  {
+    "message": "Tablet Server 1 recieved metadata from master",
+    "metaData": {
+      "_id": "60bbfcbfacb5c534a0eaade2",
+      "tablet1Documents": 582,
+      "tablet2Documents": 597,
+      "tablet3Documents": 613,
+      "tablet1KeyRange": {
+        "start": 1,
+        "end": 649
+      },
+      "tablet2KeyRange": {
+        "start": 650,
+        "end": 1345
+      },
+      "tablet3KeyRange": {
+        "start": 1346,
+        "end": 2020
+      }
+    },
+    "timeStamp": 1623013688584
+  },
+  {
+    "message": "Tablet Server 2 got metadata from master",
+    "metaData": {
+      "_id": "60bbfcbfacb5c534a0eaade2",
+      "tablet1Documents": 582,
+      "tablet2Documents": 597,
+      "tablet3Documents": 613,
+      "tablet1KeyRange": {
+        "start": 1,
+        "end": 649
+      },
+      "tablet2KeyRange": {
+        "start": 650,
+        "end": 1345
+      },
+      "tablet3KeyRange": {
+        "start": 1346,
+        "end": 2020
+      }
+    },
+    "timeStamp": 1623013688586
+  },
+  {
+    "message": "Client (8080) : Sending request to update data",
+    "TabletRequesed": 2,
+    "timeStamp": 1623013700555
+  },
+  {
+    "message": "client => id: FfbTVoBXfbCFpEu1AAAA requested data update for id: 2019 from Tablet Server 2 ",
+    "timeStamp": 1623013700557
+  },
+  {
+    "message": "client => id: FfbTVoBXfbCFpEu1AAAA acquired the lock from Tablet Server 2 to update row with id: 2019",
+    "timeStamp": 1623013700558
+  },
+  {
+    "message": "client => id: FfbTVoBXfbCFpEu1AAAArequested data update from Tablet Server 2 => Succeeded",
+    "timeStamp": 1623013701089
+  },
+  {
+    "message": "client => id: FfbTVoBXfbCFpEu1AAAA released the lock from Tablet Server 2",
+    "timeStamp": 1623013701089
+  },
+  {
+    "message": "Client (8080) :  Updated data successfully",
+    "UpdateData": {
+      "data": {
+        "_id": "60bd3935acdf7d07ecf22c93",
+        "name": "hager ali",
+        "genre": "Nihal",
+        "type": "nada",
+        "episodes": "menna",
+        "rating": "menna",
+        "members": "aya",
+        "anime_id": "2019"
+      },
+      "err": ""
+    },
+    "timeStamp": 1623013701090
+  },
+  {
+    "message": "Sending request to Tablet 2 retrieve rows with ids: 2019",
+    "timeStamp": 1623013716819
+  },
+  {
+    "message": "client => id: FfbTVoBXfbCFpEu1AAAA requested data reterival of ids:2019 from Tablet Server 2 ",
+    "timeStamp": 1623013716821
+  },
+  {
+    "message": "client => id: FfbTVoBXfbCFpEu1AAAA requested data reterival from Tablet Server 2 => Succeeded",
+    "timeStamp": 1623013716993
+  },
+  {
+    "message": "Client (8080) : Data retrieved successfully",
+    "RowRead": {
+      "data": [
+        {
+          "_id": "60bd3935acdf7d07ecf22c93",
+          "name": "hager ali",
+          "genre": "Nihal",
+          "type": "nada",
+          "episodes": "menna",
+          "rating": "menna",
+          "members": "aya",
+          "anime_id": "2019"
+        }
+      ],
+      "err": [],
+      "myerr": ""
+    },
+    "timeStamp": 1623013716995
+  },
+  {
+    "message": "Client (8080) : Sending request to delete cells from rows",
+    "TabletRequesed": 2,
+    "timeStamp": 1623013729750
+  },
+  {
+    "message": "client => id: FfbTVoBXfbCFpEu1AAAA requested Delete Cells for id: 2019 from Tablet Server 2",
+    "timeStamp": 1623013729752
+  },
+  {
+    "message": "client => id: FfbTVoBXfbCFpEu1AAAA acquired the lock for Deleting Cells for id: 2019 from Tablet Server 2",
+    "timeStamp": 1623013729752
+  },
+  {
+    "message": "client => id: FfbTVoBXfbCFpEu1AAAA requested Delete Cells from Tablet Server 2 => Succeeded",
+    "timeStamp": 1623013730093
+  },
+  {
+    "message": "client => id: FfbTVoBXfbCFpEu1AAAAreleased the lock",
+    "timeStamp": 1623013730093
+  },
+  {
+    "message": "Client (8080) : Delete cells finished successfully",
+    "DeleteCells": {
+      "data": {
+        "n": 1,
+        "nModified": 1,
+        "opTime": {
+          "ts": "6970790887014006785",
+          "t": 4
+        },
+        "electionId": "7fffffff0000000000000004",
+        "ok": 1,
+        "$clusterTime": {
+          "clusterTime": "6970790887014006785",
+          "signature": {
+            "hash": "6AUzp/UMSM1RaGfGDb92bbLjiCo=",
+            "keyId": "6966942858309795843"
+          }
+        },
+        "operationTime": "6970790887014006785"
+      },
+      "err": ""
+    },
+    "timeStamp": 1623013730094
+  },
+  {
+    "message": "Sending request to Tablet 2 retrieve rows with ids: 2019",
+    "timeStamp": 1623013734599
+  },
+  {
+    "message": "client => id: FfbTVoBXfbCFpEu1AAAA requested data reterival of ids:2019 from Tablet Server 2 ",
+    "timeStamp": 1623013734601
+  },
+  {
+    "message": "client => id: FfbTVoBXfbCFpEu1AAAA requested data reterival from Tablet Server 2 => Succeeded",
+    "timeStamp": 1623013734832
+  },
+  {
+    "message": "Client (8080) : Data retrieved successfully",
+    "RowRead": {
+      "data": [
+        {
+          "_id": "60bd3935acdf7d07ecf22c93",
+          "name": "hager ali",
+          "genre": "Nihal",
+          "anime_id": "2019"
+        }
+      ],
+      "err": [],
+      "myerr": ""
+    },
+    "timeStamp": 1623013734833
   }
 ]

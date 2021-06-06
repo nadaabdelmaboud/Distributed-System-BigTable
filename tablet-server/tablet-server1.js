@@ -48,7 +48,7 @@ socketMaster.on("connect", function () {
   socketMaster.on("GetMetaData", (data) => {
     set(data);
     tabletLogs.push({
-      message: "Tablet Server 1 got metadata",
+      message: "Tablet Server 1 recieved metadata from master",
       metaData: data,
       timeStamp: Date.now(),
     });
@@ -108,13 +108,10 @@ ioTablet.on("connection", function (socket) {
     timeStamp: Date.now(),
   });
   //Tablet Server queries from client
-
-  //the client must send the tablet number that contains the data
-  let tabletNumber; //tablet not tablet server
+  let tabletNumber; 
 
   //check on each id and send to the appropriate tablet
   socket.on("ReadRows", async function (ClientData) {
-    ///client
     console.log("acuiring master lock  ", MasterLock.isLocked());
     var before = new Date().getTime() / 1000;
     if (MasterLock.isLocked()) {
@@ -130,7 +127,7 @@ ioTablet.on("connection", function (socket) {
       message:
         "client => id: " +
         socket.client.id +
-        " requested data reterival from Tablet Server 1",
+        " requested data reterival of ids:"+ClientData.rowKeys+" from Tablet Server 1",
       timeStamp: Date.now(),
     });
     const ids = await AnimeValidation.seperateId(ClientData.rowKeys);
@@ -144,8 +141,7 @@ ioTablet.on("connection", function (socket) {
         message:
           "client => id: " +
           socket.client.id +
-          " requested data reterival => Error: " +
-          data1.myerr,
+          " requested data reterival => Error: Problem retrieving data from Tablet Server 1 Tablet 1",
         timeStamp: Date.now(),
       });
     }
@@ -155,8 +151,7 @@ ioTablet.on("connection", function (socket) {
         message:
           "client => id: " +
           socket.client.id +
-          " requested data reterival => Error: " +
-          data2.myerr,
+          " requested data reterival => Error: Problem retrieving data from Tablet Server 1 Tablet 2",
         timeStamp: Date.now(),
       });
     }
@@ -205,7 +200,7 @@ ioTablet.on("connection", function (socket) {
       message:
         "client => id: " +
         socket.client.id +
-        " requested data update from Tablet Server " +
+        " requested data update for id: "+ClientData.rowKey+" from Tablet Server 1 Tablet " +
         tabletNumber,
       timeStamp: Date.now(),
     });
@@ -222,12 +217,10 @@ ioTablet.on("connection", function (socket) {
       message:
         "client => id: " +
         socket.client.id +
-        " acquired the lock from Tablet Server " +
-        tabletNumber,
+        " acquired the lock from Tablet Server 1 Tablet" + tabletNumber +" to update row with id: "+ClientData.rowKey,
       timeStamp: Date.now(),
     });
     try {
-      //await new Promise((resolve) => setTimeout(resolve, 10000));
       const data = await AnimeService.updateAnime(
         ClientData.Anime,
         ClientData.rowKey,
@@ -240,7 +233,7 @@ ioTablet.on("connection", function (socket) {
           message:
             "client => id: " +
             socket.client.id +
-            "requested data update from Tablet Server 1 => Error: " +
+            " requested data update from Tablet Server 1 => Error: " +
             data.err,
           timeStamp: Date.now(),
         });
@@ -252,7 +245,7 @@ ioTablet.on("connection", function (socket) {
         message:
           "client => id: " +
           socket.client.id +
-          "requested data update from Tablet Server 1 => Succeeded",
+          " requested data update from Tablet Server 1 => Succeeded",
         timeStamp: Date.now(),
       });
     } finally {
@@ -262,7 +255,7 @@ ioTablet.on("connection", function (socket) {
         message:
           "client => id: " +
           socket.client.id +
-          " released the lock from Tablet Server " +
+          " released the lock from Tablet Server 1 Tablet " +
           tabletNumber,
         timeStamp: Date.now(),
       });
@@ -282,7 +275,12 @@ ioTablet.on("connection", function (socket) {
     );
 
     tabletLogs.push({
-      message: "client => id: " + socket.client.id + " requested Delete Cells ",
+      message:
+        "client => id: " +
+        socket.client.id +
+        " requested Delete Cells for id: " +
+        ClientData.rowKey +
+        " from Tablet Server 1 ",
       timeStamp: Date.now(),
     });
 
@@ -292,7 +290,13 @@ ioTablet.on("connection", function (socket) {
     else release = await MUtexTablet2.acquire();
     console.log("tablet ", tabletNumber, "aquired lock");
     tabletLogs.push({
-      message: "client => id: " + socket.client.id + " acquired the lock ",
+      message:
+        "client => id: " +
+        socket.client.id +
+        " acquired the lock for Deleting Cells for id: " +
+        ClientData.rowKey +
+        " from Tablet Server 1 Tablet " +
+        tabletNumber,
       timeStamp: Date.now(),
     });
 
@@ -309,7 +313,7 @@ ioTablet.on("connection", function (socket) {
           message:
             "client => id: " +
             socket.client.id +
-            " requested Delete Cells from Tablet Server " +
+            " requested Delete Cells for id: "+ClientData.rowKey+" from Tablet Server 1 Tablet " +
             tabletNumber +
             "  => Error: " +
             data.err,
@@ -323,7 +327,7 @@ ioTablet.on("connection", function (socket) {
         message:
           "client => id: " +
           socket.client.id +
-          " requested Delete Cells from Tablet Server " +
+          " requested Delete Cells for id: "+ClientData.rowKey+" from Tablet Server 1 Tablet " +
           tabletNumber +
           " => Succeeded",
         timeStamp: Date.now(),
@@ -331,7 +335,10 @@ ioTablet.on("connection", function (socket) {
     } finally {
       release();
       tabletLogs.push({
-        message: "client => id: " + socket.client.id + "released the lock",
+        message:
+          "client => id: " +
+          socket.client.id +
+          "released the lock from Tablet Server 1 Tablet "+tabletNumber,
         timeStamp: Date.now(),
       });
     }
@@ -350,7 +357,7 @@ ioTablet.on("connection", function (socket) {
     );
 
     tabletLogs.push({
-      message: "client => id: " + socket.client.id + " requested Delete Row ",
+      message: "client => id: " + socket.client.id + " requested Delete Rows with ids: "+ClientData.rowKeys+" from Tablet Server 1 ",
       timeStamp: Date.now(),
     });
 
@@ -362,12 +369,11 @@ ioTablet.on("connection", function (socket) {
       console.log("Delete Row from tablet server 1 ids:",ids.ids1);
       const release = await MUtexTablet1.acquire();
       console.log("inside the delete row request of tablet server 2 tablet 1");
-      await new Promise((resolve) => setTimeout(resolve, 20000));
       tabletLogs.push({
         message:
           "client => id: " +
           socket.client.id +
-          " acquired the lock on Tablet 1 ",
+          " acquired the lock on Tablet Server 1 Tablet 1 for deleting rows with ids: "+ids.ids1,
         timeStamp: Date.now(),
       });
       try {
@@ -378,7 +384,7 @@ ioTablet.on("connection", function (socket) {
             message:
               "client => id: " +
               socket.client.id +
-              " requested Delete Row from Tablet Server 1  => Error: No Anime Was Deleted",
+              " requested Delete Row from Tablet Server 1 Tablet 1 => Error: No Anime Was Deleted",
             timeStamp: Date.now(),
           });
         } else {
@@ -393,7 +399,7 @@ ioTablet.on("connection", function (socket) {
             message:
               "client => id: " +
               socket.client.id +
-              " requested Delete Row to master from Tablet Server 1 => Succeeded",
+              " requested Delete Row to master from Tablet Server 1 Tablet 1 => Succeeded",
             timeStamp: Date.now(),
           });
         }
@@ -401,7 +407,7 @@ ioTablet.on("connection", function (socket) {
         release();
         console.log("tablet 1 released lock");
         tabletLogs.push({
-          message: "client => id: " + socket.client.id + " released the lock ",
+          message: "client => id: " + socket.client.id + " released the lock from Tablet Server 1 Tablet 1",
           timeStamp: Date.now(),
         });
       }
@@ -411,12 +417,11 @@ ioTablet.on("connection", function (socket) {
       console.log("Delete Row from tablet server 1 tablet 2 ids:", ids.ids2);
       const release = await MUtexTablet2.acquire();
       console.log("inside the delete row request of tablet server 2 tablet 2");
-      await new Promise((resolve) => setTimeout(resolve, 20000));
       tabletLogs.push({
         message:
           "client => id: " +
           socket.client.id +
-          " acquired the lock on Tablet server 1 tablet 2",
+          " acquired the lock on Tablet server 1 tablet 2 for deleting rows with ids: "+ids.ids2,
         timeStamp: Date.now(),
       });
       try {
@@ -429,7 +434,7 @@ ioTablet.on("connection", function (socket) {
             message:
               "client => id: " +
               socket.client.id +
-              " requested Delete Row from Tablet Server 1  => Error: No Anime Was Deleted",
+              " requested Delete Rows from Tablet Server 1 Tablet 2 => Error: No Anime Was Deleted",
             timeStamp: Date.now(),
           });
         } else {
@@ -444,7 +449,7 @@ ioTablet.on("connection", function (socket) {
             message:
               "client => id: " +
               socket.client.id +
-              " requested Delete Row to master from Tablet Server 1 Tablet 2 => Succeeded",
+              " requested Delete Rows to master from Tablet Server 1 Tablet 2 => Succeeded",
             timeStamp: Date.now(),
           });
         }
@@ -455,7 +460,7 @@ ioTablet.on("connection", function (socket) {
           message:
             "client => id: " +
             socket.client.id +
-            " released the lock on Tablet 2 ",
+            " released the lock on Tablet Server 1 Tablet 2 ",
           timeStamp: Date.now(),
         });
       }
@@ -466,7 +471,7 @@ ioTablet.on("connection", function (socket) {
         message:
           "client => id: " +
           socket.client.id +
-          " requested Delete Row to client from Tablet Server 1  => Error : No Key Rows Exists Tablet Server 1",
+          " requested Delete Rows to client from Tablet Server 1 Tablet 2 => Error : No Key Rows Exists in Tablet Server 1",
         timeStamp: Date.now(),
       });
       return;
@@ -485,7 +490,7 @@ ioTablet.on("connection", function (socket) {
       message:
         "client => id: " +
         socket.client.id +
-        " requested Delete Row to client from Tablet Server 1  => Succeeded",
+        " requested Delete Rows to client from Tablet Server 1  => Succeeded",
       timeStamp: Date.now(),
     });
 
