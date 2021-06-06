@@ -408,9 +408,11 @@ input {
 }
 .arrayItems {
   border: 2px solid #2c3e50;
+  margin: 0;
 }
 .errorList {
   display: inline-block;
+  margin:0;
 }
 #check {
   margin: 0;
@@ -483,7 +485,6 @@ export default {
       messageToast: "",
       addAnimes: [],
       port: "",
-      //errorDetected: false,
       errors1: [],
       errors2: [],
     };
@@ -796,7 +797,6 @@ export default {
       var dataBack = data.data;
       console.log("data1", data);
       if (data.err.length != 0) {
-        //this.errorDetected = true;
         console.log("error", data.err);
         this.errors1 = data.err;
       }
@@ -900,17 +900,21 @@ export default {
       });
     },
     ReadRowsSubmit() {
+      this.errors1 = [];
+      this.errors2 = [];
       var rowKeys = this.getAnimeNumber.split(" ");
       let tablet1Rows = [],
         tablet2Rows = [];
       let outOfRange = [];
+
 
       for (let i = 0; i < rowKeys.length; i++) {
         let t = this.validateRowKey(rowKeys[i]);
         if (t == 1 || t == 2) tablet1Rows.push(rowKeys[i]);
         else if (t == 3) tablet2Rows.push(rowKeys[i]);
         if (t == -1) {
-          outOfRange.push(rowKeys[i]);
+          if(rowKeys[i] != "")
+            outOfRange.push(rowKeys[i]);
         }
       }
 
@@ -926,7 +930,6 @@ export default {
           this.messageToast + outOfRange[len - 1] + " not in range";
         outOfRange = [];
       }
-      //this.errorDetected = false;
 
       let data1 = {
         rowKeys: tablet1Rows,

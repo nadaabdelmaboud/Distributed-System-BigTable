@@ -1,63 +1,11 @@
 [
   {
-    "message": "Tablet 2 blocked Requests as master is rebalancing",
-    "timeStamp": 1622941483918
-  },
-  {
-    "message": "Tablet 1 blocked Requests as master is rebalancing",
-    "timeStamp": 1622941483919
-  },
-  {
-    "message": "Sending request to Tablet 2 retrieve rows from data1700,1701,1702,2000",
-    "timeStamp": 1622941488579
-  },
-  {
-    "message": "Sending request to Tablet 1 retrieve rows from data1,2,3,4,1347",
-    "timeStamp": 1622941488579
-  },
-  {
-    "message": "Sending request to Tablet 1 retrieve rows from data1,2,3,4,1347",
-    "timeStamp": 1622941500016
-  },
-  {
-    "message": "Sending request to Tablet 2 retrieve rows from data1700,1701,1702,2000",
-    "timeStamp": 1622941500016
-  },
-  {
-    "message": "master rebalanced the data",
-    "timeStamp": 1622941501116
-  },
-  {
-    "message": "master finished balancing, Tablet 2 removed block",
-    "timeStamp": 1622941501116
-  },
-  {
-    "message": "master finished balancing, Tablet 1 removed block",
-    "timeStamp": 1622941501116
-  },
-  {
-    "message": "client => id: f6qG_plwSwQXpXp8AAAQ requested data reterival from Tablet 2 ",
-    "timeStamp": 1622941501118
-  },
-  {
-    "message": "client => id: Q5m3gxUAaGgq1NL4AAAQ requested data reterival from Tablet 1 ",
-    "timeStamp": 1622941501118
-  },
-  {
-    "message": "client => id: Q5m3gxUAaGgq1NL4AAAQ requested data reterival from Tablet 1 ",
-    "timeStamp": 1622941501119
-  },
-  {
-    "message": "client => id: f6qG_plwSwQXpXp8AAAQ requested data reterival from Tablet 2 ",
-    "timeStamp": 1622941501119
-  },
-  {
-    "message": "Client (8080) Got metadata successfully",
+    "message": "Client (8081) Got metadata successfully",
     "metaData": {
       "_id": "60bbfcbfacb5c534a0eaade2",
-      "tablet1Documents": 608,
-      "tablet2Documents": 608,
-      "tablet3Documents": 608,
+      "tablet1Documents": 603,
+      "tablet2Documents": 606,
+      "tablet3Documents": 613,
       "tablet1KeyRange": {
         "start": 1,
         "end": 649
@@ -68,22 +16,18 @@
       },
       "tablet3KeyRange": {
         "start": 1346,
-        "end": 2004
+        "end": 2009
       }
     },
-    "timeStamp": 1622941501284
+    "timeStamp": 1622944381656
   },
   {
-    "message": "master updated and re-emitted the metadata",
-    "timeStamp": 1622941501284
-  },
-  {
-    "message": "Tablet 1 got metadata",
+    "message": "Client (8081) Got metadata successfully",
     "metaData": {
       "_id": "60bbfcbfacb5c534a0eaade2",
-      "tablet1Documents": 608,
-      "tablet2Documents": 608,
-      "tablet3Documents": 608,
+      "tablet1Documents": 603,
+      "tablet2Documents": 606,
+      "tablet3Documents": 612,
       "tablet1KeyRange": {
         "start": 1,
         "end": 649
@@ -94,578 +38,157 @@
       },
       "tablet3KeyRange": {
         "start": 1346,
-        "end": 2004
+        "end": 2009
       }
     },
-    "timeStamp": 1622941501284
+    "timeStamp": 1622944406370
   },
   {
-    "message": "Tablet 2 got metadata",
-    "metaData": {
-      "_id": "60bbfcbfacb5c534a0eaade2",
-      "tablet1Documents": 608,
-      "tablet2Documents": 608,
-      "tablet3Documents": 608,
-      "tablet1KeyRange": {
-        "start": 1,
-        "end": 649
+    "message": "Client (8082) : Sending request to delete cells from rows",
+    "TabletRequesed": 1,
+    "timeStamp": 1622944440887
+  },
+  {
+    "message": "client => id: dOvivfS3IZn895JwAAAk requested Delete Cells ",
+    "timeStamp": 1622944440888
+  },
+  {
+    "message": "client => id: dOvivfS3IZn895JwAAAk acquired the lock ",
+    "timeStamp": 1622944440888
+  },
+  {
+    "message": "client => id: dOvivfS3IZn895JwAAAk requested Delete Cells from Tablet 1 => Succeeded",
+    "timeStamp": 1622944441213
+  },
+  {
+    "message": "client => id: dOvivfS3IZn895JwAAAkreleased the lock",
+    "timeStamp": 1622944441213
+  },
+  {
+    "message": "Client (8082) : Delete cells finished successfully",
+    "DeleteCells": {
+      "data": {
+        "n": 1,
+        "nModified": 1,
+        "opTime": {
+          "ts": "6970493288730066945",
+          "t": 4
+        },
+        "electionId": "7fffffff0000000000000004",
+        "ok": 1,
+        "$clusterTime": {
+          "clusterTime": "6970493288730066945",
+          "signature": {
+            "hash": "fsNmifMYYrmFqBkeH5RONwsKeh8=",
+            "keyId": "6966942858309795843"
+          }
+        },
+        "operationTime": "6970493288730066945"
       },
-      "tablet2KeyRange": {
-        "start": 650,
-        "end": 1345
-      },
-      "tablet3KeyRange": {
-        "start": 1346,
-        "end": 2004
-      }
+      "err": ""
     },
-    "timeStamp": 1622941501287
+    "timeStamp": 1622944441215
   },
   {
-    "message": "client => id: Q5m3gxUAaGgq1NL4AAAQrequested data reterival => Error: this rowKeys belongs to tablet number: 3",
-    "timeStamp": 1622941501292
+    "message": "client => id: Yzf6y4LDV9O1F4OHAABf disconnected from master",
+    "timeStamp": 1622944447393
   },
   {
-    "message": "client => id: Q5m3gxUAaGgq1NL4AAAQ requested data reterival from Tablet 1 => Succeeded",
-    "timeStamp": 1622941501297
+    "message": "client => id: 997wUNUqCnb1ZqQQAABh disconnected from master",
+    "timeStamp": 1622944448396
   },
   {
-    "message": "Client (8080) : Data retrieved successfully",
+    "message": "client => id: 5xPSNztPKxD3jjcbAABj disconnected from master",
+    "timeStamp": 1622944449391
+  },
+  {
+    "message": "client => id: mEkXQ3-2EeRczfUhAABl disconnected from master",
+    "timeStamp": 1622944449404
+  },
+  {
+    "message": "client => id: XnngHb74z9Lwfb1jAABn disconnected from master",
+    "timeStamp": 1622944450393
+  },
+  {
+    "message": "Sending request to Tablet 1 retrieve rows from data16",
+    "timeStamp": 1622944451671
+  },
+  {
+    "message": "client => id: dOvivfS3IZn895JwAAAk requested data reterival from Tablet 1 ",
+    "timeStamp": 1622944451672
+  },
+  {
+    "message": "client => id: dOvivfS3IZn895JwAAAkrequested data reterival => Error: ",
+    "timeStamp": 1622944451854
+  },
+  {
+    "message": "client => id: dOvivfS3IZn895JwAAAk requested data reterival from Tablet 1 => Succeeded",
+    "timeStamp": 1622944451855
+  },
+  {
+    "message": "Client (8082) : Data retrieved successfully",
     "RowRead": {
       "data": [
         {
-          "_id": "60bbfbe96122eb32f006184b",
-          "anime_id": "1",
-          "name": "Cowboy Bebop",
-          "genre": "Action",
-          "type": "TV",
-          "episodes": "26",
-          "rating": "8.82",
-          "members": "486824"
+          "_id": "60bbfbe96122eb32f0061851",
+          "anime_id": "16"
         }
       ],
-      "err": [
-        "2",
-        "3",
-        "4"
-      ]
+      "err": []
     },
-    "timeStamp": 1622941501297
+    "timeStamp": 1622944451856
   },
   {
-    "message": "client => id: f6qG_plwSwQXpXp8AAAQ requested data reterival from Tablet 2 => Succeeded",
-    "timeStamp": 1622941501303
+    "message": "client => id: 3hbVjNbpSmCr6SHiAABp disconnected from master",
+    "timeStamp": 1622944453392
   },
   {
-    "message": "Client (8080) : Data retrieved successfully",
+    "message": "client => id: CLkv3W12HTgVGB_nAABb disconnected from master",
+    "timeStamp": 1622944459397
+  },
+  {
+    "message": "client => id: N6NJmQ6MvLVBeAk-AABd disconnected from master",
+    "timeStamp": 1622944467394
+  },
+  {
+    "message": "Sending request to Tablet 1 retrieve rows from data16,34,29",
+    "timeStamp": 1622944494974
+  },
+  {
+    "message": "client => id: dOvivfS3IZn895JwAAAk requested data reterival from Tablet 1 ",
+    "timeStamp": 1622944494975
+  },
+  {
+    "message": "client => id: dOvivfS3IZn895JwAAAkrequested data reterival => Error: ",
+    "timeStamp": 1622944495175
+  },
+  {
+    "message": "Client (8082) : Data retrieved successfully",
     "RowRead": {
       "data": [
         {
-          "_id": "60bbfbed6122eb32f0061e54",
-          "anime_id": "1701",
-          "name": "Boku no Marie",
-          "genre": "Comedy- Ecchi- Romance- Sci-Fi- Seinen",
-          "type": "OVA",
-          "episodes": "3",
-          "rating": "6.44",
-          "members": "2186"
+          "_id": "60bbfbe96122eb32f0061851",
+          "anime_id": "16"
         },
         {
-          "_id": "60bbfbed6122eb32f0061e55",
-          "anime_id": "1702",
-          "name": "Yoru ga Kuru!",
-          "genre": "Demons- Hentai- Horror- Super Power- Supernatural",
-          "type": "OVA",
-          "episodes": "4",
-          "rating": "6.02",
-          "members": "1724"
-        }
-      ],
-      "err": [
-        "1700",
-        "2000"
-      ],
-      "myerr": ""
-    },
-    "timeStamp": 1622941501306
-  },
-  {
-    "message": "client => id: Q5m3gxUAaGgq1NL4AAAQrequested data reterival => Error: this rowKeys belongs to tablet number: 3",
-    "timeStamp": 1622941501453
-  },
-  {
-    "message": "Client (8080) : Data retrieved successfully",
-    "RowRead": {
-      "data": [
-        {
-          "_id": "60bbfbe96122eb32f006184b",
-          "anime_id": "1",
-          "name": "Cowboy Bebop",
-          "genre": "Action",
+          "_id": "60bbfbe96122eb32f006185e",
+          "anime_id": "29",
+          "name": "Zipang",
+          "genre": "Action- Drama- Historical- Military- Sci-Fi- Seinen",
           "type": "TV",
           "episodes": "26",
-          "rating": "8.82",
-          "members": "486824"
+          "rating": "7.56",
+          "members": "8630"
         }
       ],
       "err": [
-        "2",
-        "3",
-        "4"
+        "34"
       ]
     },
-    "timeStamp": 1622941501456
+    "timeStamp": 1622944495178
   },
   {
-    "message": "client => id: Q5m3gxUAaGgq1NL4AAAQ requested data reterival from Tablet 1 => Succeeded",
-    "timeStamp": 1622941501456
-  },
-  {
-    "message": "client => id: f6qG_plwSwQXpXp8AAAQ requested data reterival from Tablet 2 => Succeeded",
-    "timeStamp": 1622941501471
-  },
-  {
-    "message": "Client (8080) : Data retrieved successfully",
-    "RowRead": {
-      "data": [
-        {
-          "_id": "60bbfbed6122eb32f0061e54",
-          "anime_id": "1701",
-          "name": "Boku no Marie",
-          "genre": "Comedy- Ecchi- Romance- Sci-Fi- Seinen",
-          "type": "OVA",
-          "episodes": "3",
-          "rating": "6.44",
-          "members": "2186"
-        },
-        {
-          "_id": "60bbfbed6122eb32f0061e55",
-          "anime_id": "1702",
-          "name": "Yoru ga Kuru!",
-          "genre": "Demons- Hentai- Horror- Super Power- Supernatural",
-          "type": "OVA",
-          "episodes": "4",
-          "rating": "6.02",
-          "members": "1724"
-        }
-      ],
-      "err": [
-        "1700",
-        "2000"
-      ],
-      "myerr": ""
-    },
-    "timeStamp": 1622941501472
-  },
-  {
-    "message": "Sending request to Tablet 2 retrieve rows from data1700,1701,1702,2000,1347",
-    "timeStamp": 1622941510716
-  },
-  {
-    "message": "Sending request to Tablet 1 retrieve rows from data1,2,3,4",
-    "timeStamp": 1622941510716
-  },
-  {
-    "message": "client => id: f6qG_plwSwQXpXp8AAAQ requested data reterival from Tablet 2 ",
-    "timeStamp": 1622941510719
-  },
-  {
-    "message": "client => id: Q5m3gxUAaGgq1NL4AAAQ requested data reterival from Tablet 1 ",
-    "timeStamp": 1622941510719
-  },
-  {
-    "message": "client => id: Q5m3gxUAaGgq1NL4AAAQrequested data reterival => Error: ",
-    "timeStamp": 1622941510898
-  },
-  {
-    "message": "client => id: Q5m3gxUAaGgq1NL4AAAQ requested data reterival from Tablet 1 => Succeeded",
-    "timeStamp": 1622941510903
-  },
-  {
-    "message": "Client (8080) : Data retrieved successfully",
-    "RowRead": {
-      "data": [
-        {
-          "_id": "60bbfbe96122eb32f006184b",
-          "anime_id": "1",
-          "name": "Cowboy Bebop",
-          "genre": "Action",
-          "type": "TV",
-          "episodes": "26",
-          "rating": "8.82",
-          "members": "486824"
-        }
-      ],
-      "err": [
-        "2",
-        "3",
-        "4"
-      ]
-    },
-    "timeStamp": 1622941510904
-  },
-  {
-    "message": "client => id: f6qG_plwSwQXpXp8AAAQ requested data reterival from Tablet 2 => Succeeded",
-    "timeStamp": 1622941510912
-  },
-  {
-    "message": "Client (8080) : Data retrieved successfully",
-    "RowRead": {
-      "data": [
-        {
-          "_id": "60bbfbed6122eb32f0061d0c",
-          "anime_id": "1347",
-          "name": "Bubblegum Crisis",
-          "genre": "Adventure- Mecha- Sci-Fi- Shounen",
-          "type": "OVA",
-          "episodes": "8",
-          "rating": "7.36",
-          "members": "17268"
-        },
-        {
-          "_id": "60bbfbed6122eb32f0061e54",
-          "anime_id": "1701",
-          "name": "Boku no Marie",
-          "genre": "Comedy- Ecchi- Romance- Sci-Fi- Seinen",
-          "type": "OVA",
-          "episodes": "3",
-          "rating": "6.44",
-          "members": "2186"
-        },
-        {
-          "_id": "60bbfbed6122eb32f0061e55",
-          "anime_id": "1702",
-          "name": "Yoru ga Kuru!",
-          "genre": "Demons- Hentai- Horror- Super Power- Supernatural",
-          "type": "OVA",
-          "episodes": "4",
-          "rating": "6.02",
-          "members": "1724"
-        }
-      ],
-      "err": [
-        "1700",
-        "2000"
-      ],
-      "myerr": ""
-    },
-    "timeStamp": 1622941510913
-  },
-  {
-    "message": "Client (8080) is Connecting to tablet",
-    "timeStamp": 1622941813242
-  },
-  {
-    "message": "Client (8080)Connected to master",
-    "timeStamp": 1622941813243
-  },
-  {
-    "message": "Client (8080) is disconnecting ",
-    "timeStamp": 1622941813252
-  },
-  {
-    "message": "Client (8080) is disconnecting ",
-    "timeStamp": 1622941813252
-  },
-  {
-    "message": "Tablet 2 connected to client => id: TafWIzUfq3Vd2L03AAAS",
-    "timeStamp": 1622941813276
-  },
-  {
-    "message": "Tablet 1 connected to client => id: t307n3WTKM2hZRYOAAAS",
-    "timeStamp": 1622941813276
-  },
-  {
-    "message": "client => id: tiyXrf9bHH-pMEp8AAA5 connected to master",
-    "timeStamp": 1622941813277
-  },
-  {
-    "message": "Client (8080) Got metadata successfully",
-    "metaData": {
-      "_id": "60bbfcbfacb5c534a0eaade2",
-      "tablet1Documents": 608,
-      "tablet2Documents": 608,
-      "tablet3Documents": 608,
-      "tablet1KeyRange": {
-        "start": 1,
-        "end": 649
-      },
-      "tablet2KeyRange": {
-        "start": 650,
-        "end": 1345
-      },
-      "tablet3KeyRange": {
-        "start": 1346,
-        "end": 2004
-      }
-    },
-    "timeStamp": 1622941813575
-  },
-  {
-    "message": "Client (8080) is Connecting to tablet",
-    "timeStamp": 1622941849405
-  },
-  {
-    "message": "Client (8080)Connected to master",
-    "timeStamp": 1622941849409
-  },
-  {
-    "message": "Client (8080) is disconnecting ",
-    "timeStamp": 1622941849417
-  },
-  {
-    "message": "Client (8080) is disconnecting ",
-    "timeStamp": 1622941849417
-  },
-  {
-    "message": "Tablet 2 connected to client => id: i2czwPHuCxIoxgTBAAAU",
-    "timeStamp": 1622941849433
-  },
-  {
-    "message": "Tablet 1 connected to client => id: wrtDns-OptYva9nTAAAU",
-    "timeStamp": 1622941849433
-  },
-  {
-    "message": "client => id: KDg-oQ0GYl-8p5AHAAA7 connected to master",
-    "timeStamp": 1622941849434
-  },
-  {
-    "message": "Client (8080) Got metadata successfully",
-    "metaData": {
-      "_id": "60bbfcbfacb5c534a0eaade2",
-      "tablet1Documents": 608,
-      "tablet2Documents": 608,
-      "tablet3Documents": 608,
-      "tablet1KeyRange": {
-        "start": 1,
-        "end": 649
-      },
-      "tablet2KeyRange": {
-        "start": 650,
-        "end": 1345
-      },
-      "tablet3KeyRange": {
-        "start": 1346,
-        "end": 2004
-      }
-    },
-    "timeStamp": 1622941850121
-  },
-  {
-    "message": "client => id: shffVVgu5TpJQ3skAAA3 disconnected from master",
-    "timeStamp": 1622941854165
-  },
-  {
-    "message": "client => id: tiyXrf9bHH-pMEp8AAA5 disconnected from master",
-    "timeStamp": 1622941854165
-  },
-  {
-    "message": "client => id: KDg-oQ0GYl-8p5AHAAA7 disconnected from master",
-    "timeStamp": 1622941854166
-  },
-  {
-    "message": "Client (8080) is Connecting to tablet",
-    "timeStamp": 1622941854556
-  },
-  {
-    "message": "Client (8080)Connected to master",
-    "timeStamp": 1622941854557
-  },
-  {
-    "message": "Tablet 1 connected to client => id: w7_FTq8MGQ392Nu3AAAW",
-    "timeStamp": 1622941854652
-  },
-  {
-    "message": "Tablet 2 connected to client => id: PySyiINxKVPCVg2vAAAW",
-    "timeStamp": 1622941854652
-  },
-  {
-    "message": "client => id: Z-H9xH-OSvgx2G8GAAA9 connected to master",
-    "timeStamp": 1622941854741
-  },
-  {
-    "message": "Client (8080) Got metadata successfully",
-    "metaData": {
-      "_id": "60bbfcbfacb5c534a0eaade2",
-      "tablet1Documents": 608,
-      "tablet2Documents": 608,
-      "tablet3Documents": 608,
-      "tablet1KeyRange": {
-        "start": 1,
-        "end": 649
-      },
-      "tablet2KeyRange": {
-        "start": 650,
-        "end": 1345
-      },
-      "tablet3KeyRange": {
-        "start": 1346,
-        "end": 2004
-      }
-    },
-    "timeStamp": 1622941854912
-  },
-  {
-    "message": "Sending request to Tablet 2 retrieve rows from data1700,1347",
-    "timeStamp": 1622941864942
-  },
-  {
-    "message": "Sending request to Tablet 1 retrieve rows from data1,2",
-    "timeStamp": 1622941864942
-  },
-  {
-    "message": "client => id: w7_FTq8MGQ392Nu3AAAW requested data reterival from Tablet 1 ",
-    "timeStamp": 1622941864945
-  },
-  {
-    "message": "client => id: PySyiINxKVPCVg2vAAAW requested data reterival from Tablet 2 ",
-    "timeStamp": 1622941864945
-  },
-  {
-    "message": "client => id: PySyiINxKVPCVg2vAAAW requested data reterival from Tablet 2 => Succeeded",
-    "timeStamp": 1622941865120
-  },
-  {
-    "message": "Client (8080) : Data retrieved successfully",
-    "RowRead": {
-      "data": [
-        {
-          "_id": "60bbfbed6122eb32f0061d0c",
-          "anime_id": "1347",
-          "name": "Bubblegum Crisis",
-          "genre": "Adventure- Mecha- Sci-Fi- Shounen",
-          "type": "OVA",
-          "episodes": "8",
-          "rating": "7.36",
-          "members": "17268"
-        }
-      ],
-      "err": [
-        "1700"
-      ],
-      "myerr": ""
-    },
-    "timeStamp": 1622941865121
-  },
-  {
-    "message": "client => id: w7_FTq8MGQ392Nu3AAAWrequested data reterival => Error: ",
-    "timeStamp": 1622941865176
-  },
-  {
-    "message": "client => id: w7_FTq8MGQ392Nu3AAAW requested data reterival from Tablet 1 => Succeeded",
-    "timeStamp": 1622941865181
-  },
-  {
-    "message": "Client (8080) : Data retrieved successfully",
-    "RowRead": {
-      "data": [
-        {
-          "_id": "60bbfbe96122eb32f006184b",
-          "anime_id": "1",
-          "name": "Cowboy Bebop",
-          "genre": "Action",
-          "type": "TV",
-          "episodes": "26",
-          "rating": "8.82",
-          "members": "486824"
-        }
-      ],
-      "err": [
-        "2"
-      ]
-    },
-    "timeStamp": 1622941865182
-  },
-  {
-    "message": "Sending request to Tablet 1 retrieve rows from data1,2,3,4,5",
-    "timeStamp": 1622941884149
-  },
-  {
-    "message": "Sending request to Tablet 2 retrieve rows from data1700,1347,2000",
-    "timeStamp": 1622941884149
-  },
-  {
-    "message": "client => id: w7_FTq8MGQ392Nu3AAAW requested data reterival from Tablet 1 ",
-    "timeStamp": 1622941884151
-  },
-  {
-    "message": "client => id: PySyiINxKVPCVg2vAAAW requested data reterival from Tablet 2 ",
-    "timeStamp": 1622941884152
-  },
-  {
-    "message": "client => id: w7_FTq8MGQ392Nu3AAAWrequested data reterival => Error: ",
-    "timeStamp": 1622941884328
-  },
-  {
-    "message": "Client (8080) : Data retrieved successfully",
-    "RowRead": {
-      "data": [
-        {
-          "_id": "60bbfbed6122eb32f0061d0c",
-          "anime_id": "1347",
-          "name": "Bubblegum Crisis",
-          "genre": "Adventure- Mecha- Sci-Fi- Shounen",
-          "type": "OVA",
-          "episodes": "8",
-          "rating": "7.36",
-          "members": "17268"
-        }
-      ],
-      "err": [
-        "1700",
-        "2000"
-      ],
-      "myerr": ""
-    },
-    "timeStamp": 1622941884330
-  },
-  {
-    "message": "client => id: PySyiINxKVPCVg2vAAAW requested data reterival from Tablet 2 => Succeeded",
-    "timeStamp": 1622941884330
-  },
-  {
-    "message": "client => id: w7_FTq8MGQ392Nu3AAAW requested data reterival from Tablet 1 => Succeeded",
-    "timeStamp": 1622941884334
-  },
-  {
-    "message": "Client (8080) : Data retrieved successfully",
-    "RowRead": {
-      "data": [
-        {
-          "_id": "60bbfbe96122eb32f006184b",
-          "anime_id": "1",
-          "name": "Cowboy Bebop",
-          "genre": "Action",
-          "type": "TV",
-          "episodes": "26",
-          "rating": "8.82",
-          "members": "486824"
-        },
-        {
-          "_id": "60bbfbe96122eb32f006184c",
-          "anime_id": "5",
-          "name": "Cowboy Bebop: Tengoku no Tobira",
-          "genre": "Action- Drama- Mystery- Sci-Fi- Space",
-          "type": "Movie",
-          "episodes": "1",
-          "rating": "8.4",
-          "members": "137636"
-        }
-      ],
-      "err": [
-        "2",
-        "3",
-        "4"
-      ]
-    },
-    "timeStamp": 1622941884339
-  },
-  {
-    "message": "client => id: q_1ATwg6vYvo8LYwAAAl disconnected from master",
-    "timeStamp": 1622942040872
-  },
-  {
-    "message": "client => id: OET-TheDDvVTGLm0AAAn disconnected from master",
-    "timeStamp": 1622942043090
+    "message": "client => id: dOvivfS3IZn895JwAAAk requested data reterival from Tablet 1 => Succeeded",
+    "timeStamp": 1622944495178
   }
 ]
