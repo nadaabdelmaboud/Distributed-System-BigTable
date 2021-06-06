@@ -355,10 +355,11 @@ ioTablet.on("connection", function (socket) {
     });
 
     const ids = await AnimeValidation.seperateId(ClientData.rowKeys);
-    let data1, data2 ;
+    let data1 = {err:[]};
+    let data2 ={err:[]};
  
     if (ids.ids1.length != 0) {
-      console.log("Delete Row from tablet 1");
+      console.log("Delete Row from tablet server 1 ids:",ids.ids1);
       const release = await MUtexTablet1.acquire();
       console.log("inside the delete row request of tablet server 2 tablet 1");
       await new Promise((resolve) => setTimeout(resolve, 20000));
@@ -386,7 +387,7 @@ ioTablet.on("connection", function (socket) {
             updateType: "delete",
             ids: data1.ids,
           };
-          console.log("deleting from tablet1 :", masterUpdateData);
+          console.log("masterUpdateData for tablet 1 :", masterUpdateData);
           socketMaster.emit("tablet-update", masterUpdateData);
           tabletLogs.push({
             message:
@@ -407,7 +408,7 @@ ioTablet.on("connection", function (socket) {
     }
 
     if (ids.ids2.length != 0) {
-      console.log("Delete Row from tablet server 1 tablet 2");
+      console.log("Delete Row from tablet server 1 tablet 2 ids:", ids.ids2);
       const release = await MUtexTablet2.acquire();
       console.log("inside the delete row request of tablet server 2 tablet 2");
       await new Promise((resolve) => setTimeout(resolve, 20000));
@@ -437,7 +438,7 @@ ioTablet.on("connection", function (socket) {
             updateType: "delete",
             ids: data2.ids,
           };
-          console.log("deleting from tablet2 :", masterUpdateData);
+          console.log("masterUpdateData for tablet 2 :", masterUpdateData);
           socketMaster.emit("tablet-update", masterUpdateData);
           tabletLogs.push({
             message:
@@ -449,6 +450,7 @@ ioTablet.on("connection", function (socket) {
         }
       } finally {
         release();
+        console.log("tablet 1 released lock");
         tabletLogs.push({
           message:
             "client => id: " +
@@ -476,6 +478,7 @@ ioTablet.on("connection", function (socket) {
         : data1.err.length != 0
         ? data1.err
         : data2.err;
+    console.log("/////////////////////////////////");
     console.log("send to client:", data);
     socket.emit("DeleteRowResponse", data);
     tabletLogs.push({

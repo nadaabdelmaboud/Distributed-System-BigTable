@@ -1,22 +1,26 @@
 [
   {
     "message": "Master acquired the lock to delete documents",
-    "timeStamp": 1623005205927
+    "timeStamp": 1623006552912
   },
   {
     "message": "Master released the lock after deleting documents",
-    "timeStamp": 1623005206095
+    "timeStamp": 1623006553084
   },
   {
-    "message": "master updated and re-emitted the metadata",
-    "timeStamp": 1623005206451
+    "message": "Master acquired the lock to delete documents",
+    "timeStamp": 1623006553084
+  },
+  {
+    "message": "Master released the lock after deleting documents",
+    "timeStamp": 1623006553258
   },
   {
     "message": "Tablet Server 1 got metadata",
     "metaData": {
       "_id": "60bbfcbfacb5c534a0eaade2",
-      "tablet1Documents": 586,
-      "tablet2Documents": 601,
+      "tablet1Documents": 583,
+      "tablet2Documents": 599,
       "tablet3Documents": 612,
       "tablet1KeyRange": {
         "start": 1,
@@ -31,14 +35,40 @@
         "end": 2014
       }
     },
-    "timeStamp": 1623005206451
+    "timeStamp": 1623006553419
+  },
+  {
+    "message": "master updated and re-emitted the metadata",
+    "timeStamp": 1623006553419
+  },
+  {
+    "message": "Client (8080) Got metadata successfully",
+    "metaData": {
+      "_id": "60bbfcbfacb5c534a0eaade2",
+      "tablet1Documents": 583,
+      "tablet2Documents": 599,
+      "tablet3Documents": 612,
+      "tablet1KeyRange": {
+        "start": 1,
+        "end": 649
+      },
+      "tablet2KeyRange": {
+        "start": 650,
+        "end": 1345
+      },
+      "tablet3KeyRange": {
+        "start": 1346,
+        "end": 2014
+      }
+    },
+    "timeStamp": 1623006553420
   },
   {
     "message": "Tablet Server 2 got metadata",
     "metaData": {
       "_id": "60bbfcbfacb5c534a0eaade2",
-      "tablet1Documents": 586,
-      "tablet2Documents": 601,
+      "tablet1Documents": 583,
+      "tablet2Documents": 599,
       "tablet3Documents": 612,
       "tablet1KeyRange": {
         "start": 1,
@@ -53,69 +83,202 @@
         "end": 2014
       }
     },
-    "timeStamp": 1623005206453
+    "timeStamp": 1623006553422
   },
   {
-    "message": "Sending request to Tablet 1 retrieve rows with ids: 20,662,663",
-    "timeStamp": 1623005296975
+    "message": "Tablet Server 1 got metadata",
+    "metaData": {
+      "_id": "60bbfcbfacb5c534a0eaade2",
+      "tablet1Documents": 583,
+      "tablet2Documents": 599,
+      "tablet3Documents": 612,
+      "tablet1KeyRange": {
+        "start": 1,
+        "end": 649
+      },
+      "tablet2KeyRange": {
+        "start": 650,
+        "end": 1345
+      },
+      "tablet3KeyRange": {
+        "start": 1346,
+        "end": 2014
+      }
+    },
+    "timeStamp": 1623006553598
   },
   {
-    "message": "client => id: QWjp4mTfdWs-LS3TAAAA requested data reterival from Tablet Server 1",
-    "timeStamp": 1623005296977
+    "message": "master updated and re-emitted the metadata",
+    "timeStamp": 1623006553598
   },
   {
-    "message": "client => id: QWjp4mTfdWs-LS3TAAAA requested data reterival => Error: No data retrieved",
-    "timeStamp": 1623005297319
+    "message": "Client (8080) Got metadata successfully",
+    "metaData": {
+      "_id": "60bbfcbfacb5c534a0eaade2",
+      "tablet1Documents": 583,
+      "tablet2Documents": 599,
+      "tablet3Documents": 612,
+      "tablet1KeyRange": {
+        "start": 1,
+        "end": 649
+      },
+      "tablet2KeyRange": {
+        "start": 650,
+        "end": 1345
+      },
+      "tablet3KeyRange": {
+        "start": 1346,
+        "end": 2014
+      }
+    },
+    "timeStamp": 1623006553599
   },
   {
-    "message": "client => id: QWjp4mTfdWs-LS3TAAAA requested data reterival => Error: No data retrieved",
-    "timeStamp": 1623005297320
+    "message": "Tablet Server 2 got metadata",
+    "metaData": {
+      "_id": "60bbfcbfacb5c534a0eaade2",
+      "tablet1Documents": 583,
+      "tablet2Documents": 599,
+      "tablet3Documents": 612,
+      "tablet1KeyRange": {
+        "start": 1,
+        "end": 649
+      },
+      "tablet2KeyRange": {
+        "start": 650,
+        "end": 1345
+      },
+      "tablet3KeyRange": {
+        "start": 1346,
+        "end": 2014
+      }
+    },
+    "timeStamp": 1623006553601
   },
   {
-    "message": "Client (8081) : Data retrieved successfully",
-    "RowRead": {
-      "data": [],
+    "message": "client => id: rETTbZu0-2QjOD81AAAC acquired the lock on Tablet server 1 tablet 2",
+    "timeStamp": 1623006570532
+  },
+  {
+    "message": "client => id: rETTbZu0-2QjOD81AAAC released the lock on Tablet 2 ",
+    "timeStamp": 1623006570867
+  },
+  {
+    "message": "client => id: rETTbZu0-2QjOD81AAAC requested Delete Row to master from Tablet Server 1 Tablet 2 => Succeeded",
+    "timeStamp": 1623006570867
+  },
+  {
+    "message": "client => id: rETTbZu0-2QjOD81AAAC requested Delete Row to client from Tablet Server 1  => Succeeded",
+    "timeStamp": 1623006570869
+  },
+  {
+    "message": "Client (8080) : Delete row finished successfully",
+    "DeleteRow": {
       "err": [
-        "20",
-        "662",
-        "663"
+        "19",
+        "20"
       ]
     },
-    "timeStamp": 1623005297322
+    "timeStamp": 1623006570870
   },
   {
-    "message": "client => id: QWjp4mTfdWs-LS3TAAAA requested data reterival from Tablet Server 1 => Succeeded",
-    "timeStamp": 1623005297322
+    "message": "Master acquired the lock to delete documents",
+    "timeStamp": 1623006573170
   },
   {
-    "message": "Sending request to Tablet 1 retrieve rows with ids: 23,655",
-    "timeStamp": 1623005304569
+    "message": "Master released the lock after deleting documents",
+    "timeStamp": 1623006573328
   },
   {
-    "message": "client => id: Vv2Yn9_DcHYJfX6BAAAC requested data reterival from Tablet Server 1",
-    "timeStamp": 1623005304571
+    "message": "master updated and re-emitted the metadata",
+    "timeStamp": 1623006573658
   },
   {
-    "message": "client => id: Vv2Yn9_DcHYJfX6BAAAC requested data reterival => Error: No data retrieved",
-    "timeStamp": 1623005304975
-  },
-  {
-    "message": "client => id: Vv2Yn9_DcHYJfX6BAAAC requested data reterival => Error: No data retrieved",
-    "timeStamp": 1623005304976
-  },
-  {
-    "message": "client => id: Vv2Yn9_DcHYJfX6BAAAC requested data reterival from Tablet Server 1 => Succeeded",
-    "timeStamp": 1623005304977
-  },
-  {
-    "message": "Client (8080) : Data retrieved successfully",
-    "RowRead": {
-      "data": [],
-      "err": [
-        "23",
-        "655"
-      ]
+    "message": "Client (8081) Got metadata successfully",
+    "metaData": {
+      "_id": "60bbfcbfacb5c534a0eaade2",
+      "tablet1Documents": 583,
+      "tablet2Documents": 597,
+      "tablet3Documents": 612,
+      "tablet1KeyRange": {
+        "start": 1,
+        "end": 649
+      },
+      "tablet2KeyRange": {
+        "start": 650,
+        "end": 1345
+      },
+      "tablet3KeyRange": {
+        "start": 1346,
+        "end": 2014
+      }
     },
-    "timeStamp": 1623005304978
+    "timeStamp": 1623006573659
+  },
+  {
+    "message": "Client (8080) Got metadata successfully",
+    "metaData": {
+      "_id": "60bbfcbfacb5c534a0eaade2",
+      "tablet1Documents": 583,
+      "tablet2Documents": 597,
+      "tablet3Documents": 612,
+      "tablet1KeyRange": {
+        "start": 1,
+        "end": 649
+      },
+      "tablet2KeyRange": {
+        "start": 650,
+        "end": 1345
+      },
+      "tablet3KeyRange": {
+        "start": 1346,
+        "end": 2014
+      }
+    },
+    "timeStamp": 1623006573659
+  },
+  {
+    "message": "Tablet Server 1 got metadata",
+    "metaData": {
+      "_id": "60bbfcbfacb5c534a0eaade2",
+      "tablet1Documents": 583,
+      "tablet2Documents": 597,
+      "tablet3Documents": 612,
+      "tablet1KeyRange": {
+        "start": 1,
+        "end": 649
+      },
+      "tablet2KeyRange": {
+        "start": 650,
+        "end": 1345
+      },
+      "tablet3KeyRange": {
+        "start": 1346,
+        "end": 2014
+      }
+    },
+    "timeStamp": 1623006573659
+  },
+  {
+    "message": "Tablet Server 2 got metadata",
+    "metaData": {
+      "_id": "60bbfcbfacb5c534a0eaade2",
+      "tablet1Documents": 583,
+      "tablet2Documents": 597,
+      "tablet3Documents": 612,
+      "tablet1KeyRange": {
+        "start": 1,
+        "end": 649
+      },
+      "tablet2KeyRange": {
+        "start": 650,
+        "end": 1345
+      },
+      "tablet3KeyRange": {
+        "start": 1346,
+        "end": 2014
+      }
+    },
+    "timeStamp": 1623006573661
   }
 ]
