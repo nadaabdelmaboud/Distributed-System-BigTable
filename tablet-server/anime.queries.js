@@ -8,13 +8,25 @@ const Tablet = {
     AnimeModel.push(await Models.getAnimeModel2());
     AnimeModel.push(await Models3.getAnimeModel3());
   },
-
+  async findbyanimeid(rowKeys, tabletNum) {
+    const result = await AnimeModel[tabletNum - 1].find({
+      anime_id: { $in: rowKeys },
+    },{anime_id:1 , _id:0});
+    ids=[];
+    if(result.length!=0){
+      for (let i = 0; i < result.length; i++) {
+        ids.push(result[i].anime_id);
+      }
+    }
+    return ids;
+  },
   async findRows(rowKeys, tabletNum) {
     console.log("rowKey:", rowKeys);
-    const result = await AnimeModel[tabletNum - 1].find(
-      { anime_id: { $in: rowKeys } }
-    );
-    if (!result || result.length == 0) return { data: [], err: rowKeys ,myerr:"No data retrieved"};
+    const result = await AnimeModel[tabletNum - 1].find({
+      anime_id: { $in: rowKeys },
+    });
+    if (!result || result.length == 0)
+      return { data: [], err: rowKeys, myerr: "No data retrieved" };
     ids = [];
     err = [];
     if (result.length != rowKeys.length) {
@@ -25,7 +37,7 @@ const Tablet = {
     }
     console.log("dataoutput", result, "ids", err);
 
-    return { data:result,err:err ,myerr:""};
+    return { data: result, err: err, myerr: "" };
   },
   async updateAnime(Anime, rowKey, tabletNum) {
     const updatedAnime = await AnimeModel[tabletNum - 1].find({
@@ -73,11 +85,11 @@ const Tablet = {
     const data = await AnimeModel[tabletNum - 1].find({ anime_id: anime_id });
     return data;
   },
-  async deleteRow(rowKey, tabletNum) {
-    const result = await AnimeModel[tabletNum - 1].deleteOne({
-      anime_id: rowKey,
+  async deleteRow(rowKeys, tabletNum) {
+    const result = await AnimeModel[tabletNum - 1].deleteMany({
+      anime_id: { $in: rowKeys },
     });
-    return result;
+    return result.ok;
   },
 };
 module.exports = Tablet;

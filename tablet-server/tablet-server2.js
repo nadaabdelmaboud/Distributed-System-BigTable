@@ -374,27 +374,23 @@ ioTablet.on("connection", function (socket) {
     });
     try {
       console.log("Delete Row");
-      tabletNumber = await AnimeValidation.validateRowKey(ClientData.rowKeys[0]);
-      const data = await AnimeService.deleteRow(
-        ClientData.rowKeys[0],
-        tabletNumber
-      );
-      if (!data.data) {
-        console.log(data.err);
+      const data = await AnimeService.deleteRow(ClientData.rowKeys, 3);
+      if (data.ids.length == 0) {
+        console.log("No Anime Was Deleted");
         tabletLogs.push({
           message:
             "client => id: " +
             socket.client.id +
-            " requested Delete Row from Tablet 2  => Error: " +
-            data.err,
+            " requested Delete Row from Tablet 2  => Error: No Anime Was Deleted ",
           timeStamp: Date.now(),
         });
       } else {
         const masterUpdateData = {
-          tabletId: tabletNumber,
+          tabletId: 3,
           updateType: "delete",
-          ids: [ClientData.rowKeys[0]],
+          ids: data.ids,
         };
+        console.log("deleted from tablet 3 :", masterUpdateData);
         socketMaster.emit("tablet-update", masterUpdateData);
         tabletLogs.push({
           message:
@@ -404,6 +400,7 @@ ioTablet.on("connection", function (socket) {
           timeStamp: Date.now(),
         });
       }
+      console.log("Data Send To Client :" ,data);
       socket.emit("DeleteRowResponse", data);
       tabletLogs.push({
         message:
