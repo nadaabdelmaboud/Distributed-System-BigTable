@@ -249,6 +249,36 @@
             required
           />
         </div>
+
+       <div v-if="errorsInDelete1.length != 0 || errorsInDelete2.length != 0">
+          <p>Error detected while deleting rows of id:</p>
+          <div v-if="errorsInDelete1.length != 0">
+            <p>Tablet1 RowKey Errors:</p>
+            <div v-for="error in errorsInDelete1" :key="error" class="errorList">
+              <div class="errorItems">
+                <div>
+                  {{ error }}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div v-if="errorsInDelete2.length != 0">
+            <p>Tablet2 RowKey Errors:</p>
+            <div
+              v-for="errorID in errorsInDelete2"
+              :key="errorID"
+              class="errorList"
+            >
+              <div class="errorItems">
+                <div>
+                  {{ errorID }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
         <div>
           <button type="submit">Delete Anime</button>
         </div>
@@ -487,6 +517,8 @@ export default {
       port: "",
       errors1: [],
       errors2: [],
+      errorsInDelete1:[],
+      errorsInDelete2:[]
     };
   },
   beforeDestroy() {
@@ -598,9 +630,8 @@ export default {
     this.socketTablet2.on("DeleteRowResponse", (DeleteRow) => {
       console.log("Row deleted in client (Delete Row):", DeleteRow);
 
-      if (DeleteRow.data == false) {
-        this.showToast();
-        this.messageToast = DeleteRow.err;
+      if (DeleteRow.err.length != 0) {
+        this.errorsInDelete2 = DeleteRow.err;
       } else {
         this.showToast();
         this.messageToast = "Rows are deleted successfully";
@@ -738,9 +769,8 @@ export default {
     this.socketTablet1.on("DeleteRowResponse", (DeleteRow) => {
       console.log("Row deleted in client (Delete Row):", DeleteRow);
 
-      if (DeleteRow.data == false) {
-        this.showToast();
-        this.messageToast = DeleteRow.err;
+      if (DeleteRow.err.length != 0) {
+        this.errorsInDelete1 = DeleteRow.err;
       } else {
         this.showToast();
         this.messageToast = "Rows are deleted successfully";
@@ -1004,6 +1034,8 @@ export default {
       });
     },
     DeleteRowSubmit() {
+      this.errorsInDelete1 = [];
+      this.errorsInDelete2 = [];
       var rowKeys = this.deletedAnimeNumber.split(" ");
       let tablet1Rows = [],
         tablet2Rows = [];
@@ -1015,7 +1047,8 @@ export default {
         if (t == 1 || t == 2) tablet1Rows.push(rowKeys[i]);
         else if (t == 3) tablet2Rows.push(rowKeys[i]);
         if (t == -1) {
-          outOfRange.push(rowKeys[i]);
+          if(rowKeys[i] != "")
+            outOfRange.push(rowKeys[i]);
         }
       }
 

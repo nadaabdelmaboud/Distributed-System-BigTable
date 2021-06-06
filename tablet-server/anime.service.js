@@ -69,25 +69,16 @@ const AnimeService = {
       return { data: false, err: "problem deleting cell" };
     return { data: result, err: "" };
   },
-  async deleteRow(rowKey, tabletNum) {
-    console.log(rowKey);
-    const isKeyValid = await AnimeValidation.validateRowKey(rowKey);
-    if (isKeyValid == -1) return { data: false, err: "rowKey Doesn't Exist" };
-    if (isKeyValid != tabletNum)
-      return {
-        data: false,
-        err: `this rowKey belongs to tablet number: ${isKeyValid}`,
-      };
-    const DoesExist = await Anime.getAnimeById(rowKey,tabletNum);
-    if(!DoesExist || DoesExist.length==0){
-      return { data: false, err: "The row Key Doesn't Exist" }; 
-    }
-    const result = await Anime.deleteRow(rowKey, tabletNum);
-    if (!result || result.length == 0)
-      return { data: false, err: "problem deleting Anime" };
-    if(result.deletedCount == 0)
-      return { data: false, err: "The row Key Doesn't Exist" };
-    return { data: result, err: "" };
+  async deleteRow(rowKeys, tabletNum) {
+    const isKeyValid = await AnimeValidation.validateRowKeys(rowKeys);
+    if (isKeyValid == -1) return { ids: [], myerr: "rowKey Doesn't Exist" ,err:rowKeys};
+    const ids = await Anime.findbyanimeid(rowKeys, tabletNum);
+    var err = (ids.length!=0)?rowKeys.filter((x) => ids.indexOf(x) === -1):rowKeys;
+    err =(err.length!=0)?[...new Set(err)]:[];
+    const result = await Anime.deleteRow(ids, tabletNum);
+    if(result == 0)
+      return{ids:[],err:rowKeys};
+    return {ids:ids,err:err};
   },
 };
 module.exports = AnimeService;

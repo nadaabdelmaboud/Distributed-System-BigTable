@@ -371,29 +371,64 @@ ioTablet.on("connection", function (socket) {
     });
     try {
       console.log("Delete Row");
-      tabletNumber = await AnimeValidation.validateRowKey(ClientData.rowKeys[0]);
-      const data = await AnimeService.deleteRow(
-        ClientData.rowKeys[0],
-        tabletNumber
-      );
-      if (!data.data) {
-        console.log(data.err);
+      const ids = await AnimeValidation.seperateId(ClientData.rowKeys);
+      const data1 = await AnimeService.deleteRow(ids.ids1, 1);
+      const data2 = await AnimeService.deleteRow(ids.ids2, 2);
+      console.log("data1",data1);
+      console.log("/////////////////////");
+      console.log("data2",data2);
+      if (data1.ids.length == 0) {
+        console.log("No Anime Was Deleted");
         tabletLogs.push({
-          message: "client => id: " + socket.client.id + " requested Delete Row from Tablet 1  => Error: " + data.err,
-          timeStamp: Date.now(),
-        });
-      } else {
-        const masterUpdateData = {
-          tabletId: tabletNumber,
-          updateType: "delete",
-          ids: [ClientData.rowKeys[0]],
-        };
-        socketMaster.emit("tablet-update", masterUpdateData);
-        tabletLogs.push({
-          message: "client => id: " + socket.client.id + " requested Delete Row to master from Tablet 1 => Succeeded",
+          message: "client => id: " + socket.client.id + " requested Delete Row from Tablet 1  => Error: No Anime Was Deleted",
           timeStamp: Date.now(),
         });
       }
+      else{
+        const masterUpdateData = {
+          tabletId: 1,
+          updateType: "delete",
+          ids: data1.ids,
+        };
+        console.log("deleting from tablet1 :", masterUpdateData);
+        socketMaster.emit("tablet-update", masterUpdateData);
+        tabletLogs.push({
+          message:
+            "client => id: " +
+            socket.client.id +
+            " requested Delete Row to master from Tablet 1 => Succeeded",
+          timeStamp: Date.now(),
+        });
+      }
+      if (data2.ids.length == 0) {
+        console.log("No Anime Was Deleted");
+        tabletLogs.push({
+          message:"client => id: " +socket.client.id +" requested Delete Row from Tablet 1  => Error: No Anime Was Deleted" ,timeStamp: Date.now(),
+        });
+      } else {
+        const masterUpdateData = {
+          tabletId: 2,
+          updateType: "delete",
+          ids: data2.ids,
+        };
+        console.log("deleting from tablet2 :", masterUpdateData);
+        socketMaster.emit("tablet-update", masterUpdateData);
+        tabletLogs.push({
+          message:
+            "client => id: " +
+            socket.client.id +
+            " requested Delete Row to master from Tablet 1 => Succeeded",
+          timeStamp: Date.now(),
+        });
+      }
+      var data ={};
+      data.err =
+        data1.err.length != 0 && data2.err.length != 0
+          ? data1.err.concat(data2.err)
+          : data1.err.length != 0
+          ? data1.err
+          : data2.err;
+      console.log("send to client:",data);
       socket.emit("DeleteRowResponse", data);
       tabletLogs.push({
         message: "client => id: " + socket.client.id + " requested Delete Row to client from Tablet 1  => Succeeded",
