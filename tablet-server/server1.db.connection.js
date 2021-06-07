@@ -7,8 +7,8 @@ let AnimeModel2;
 const connect = async function () {
   let mongoose1 = await connectToDB(1);
   let mongoose2 = await connectToDB(2);
-  console.log("Connected Succesfull to Tablet 1 DataBase");
-  console.log("Connected Succesfull to Tablet 2 DataBase");
+  console.log("Connected Succesfully to Tablet 1 DataBase");
+  console.log("Connected Succesfully to Tablet 2 DataBase");
   AnimeModel1 = mongoose1.model("model1", new Schema(animeModel), "BigTable");
   AnimeModel2 = mongoose2.model("model1", new Schema(animeModel), "BigTable");
 };

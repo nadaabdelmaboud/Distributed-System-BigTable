@@ -1,10 +1,1155 @@
 [
   {
-    "message": "client => id: LAqdtxPx_PPaXLHIAAAJ disconnected from master",
-    "timeStamp": 1623009366527
+    "message": "Client (8081) Got metadata successfully",
+    "metaData": {
+      "_id": "60bd6cb72b0ef944b4dd5337",
+      "tablet1Documents": 599,
+      "tablet2Documents": 598,
+      "tablet3Documents": 606,
+      "tablet1KeyRange": {
+        "start": 18,
+        "end": 655
+      },
+      "tablet2KeyRange": {
+        "start": 656,
+        "end": 1346
+      },
+      "tablet3KeyRange": {
+        "start": 1347,
+        "end": 2003
+      }
+    },
+    "timeStamp": 1623033972743
   },
   {
-    "message": "client => id: eBohwmqUtwdGMSrwAAAP connected to master",
-    "timeStamp": 1623009371770
+    "message": "Client (8081) Got metadata successfully",
+    "metaData": {
+      "_id": "60bd6cb72b0ef944b4dd5337",
+      "tablet1Documents": 599,
+      "tablet2Documents": 598,
+      "tablet3Documents": 606,
+      "tablet1KeyRange": {
+        "start": 18,
+        "end": 655
+      },
+      "tablet2KeyRange": {
+        "start": 656,
+        "end": 1346
+      },
+      "tablet3KeyRange": {
+        "start": 1347,
+        "end": 2003
+      }
+    },
+    "timeStamp": 1623033972743
+  },
+  {
+    "message": "Client (8081) Got metadata successfully",
+    "metaData": {
+      "_id": "60bd6cb72b0ef944b4dd5337",
+      "tablet1Documents": 599,
+      "tablet2Documents": 598,
+      "tablet3Documents": 606,
+      "tablet1KeyRange": {
+        "start": 18,
+        "end": 655
+      },
+      "tablet2KeyRange": {
+        "start": 656,
+        "end": 1346
+      },
+      "tablet3KeyRange": {
+        "start": 1347,
+        "end": 2003
+      }
+    },
+    "timeStamp": 1623033972744
+  },
+  {
+    "message": "Client (8081) Got metadata successfully",
+    "metaData": {
+      "_id": "60bd6cb72b0ef944b4dd5337",
+      "tablet1Documents": 599,
+      "tablet2Documents": 598,
+      "tablet3Documents": 606,
+      "tablet1KeyRange": {
+        "start": 18,
+        "end": 655
+      },
+      "tablet2KeyRange": {
+        "start": 656,
+        "end": 1346
+      },
+      "tablet3KeyRange": {
+        "start": 1347,
+        "end": 2003
+      }
+    },
+    "timeStamp": 1623033972744
+  },
+  {
+    "message": "Client (8081) Got metadata successfully",
+    "metaData": {
+      "_id": "60bd6cb72b0ef944b4dd5337",
+      "tablet1Documents": 599,
+      "tablet2Documents": 598,
+      "tablet3Documents": 606,
+      "tablet1KeyRange": {
+        "start": 18,
+        "end": 655
+      },
+      "tablet2KeyRange": {
+        "start": 656,
+        "end": 1346
+      },
+      "tablet3KeyRange": {
+        "start": 1347,
+        "end": 2003
+      }
+    },
+    "timeStamp": 1623033972744
+  },
+  {
+    "message": "Client (8080) Got metadata successfully",
+    "metaData": {
+      "_id": "60bd6cb72b0ef944b4dd5337",
+      "tablet1Documents": 599,
+      "tablet2Documents": 598,
+      "tablet3Documents": 606,
+      "tablet1KeyRange": {
+        "start": 18,
+        "end": 655
+      },
+      "tablet2KeyRange": {
+        "start": 656,
+        "end": 1346
+      },
+      "tablet3KeyRange": {
+        "start": 1347,
+        "end": 2003
+      }
+    },
+    "timeStamp": 1623033972744
+  },
+  {
+    "message": "Client (8081) Got metadata successfully",
+    "metaData": {
+      "_id": "60bd6cb72b0ef944b4dd5337",
+      "tablet1Documents": 599,
+      "tablet2Documents": 598,
+      "tablet3Documents": 606,
+      "tablet1KeyRange": {
+        "start": 18,
+        "end": 655
+      },
+      "tablet2KeyRange": {
+        "start": 656,
+        "end": 1346
+      },
+      "tablet3KeyRange": {
+        "start": 1347,
+        "end": 2003
+      }
+    },
+    "timeStamp": 1623033972744
+  },
+  {
+    "message": "Client (8080) Got metadata successfully",
+    "metaData": {
+      "_id": "60bd6cb72b0ef944b4dd5337",
+      "tablet1Documents": 599,
+      "tablet2Documents": 598,
+      "tablet3Documents": 606,
+      "tablet1KeyRange": {
+        "start": 18,
+        "end": 655
+      },
+      "tablet2KeyRange": {
+        "start": 656,
+        "end": 1346
+      },
+      "tablet3KeyRange": {
+        "start": 1347,
+        "end": 2003
+      }
+    },
+    "timeStamp": 1623033972744
+  },
+  {
+    "message": "Client (8080) Got metadata successfully",
+    "metaData": {
+      "_id": "60bd6cb72b0ef944b4dd5337",
+      "tablet1Documents": 599,
+      "tablet2Documents": 598,
+      "tablet3Documents": 606,
+      "tablet1KeyRange": {
+        "start": 18,
+        "end": 655
+      },
+      "tablet2KeyRange": {
+        "start": 656,
+        "end": 1346
+      },
+      "tablet3KeyRange": {
+        "start": 1347,
+        "end": 2003
+      }
+    },
+    "timeStamp": 1623033972744
+  },
+  {
+    "message": "Client (8080) Got metadata successfully",
+    "metaData": {
+      "_id": "60bd6cb72b0ef944b4dd5337",
+      "tablet1Documents": 599,
+      "tablet2Documents": 598,
+      "tablet3Documents": 606,
+      "tablet1KeyRange": {
+        "start": 18,
+        "end": 655
+      },
+      "tablet2KeyRange": {
+        "start": 656,
+        "end": 1346
+      },
+      "tablet3KeyRange": {
+        "start": 1347,
+        "end": 2003
+      }
+    },
+    "timeStamp": 1623033972744
+  },
+  {
+    "message": "Client (8080) Got metadata successfully",
+    "metaData": {
+      "_id": "60bd6cb72b0ef944b4dd5337",
+      "tablet1Documents": 599,
+      "tablet2Documents": 598,
+      "tablet3Documents": 606,
+      "tablet1KeyRange": {
+        "start": 18,
+        "end": 655
+      },
+      "tablet2KeyRange": {
+        "start": 656,
+        "end": 1346
+      },
+      "tablet3KeyRange": {
+        "start": 1347,
+        "end": 2003
+      }
+    },
+    "timeStamp": 1623033972744
+  },
+  {
+    "message": "Client (8080) Got metadata successfully",
+    "metaData": {
+      "_id": "60bd6cb72b0ef944b4dd5337",
+      "tablet1Documents": 599,
+      "tablet2Documents": 598,
+      "tablet3Documents": 606,
+      "tablet1KeyRange": {
+        "start": 18,
+        "end": 655
+      },
+      "tablet2KeyRange": {
+        "start": 656,
+        "end": 1346
+      },
+      "tablet3KeyRange": {
+        "start": 1347,
+        "end": 2003
+      }
+    },
+    "timeStamp": 1623033972744
+  },
+  {
+    "message": "Client (8080) Got metadata successfully",
+    "metaData": {
+      "_id": "60bd6cb72b0ef944b4dd5337",
+      "tablet1Documents": 599,
+      "tablet2Documents": 598,
+      "tablet3Documents": 606,
+      "tablet1KeyRange": {
+        "start": 18,
+        "end": 655
+      },
+      "tablet2KeyRange": {
+        "start": 656,
+        "end": 1346
+      },
+      "tablet3KeyRange": {
+        "start": 1347,
+        "end": 2003
+      }
+    },
+    "timeStamp": 1623033972745
+  },
+  {
+    "message": "Client (8080) Got metadata successfully",
+    "metaData": {
+      "_id": "60bd6cb72b0ef944b4dd5337",
+      "tablet1Documents": 599,
+      "tablet2Documents": 598,
+      "tablet3Documents": 606,
+      "tablet1KeyRange": {
+        "start": 18,
+        "end": 655
+      },
+      "tablet2KeyRange": {
+        "start": 656,
+        "end": 1346
+      },
+      "tablet3KeyRange": {
+        "start": 1347,
+        "end": 2003
+      }
+    },
+    "timeStamp": 1623033972745
+  },
+  {
+    "message": "Client (8080) Got metadata successfully",
+    "metaData": {
+      "_id": "60bd6cb72b0ef944b4dd5337",
+      "tablet1Documents": 599,
+      "tablet2Documents": 598,
+      "tablet3Documents": 606,
+      "tablet1KeyRange": {
+        "start": 18,
+        "end": 655
+      },
+      "tablet2KeyRange": {
+        "start": 656,
+        "end": 1346
+      },
+      "tablet3KeyRange": {
+        "start": 1347,
+        "end": 2003
+      }
+    },
+    "timeStamp": 1623033972745
+  },
+  {
+    "message": "Client (8080) Got metadata successfully",
+    "metaData": {
+      "_id": "60bd6cb72b0ef944b4dd5337",
+      "tablet1Documents": 599,
+      "tablet2Documents": 598,
+      "tablet3Documents": 606,
+      "tablet1KeyRange": {
+        "start": 18,
+        "end": 655
+      },
+      "tablet2KeyRange": {
+        "start": 656,
+        "end": 1346
+      },
+      "tablet3KeyRange": {
+        "start": 1347,
+        "end": 2003
+      }
+    },
+    "timeStamp": 1623033972745
+  },
+  {
+    "message": "Client (8081) Got metadata successfully",
+    "metaData": {
+      "_id": "60bd6cb72b0ef944b4dd5337",
+      "tablet1Documents": 599,
+      "tablet2Documents": 598,
+      "tablet3Documents": 606,
+      "tablet1KeyRange": {
+        "start": 18,
+        "end": 655
+      },
+      "tablet2KeyRange": {
+        "start": 656,
+        "end": 1346
+      },
+      "tablet3KeyRange": {
+        "start": 1347,
+        "end": 2003
+      }
+    },
+    "timeStamp": 1623033972745
+  },
+  {
+    "message": "Client (8081) Got metadata successfully",
+    "metaData": {
+      "_id": "60bd6cb72b0ef944b4dd5337",
+      "tablet1Documents": 599,
+      "tablet2Documents": 598,
+      "tablet3Documents": 606,
+      "tablet1KeyRange": {
+        "start": 18,
+        "end": 655
+      },
+      "tablet2KeyRange": {
+        "start": 656,
+        "end": 1346
+      },
+      "tablet3KeyRange": {
+        "start": 1347,
+        "end": 2003
+      }
+    },
+    "timeStamp": 1623033972745
+  },
+  {
+    "message": "Client (8080) Got metadata successfully",
+    "metaData": {
+      "_id": "60bd6cb72b0ef944b4dd5337",
+      "tablet1Documents": 599,
+      "tablet2Documents": 598,
+      "tablet3Documents": 606,
+      "tablet1KeyRange": {
+        "start": 18,
+        "end": 655
+      },
+      "tablet2KeyRange": {
+        "start": 656,
+        "end": 1346
+      },
+      "tablet3KeyRange": {
+        "start": 1347,
+        "end": 2003
+      }
+    },
+    "timeStamp": 1623033972746
+  },
+  {
+    "message": "Client (8080) Got metadata successfully",
+    "metaData": {
+      "_id": "60bd6cb72b0ef944b4dd5337",
+      "tablet1Documents": 599,
+      "tablet2Documents": 598,
+      "tablet3Documents": 606,
+      "tablet1KeyRange": {
+        "start": 18,
+        "end": 655
+      },
+      "tablet2KeyRange": {
+        "start": 656,
+        "end": 1346
+      },
+      "tablet3KeyRange": {
+        "start": 1347,
+        "end": 2003
+      }
+    },
+    "timeStamp": 1623033972746
+  },
+  {
+    "message": "Client (8081) Got metadata successfully",
+    "metaData": {
+      "_id": "60bd6cb72b0ef944b4dd5337",
+      "tablet1Documents": 599,
+      "tablet2Documents": 598,
+      "tablet3Documents": 606,
+      "tablet1KeyRange": {
+        "start": 18,
+        "end": 655
+      },
+      "tablet2KeyRange": {
+        "start": 656,
+        "end": 1346
+      },
+      "tablet3KeyRange": {
+        "start": 1347,
+        "end": 2003
+      }
+    },
+    "timeStamp": 1623033972746
+  },
+  {
+    "message": "Client (8081) Got metadata successfully",
+    "metaData": {
+      "_id": "60bd6cb72b0ef944b4dd5337",
+      "tablet1Documents": 599,
+      "tablet2Documents": 598,
+      "tablet3Documents": 606,
+      "tablet1KeyRange": {
+        "start": 18,
+        "end": 655
+      },
+      "tablet2KeyRange": {
+        "start": 656,
+        "end": 1346
+      },
+      "tablet3KeyRange": {
+        "start": 1347,
+        "end": 2003
+      }
+    },
+    "timeStamp": 1623033972746
+  },
+  {
+    "message": "Client (8081) Got metadata successfully",
+    "metaData": {
+      "_id": "60bd6cb72b0ef944b4dd5337",
+      "tablet1Documents": 599,
+      "tablet2Documents": 598,
+      "tablet3Documents": 606,
+      "tablet1KeyRange": {
+        "start": 18,
+        "end": 655
+      },
+      "tablet2KeyRange": {
+        "start": 656,
+        "end": 1346
+      },
+      "tablet3KeyRange": {
+        "start": 1347,
+        "end": 2003
+      }
+    },
+    "timeStamp": 1623033972746
+  },
+  {
+    "message": "Client (8081) Got metadata successfully",
+    "metaData": {
+      "_id": "60bd6cb72b0ef944b4dd5337",
+      "tablet1Documents": 599,
+      "tablet2Documents": 598,
+      "tablet3Documents": 606,
+      "tablet1KeyRange": {
+        "start": 18,
+        "end": 655
+      },
+      "tablet2KeyRange": {
+        "start": 656,
+        "end": 1346
+      },
+      "tablet3KeyRange": {
+        "start": 1347,
+        "end": 2003
+      }
+    },
+    "timeStamp": 1623033972746
+  },
+  {
+    "message": "Client (8080) Got metadata successfully",
+    "metaData": {
+      "_id": "60bd6cb72b0ef944b4dd5337",
+      "tablet1Documents": 599,
+      "tablet2Documents": 598,
+      "tablet3Documents": 606,
+      "tablet1KeyRange": {
+        "start": 18,
+        "end": 655
+      },
+      "tablet2KeyRange": {
+        "start": 656,
+        "end": 1346
+      },
+      "tablet3KeyRange": {
+        "start": 1347,
+        "end": 2003
+      }
+    },
+    "timeStamp": 1623033972746
+  },
+  {
+    "message": "Client (8080) Got metadata successfully",
+    "metaData": {
+      "_id": "60bd6cb72b0ef944b4dd5337",
+      "tablet1Documents": 599,
+      "tablet2Documents": 598,
+      "tablet3Documents": 606,
+      "tablet1KeyRange": {
+        "start": 18,
+        "end": 655
+      },
+      "tablet2KeyRange": {
+        "start": 656,
+        "end": 1346
+      },
+      "tablet3KeyRange": {
+        "start": 1347,
+        "end": 2003
+      }
+    },
+    "timeStamp": 1623033972746
+  },
+  {
+    "message": "Client (8080) Got metadata successfully",
+    "metaData": {
+      "_id": "60bd6cb72b0ef944b4dd5337",
+      "tablet1Documents": 599,
+      "tablet2Documents": 598,
+      "tablet3Documents": 606,
+      "tablet1KeyRange": {
+        "start": 18,
+        "end": 655
+      },
+      "tablet2KeyRange": {
+        "start": 656,
+        "end": 1346
+      },
+      "tablet3KeyRange": {
+        "start": 1347,
+        "end": 2003
+      }
+    },
+    "timeStamp": 1623033972746
+  },
+  {
+    "message": "Client (8080) Got metadata successfully",
+    "metaData": {
+      "_id": "60bd6cb72b0ef944b4dd5337",
+      "tablet1Documents": 599,
+      "tablet2Documents": 598,
+      "tablet3Documents": 606,
+      "tablet1KeyRange": {
+        "start": 18,
+        "end": 655
+      },
+      "tablet2KeyRange": {
+        "start": 656,
+        "end": 1346
+      },
+      "tablet3KeyRange": {
+        "start": 1347,
+        "end": 2003
+      }
+    },
+    "timeStamp": 1623033972746
+  },
+  {
+    "message": "Client (8081) Got metadata successfully",
+    "metaData": {
+      "_id": "60bd6cb72b0ef944b4dd5337",
+      "tablet1Documents": 599,
+      "tablet2Documents": 598,
+      "tablet3Documents": 606,
+      "tablet1KeyRange": {
+        "start": 18,
+        "end": 655
+      },
+      "tablet2KeyRange": {
+        "start": 656,
+        "end": 1346
+      },
+      "tablet3KeyRange": {
+        "start": 1347,
+        "end": 2003
+      }
+    },
+    "timeStamp": 1623033972746
+  },
+  {
+    "message": "Client (8080) Got metadata successfully",
+    "metaData": {
+      "_id": "60bd6cb72b0ef944b4dd5337",
+      "tablet1Documents": 599,
+      "tablet2Documents": 598,
+      "tablet3Documents": 606,
+      "tablet1KeyRange": {
+        "start": 18,
+        "end": 655
+      },
+      "tablet2KeyRange": {
+        "start": 656,
+        "end": 1346
+      },
+      "tablet3KeyRange": {
+        "start": 1347,
+        "end": 2003
+      }
+    },
+    "timeStamp": 1623033972746
+  },
+  {
+    "message": "Client (8080) Got metadata successfully",
+    "metaData": {
+      "_id": "60bd6cb72b0ef944b4dd5337",
+      "tablet1Documents": 599,
+      "tablet2Documents": 598,
+      "tablet3Documents": 606,
+      "tablet1KeyRange": {
+        "start": 18,
+        "end": 655
+      },
+      "tablet2KeyRange": {
+        "start": 656,
+        "end": 1346
+      },
+      "tablet3KeyRange": {
+        "start": 1347,
+        "end": 2003
+      }
+    },
+    "timeStamp": 1623033972746
+  },
+  {
+    "message": "Client (8081) Got metadata successfully",
+    "metaData": {
+      "_id": "60bd6cb72b0ef944b4dd5337",
+      "tablet1Documents": 599,
+      "tablet2Documents": 598,
+      "tablet3Documents": 606,
+      "tablet1KeyRange": {
+        "start": 18,
+        "end": 655
+      },
+      "tablet2KeyRange": {
+        "start": 656,
+        "end": 1346
+      },
+      "tablet3KeyRange": {
+        "start": 1347,
+        "end": 2003
+      }
+    },
+    "timeStamp": 1623033972746
+  },
+  {
+    "message": "Client (8080) Got metadata successfully",
+    "metaData": {
+      "_id": "60bd6cb72b0ef944b4dd5337",
+      "tablet1Documents": 599,
+      "tablet2Documents": 598,
+      "tablet3Documents": 606,
+      "tablet1KeyRange": {
+        "start": 18,
+        "end": 655
+      },
+      "tablet2KeyRange": {
+        "start": 656,
+        "end": 1346
+      },
+      "tablet3KeyRange": {
+        "start": 1347,
+        "end": 2003
+      }
+    },
+    "timeStamp": 1623033972747
+  },
+  {
+    "message": "Client (8081) Got metadata successfully",
+    "metaData": {
+      "_id": "60bd6cb72b0ef944b4dd5337",
+      "tablet1Documents": 599,
+      "tablet2Documents": 598,
+      "tablet3Documents": 606,
+      "tablet1KeyRange": {
+        "start": 18,
+        "end": 655
+      },
+      "tablet2KeyRange": {
+        "start": 656,
+        "end": 1346
+      },
+      "tablet3KeyRange": {
+        "start": 1347,
+        "end": 2003
+      }
+    },
+    "timeStamp": 1623033972747
+  },
+  {
+    "message": "Client (8080) Got metadata successfully",
+    "metaData": {
+      "_id": "60bd6cb72b0ef944b4dd5337",
+      "tablet1Documents": 599,
+      "tablet2Documents": 598,
+      "tablet3Documents": 606,
+      "tablet1KeyRange": {
+        "start": 18,
+        "end": 655
+      },
+      "tablet2KeyRange": {
+        "start": 656,
+        "end": 1346
+      },
+      "tablet3KeyRange": {
+        "start": 1347,
+        "end": 2003
+      }
+    },
+    "timeStamp": 1623033972747
+  },
+  {
+    "message": "Client (8081) Got metadata successfully",
+    "metaData": {
+      "_id": "60bd6cb72b0ef944b4dd5337",
+      "tablet1Documents": 599,
+      "tablet2Documents": 598,
+      "tablet3Documents": 606,
+      "tablet1KeyRange": {
+        "start": 18,
+        "end": 655
+      },
+      "tablet2KeyRange": {
+        "start": 656,
+        "end": 1346
+      },
+      "tablet3KeyRange": {
+        "start": 1347,
+        "end": 2003
+      }
+    },
+    "timeStamp": 1623033972747
+  },
+  {
+    "message": "Client (8080) Got metadata successfully",
+    "metaData": {
+      "_id": "60bd6cb72b0ef944b4dd5337",
+      "tablet1Documents": 599,
+      "tablet2Documents": 598,
+      "tablet3Documents": 606,
+      "tablet1KeyRange": {
+        "start": 18,
+        "end": 655
+      },
+      "tablet2KeyRange": {
+        "start": 656,
+        "end": 1346
+      },
+      "tablet3KeyRange": {
+        "start": 1347,
+        "end": 2003
+      }
+    },
+    "timeStamp": 1623033972747
+  },
+  {
+    "message": "Client (8080) Got metadata successfully",
+    "metaData": {
+      "_id": "60bd6cb72b0ef944b4dd5337",
+      "tablet1Documents": 599,
+      "tablet2Documents": 598,
+      "tablet3Documents": 606,
+      "tablet1KeyRange": {
+        "start": 18,
+        "end": 655
+      },
+      "tablet2KeyRange": {
+        "start": 656,
+        "end": 1346
+      },
+      "tablet3KeyRange": {
+        "start": 1347,
+        "end": 2003
+      }
+    },
+    "timeStamp": 1623033972747
+  },
+  {
+    "message": "Client (8080) Got metadata successfully",
+    "metaData": {
+      "_id": "60bd6cb72b0ef944b4dd5337",
+      "tablet1Documents": 599,
+      "tablet2Documents": 598,
+      "tablet3Documents": 606,
+      "tablet1KeyRange": {
+        "start": 18,
+        "end": 655
+      },
+      "tablet2KeyRange": {
+        "start": 656,
+        "end": 1346
+      },
+      "tablet3KeyRange": {
+        "start": 1347,
+        "end": 2003
+      }
+    },
+    "timeStamp": 1623033972747
+  },
+  {
+    "message": "Client (8080) Got metadata successfully",
+    "metaData": {
+      "_id": "60bd6cb72b0ef944b4dd5337",
+      "tablet1Documents": 599,
+      "tablet2Documents": 598,
+      "tablet3Documents": 606,
+      "tablet1KeyRange": {
+        "start": 18,
+        "end": 655
+      },
+      "tablet2KeyRange": {
+        "start": 656,
+        "end": 1346
+      },
+      "tablet3KeyRange": {
+        "start": 1347,
+        "end": 2003
+      }
+    },
+    "timeStamp": 1623033972747
+  },
+  {
+    "message": "Client (8080) Got metadata successfully",
+    "metaData": {
+      "_id": "60bd6cb72b0ef944b4dd5337",
+      "tablet1Documents": 599,
+      "tablet2Documents": 598,
+      "tablet3Documents": 606,
+      "tablet1KeyRange": {
+        "start": 18,
+        "end": 655
+      },
+      "tablet2KeyRange": {
+        "start": 656,
+        "end": 1346
+      },
+      "tablet3KeyRange": {
+        "start": 1347,
+        "end": 2003
+      }
+    },
+    "timeStamp": 1623033972748
+  },
+  {
+    "message": "Sending request to Tablet Server 2 retrieve rows with ids: 1347",
+    "timeStamp": 1623033974273
+  },
+  {
+    "message": "Client => id: 3kK2ERpDv8NiAkFvAAAK requested data reterival of ids: 1347 from Tablet Server 2",
+    "timeStamp": 1623033974274
+  },
+  {
+    "message": "Client => id: 3kK2ERpDv8NiAkFvAAAKrequested data reterival => Error: Problem retrieving data from Tablet Server 2 No data retrieved",
+    "timeStamp": 1623033974432
+  },
+  {
+    "message": "Client (8081) : Data retrieved successfully",
+    "RowRead": {
+      "data": [],
+      "err": [
+        "1347"
+      ],
+      "myerr": "No data retrieved"
+    },
+    "timeStamp": 1623033974432
+  },
+  {
+    "message": "client => id: rqjd_Ke6WaRbAav4AAAt disconnected from master",
+    "timeStamp": 1623033976571
+  },
+  {
+    "message": "client => id: V88GBdV9YWK1gzdCAAAT disconnected from master",
+    "timeStamp": 1623033976571
+  },
+  {
+    "message": "client => id: RNsjFRGEDfAp8UK4AAAh disconnected from master",
+    "timeStamp": 1623033976571
+  },
+  {
+    "message": "client => id: A6hmNO05iauG7h6LAAAx disconnected from master",
+    "timeStamp": 1623033976572
+  },
+  {
+    "message": "client => id: 8b_HJKVLZ6E-ifVmAABv disconnected from master",
+    "timeStamp": 1623033976573
+  },
+  {
+    "message": "client => id: QZ-oHmFSxuC27qNRAABD disconnected from master",
+    "timeStamp": 1623033976574
+  },
+  {
+    "message": "client => id: uzN_ghWEYKSu4oh7AAAr disconnected from master",
+    "timeStamp": 1623033976574
+  },
+  {
+    "message": "client => id: IpkX1sMx-RfPerL0AABN disconnected from master",
+    "timeStamp": 1623033976575
+  },
+  {
+    "message": "client => id: AbRv8bWPaWJrAXg-AABl disconnected from master",
+    "timeStamp": 1623033976576
+  },
+  {
+    "message": "client => id: sDeKymGWUAQs-VQ5AABZ disconnected from master",
+    "timeStamp": 1623033976576
+  },
+  {
+    "message": "client => id: 3PDmZwupku6CGkM-AAAj disconnected from master",
+    "timeStamp": 1623033976577
+  },
+  {
+    "message": "client => id: oNxkSMUtfjb_MYHWAABP disconnected from master",
+    "timeStamp": 1623033976577
+  },
+  {
+    "message": "client => id: Ofs47C-_yag0oZORAABX disconnected from master",
+    "timeStamp": 1623033976578
+  },
+  {
+    "message": "client => id: yj1Ogdft6jGr-fB3AAAN disconnected from master",
+    "timeStamp": 1623033976583
+  },
+  {
+    "message": "client => id: mv3u0oAmQDgxPMHuAAA7 disconnected from master",
+    "timeStamp": 1623033976585
+  },
+  {
+    "message": "client => id: h-62YvWciyx3yxDTAAAX disconnected from master",
+    "timeStamp": 1623033976585
+  },
+  {
+    "message": "client => id: wSJkt4h6F6qZDCeaAABz disconnected from master",
+    "timeStamp": 1623033976585
+  },
+  {
+    "message": "client => id: EnWIRNSbR8iQdy_mAABH disconnected from master",
+    "timeStamp": 1623033976586
+  },
+  {
+    "message": "client => id: ftvolldEwAzddEsDAAAv disconnected from master",
+    "timeStamp": 1623033976588
+  },
+  {
+    "message": "client => id: 0uvjp8OTqTsD9LoCAABj disconnected from master",
+    "timeStamp": 1623033976588
+  },
+  {
+    "message": "client => id: yf_LNU8GG7LUSwK3AABV disconnected from master",
+    "timeStamp": 1623033976588
+  },
+  {
+    "message": "client => id: Mcotb1lr_GD5DXuFAABp disconnected from master",
+    "timeStamp": 1623033976589
+  },
+  {
+    "message": "client => id: 3XE41cL520FovCCvAABF disconnected from master",
+    "timeStamp": 1623033976589
+  },
+  {
+    "message": "client => id: joaT7anSIqZ6SnmIAABx disconnected from master",
+    "timeStamp": 1623033976590
+  },
+  {
+    "message": "client => id: Chtkktos0RnUCjDLAABn disconnected from master",
+    "timeStamp": 1623033976591
+  },
+  {
+    "message": "client => id: YwUkYH8Rv-wYYaSFAAA1 disconnected from master",
+    "timeStamp": 1623033976591
+  },
+  {
+    "message": "client => id: gSmBvGlMARVNZLkFAAAz disconnected from master",
+    "timeStamp": 1623033976591
+  },
+  {
+    "message": "client => id: 94_E4MAuFBObvt4dAAAV disconnected from master",
+    "timeStamp": 1623033976592
+  },
+  {
+    "message": "client => id: bsiS02t0lBc2hyioAABr disconnected from master",
+    "timeStamp": 1623033977040
+  },
+  {
+    "message": "client => id: uNc2NtIoj3OZ_4n_AAAL disconnected from master",
+    "timeStamp": 1623033977042
+  },
+  {
+    "message": "client => id: SXMftJTwY6OKq7unAABR disconnected from master",
+    "timeStamp": 1623033977043
+  },
+  {
+    "message": "client => id: LglWc2w3YsXdyfHpAABd disconnected from master",
+    "timeStamp": 1623033977043
+  },
+  {
+    "message": "client => id: zw6hf_RLTz0CIZKtAAAn disconnected from master",
+    "timeStamp": 1623033977043
+  },
+  {
+    "message": "client => id: aahm5zASCZzpLHX1AABB disconnected from master",
+    "timeStamp": 1623033977043
+  },
+  {
+    "message": "client => id: S7oxLR_twgTUsT2aAABf disconnected from master",
+    "timeStamp": 1623033977044
+  },
+  {
+    "message": "client => id: 2GSQ4gr60_Rp3YuOAAAZ disconnected from master",
+    "timeStamp": 1623033977044
+  },
+  {
+    "message": "client => id: 2gDzDY3T4p3gWi1QAAAf disconnected from master",
+    "timeStamp": 1623033977045
+  },
+  {
+    "message": "client => id: _KNW0YnErG2J-VgDAABL disconnected from master",
+    "timeStamp": 1623033977045
+  },
+  {
+    "message": "client => id: 24QqhsL-37DQZH9mAAAB disconnected from master",
+    "timeStamp": 1623033977045
+  },
+  {
+    "message": "client => id: fInvRMAulv1l6ax2AAAb disconnected from master",
+    "timeStamp": 1623033977046
+  },
+  {
+    "message": "client => id: 0wsEUMVk4aYoX2o3AAAR disconnected from master",
+    "timeStamp": 1623033977046
+  },
+  {
+    "message": "client => id: yvt9QlbBXXBvxgusAAAd disconnected from master",
+    "timeStamp": 1623033977046
+  },
+  {
+    "message": "client => id: u0CS_O5z_z3ueIIAAABh disconnected from master",
+    "timeStamp": 1623033977047
+  },
+  {
+    "message": "client => id: 4otHx4ZxHdTzZ0j5AAA_ disconnected from master",
+    "timeStamp": 1623033977047
+  },
+  {
+    "message": "client => id: fywwkY1CQgQD4fbkAAA5 disconnected from master",
+    "timeStamp": 1623033977048
+  },
+  {
+    "message": "client => id: ukb7og8UziyJCPItAAAF disconnected from master",
+    "timeStamp": 1623033977050
+  },
+  {
+    "message": "client => id: rBlsqtopt3HGDoPIAABJ disconnected from master",
+    "timeStamp": 1623033977050
+  },
+  {
+    "message": "client => id: SEOqxA3HXXoR1SehAAAH disconnected from master",
+    "timeStamp": 1623033977051
+  },
+  {
+    "message": "client => id: vXBuUpVkx_vXgTuaAAAJ disconnected from master",
+    "timeStamp": 1623033977052
+  },
+  {
+    "message": "client => id: VpxkwlHwEMkCBJqZAAAP disconnected from master",
+    "timeStamp": 1623033977052
+  },
+  {
+    "message": "client => id: jfCzh3WSm5_0RfvBAAAl disconnected from master",
+    "timeStamp": 1623033977053
+  },
+  {
+    "message": "client => id: h526PiFKZSb6uNSCAABb disconnected from master",
+    "timeStamp": 1623033977053
+  },
+  {
+    "message": "client => id: 3Gu3JMAMZP7RbeDQAAA3 disconnected from master",
+    "timeStamp": 1623033977054
+  },
+  {
+    "message": "client => id: EvZop5vFWFOSOHlHAABT disconnected from master",
+    "timeStamp": 1623033977054
+  },
+  {
+    "message": "client => id: 4jAMBLkh3s9ClVzsAAA9 disconnected from master",
+    "timeStamp": 1623033977056
+  },
+  {
+    "message": "client => id: 4z5mn88zYmftpoHZAAAp disconnected from master",
+    "timeStamp": 1623033977056
+  },
+  {
+    "message": "client => id: 7Dj-ZLXM-HO6ImajAAB5 disconnected from master",
+    "timeStamp": 1623033977615
   }
 ]

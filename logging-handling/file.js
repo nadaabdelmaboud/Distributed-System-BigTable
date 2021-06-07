@@ -7,7 +7,6 @@ var socketMaster = ioMaster.connect("https://master-os.herokuapp.com/", {
   reconnection: true,
 });
 socketMaster.on("out-file",(masterLog)=>{
-    console.log("wee")
     let logFileString;
     let logArray = [];
     try {

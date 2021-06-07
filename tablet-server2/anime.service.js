@@ -46,10 +46,10 @@ const AnimeService = {
   async createAnime(newAnimes, tabletNum) {
     const validResult = await AnimeValidation.validateAddAnimes(newAnimes);
     if (validResult.isValidAnimes.error)
-      return { data: false, err: validResult.isValidAnimes.error.message };
+      return { data: [], err: validResult.isValidAnimes.error.message };
     const result = await Anime.createAnime(validResult.newAnimes, tabletNum);
     if (result.length == 0)
-      return { data: false, err: "problem creating Anime" };
+      return { data: [], err: "problem creating Anime" };
     return { data: result, err: "" };
   },
   async deleteCells(columnFamily, rowKey, tabletNum) {

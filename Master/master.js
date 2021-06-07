@@ -154,7 +154,6 @@ const MasterData={
                 anime.anime_id=id.toString();
                 id+=1;
             });
-            console.log(animeDocuments);
             await BigTableCollection.insertMany(animeDocuments);
             id=id-1;
             metadata.tablet3KeyRange.end=id;
@@ -274,7 +273,6 @@ io.on("connection", socket => {
         });
       
         socket.on("tablet-update",async (payload)=>{
-            console.log(payload);
             await tablet.connect(dbs["tablet"+payload.tabletId],payload.tabletId);
             let documents;
             if(payload.updateType!='delete'){
@@ -303,49 +301,13 @@ io.on("connection", socket => {
         })
 
         //Getting logs from clients and tablets 
-        socket.on("clientLogs", payload => {
+        socket.on("clientLogs", async payload => {
            //payload -> array of objects
-
-            let logFileString;
-            let logArray = [];
-            try {
-                logFileString = fs.readFileSync('./systemLogs.log', 'utf8');
-                logArray = JSON.parse(logFileString);
-            } catch (err) {
-                console.log("output file not yet intialized")            }
-            logArray = logArray.concat(payload);
-            logArray.sort(function(a, b) {
-                return a.timeStamp - b.timeStamp;
-            });
-            var ArrFormated = JSON.stringify(logArray,null,2)
-            fs.writeFile('systemLogs.log', ArrFormated , err => {
-                if (err) {
-                console.error(err)
-                return
-                }
-            })           //each object consists of message and global time stamp
+            await io.sockets.emit("out-file", payload);
         });
     
-        socket.on("tabletLogs", payload => {
-            let logFileString;
-            let logArray = [];
-            try {
-                logFileString = fs.readFileSync('./systemLogs.log', 'utf8');
-                logArray = JSON.parse(logFileString);
-            } catch (err) {
-                console.log("output file not yet intialized")
-            }
-            logArray = logArray.concat(payload);
-            logArray.sort(function(a, b) {
-                return a.timeStamp - b.timeStamp;
-            });
-            var ArrFormated = JSON.stringify(logArray,null,2)
-            fs.writeFile('systemLogs.log', ArrFormated , err => {
-                if (err) {
-                console.error(err)
-                return
-                }
-            })    
+        socket.on("tabletLogs", async payload => {
+            await io.sockets.emit("out-file",payload);
         });
 });
 
