@@ -51,20 +51,11 @@ The system consists of 3 major components :
 
 ## Sample Examples
 
-```mermaid
-sequenceDiagram
-Master --> Tablet Server#1 : Listens For Any Updates
-Master --> Tablet Server#2 : Listens For Any Updates
-Client#1 ->> Tablet Server#1: Read Rows From 1 To 20
-Client#1 ->> Tablet Server#2: Update Row 600
-Client#2 ->> Tablet Server#2: Read Rows From 700 To 800
-Tablet Server#1-->> Client#1 : Read Succissfully
-Tablet Server#2-->> Client#2 : Read Succissfully
-
-```
+[![](https://mermaid.ink/img/eyJjb2RlIjoic2VxdWVuY2VEaWFncmFtXG5NYXN0ZXIgLS0-IFRhYmxldCBTZXJ2ZXIjMSA6IExpc3RlbnMgRm9yIEFueSBVcGRhdGVzXG5NYXN0ZXIgLS0-IFRhYmxldCBTZXJ2ZXIjMiA6IExpc3RlbnMgRm9yIEFueSBVcGRhdGVzXG5DbGllbnQjMSAtPj4gVGFibGV0IFNlcnZlciMxOiBSZWFkIFJvd3MgRnJvbSAxIFRvIDIwXG5DbGllbnQjMSAtPj4gVGFibGV0IFNlcnZlciMyOiBVcGRhdGUgUm93IDYwMFxuQ2xpZW50IzIgLT4-IFRhYmxldCBTZXJ2ZXIjMjogUmVhZCBSb3dzIEZyb20gNzAwIFRvIDgwMFxuVGFibGV0IFNlcnZlciMxLS0-PiBDbGllbnQjMSA6IFJlYWQgU3VjY2lzc2Z1bGx5XG5UYWJsZXQgU2VydmVyIzItLT4-IENsaWVudCMyIDogUmVhZCBTdWNjaXNzZnVsbHkiLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9LCJ1cGRhdGVFZGl0b3IiOmZhbHNlLCJhdXRvU3luYyI6dHJ1ZSwidXBkYXRlRGlhZ3JhbSI6ZmFsc2V9)](https://mermaid-js.github.io/mermaid-live-editor/edit##eyJjb2RlIjoiXG5zZXF1ZW5jZURpYWdyYW1cbk1hc3RlciAtLT4gVGFibGV0IFNlcnZlciMxIDogTGlzdGVucyBGb3IgQW55IFVwZGF0ZXNcbk1hc3RlciAtLT4gVGFibGV0IFNlcnZlciMyIDogTGlzdGVucyBGb3IgQW55IFVwZGF0ZXNcbkNsaWVudCMxIC0-PiBUYWJsZXQgU2VydmVyIzE6IFJlYWQgUm93cyBGcm9tIDEgVG8gMjBcbkNsaWVudCMxIC0-PiBUYWJsZXQgU2VydmVyIzI6IFVwZGF0ZSBSb3cgNjAwXG5DbGllbnQjMiAtPj4gVGFibGV0IFNlcnZlciMyOiBSZWFkIFJvd3MgRnJvbSA3MDAgVG8gODAwXG5UYWJsZXQgU2VydmVyIzEtLT4-IENsaWVudCMxIDogUmVhZCBTdWNjaXNzZnVsbHlcblRhYmxldCBTZXJ2ZXIjMi0tPj4gQ2xpZW50IzIgOiBSZWFkIFN1Y2Npc3NmdWxseSIsIm1lcm1haWQiOiJ7XG4gIFwidGhlbWVcIjogXCJkZWZhdWx0XCJcbn0iLCJ1cGRhdGVFZGl0b3IiOmZhbHNlLCJhdXRvU3luYyI6dHJ1ZSwidXBkYXRlRGlhZ3JhbSI6ZmFsc2V9)
 
 
 ```mermaid
+
 sequenceDiagram
 Client ->> Tablet Server: Delete Rows From 50 To 400
 Tablet Server-->>Master: Delete Alert - Check Balance
@@ -75,6 +66,7 @@ Master -->> Tablet Server: Release Lock After Balancing
 Note right of Master: Deleting 350 Rows Causes Data Unbalancing<br/> So Master Takes Control (Gets The Lock)<br/> Of The Tablets To Rebalance<br/> .
 
 Master ->> Client : Updated MetaData
+
 ```
 
 ## Tools
