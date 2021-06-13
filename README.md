@@ -1,10 +1,7 @@
 # Distributed System - BigTable
 
 Distributed system for managing structured data that is designed to scale to a very large size.
-
-## Data Model
-
-The data this system manages consists of One BigTable that is sharded into        
+The data this system manages consists of one BigTable that is sharded into        
 3 tablets divided by Row Key , Each tablet is assigned a key range of data .
 
 
@@ -63,9 +60,42 @@ The system consists of 3 major components :
 ## Tools
 
 - Nodejs
+- Vue
 - Mongodb
 - Socket.io
 - Async-Mutux
+
+##  Run
+
+   ``` bash
+       
+       # install
+	   $ cd master
+       $ npm i
+       $ npm run install-tablets-client
+
+       # master-run
+       $ cd master
+       $ npm run start
+       
+       # tablet server#1-run
+       $ cd tablet-server
+       $ npm run start
+       
+       # tablet server#2-run
+       $ cd tablet-server2
+       $ npm run start
+       
+       # client-run
+       $ cd client
+       $ npm run serve - Then Open http://localhost:8080/ -
+       
+       # for Logs
+       $ cd master
+       $ npm run start-logs   - Then Open master/systemLogs.log -
+
+   ```
+
 
 
 ## Contributors
