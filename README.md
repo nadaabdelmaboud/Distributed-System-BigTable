@@ -1,6 +1,7 @@
 # Distributed System - BigTable
 
 Distributed system for managing structured data that is designed to scale to a very large size.
+
 The data this system manages consists of one BigTable that is sharded into        
 3 tablets divided by Row Key , Each tablet is assigned a key range of data .
 
