@@ -6,38 +6,26 @@ const MetaData = require('./metaData');
 const tablet = require('./tablet-instance')
 const Mutex = require('async-mutex').Mutex;
 const mutex = new Mutex();
-
 const fs = require('fs')
-
 fs.openSync("systemLogs.log", 'w+')
 let masterLog = []
-const io = require("socket.io")(3000);
+
+
+
+const MASTER_PORT=3000;
+const PORT = process.env.PORT || MASTER_PORT
+const server = express().get("/",(req, res) => res.send("HELLO FROM MASTER"))
+  .listen(PORT , () => console.log(`Listening on ${PORT}`));
+const io = new require("socket.io")(server);
 
 masterLog.push({
     message: "Master started...",
     timeStamp: Date.now(),
   });
-setInterval(()=>{
-    let logFileString;
-    let logArray = [];
-    try {
-        logFileString = fs.readFileSync('./systemLogs.log', 'utf8');
-        logArray = JSON.parse(logFileString);
-    } catch (err) {
-        console.log("output file not yet intialized")
-    }
-    logArray = logArray.concat(masterLog);
-    logArray.sort(function(a, b) {
-        return a.timeStamp - b.timeStamp;
-    });
-    masterLog=[]
-    var ArrFormated = JSON.stringify(logArray,null,2)
-    fs.writeFile('systemLogs.log', ArrFormated, err => {
-        if (err) {
-        console.error(err)
-        return
-        }
-    })
+setInterval(async ()=>{
+
+   await io.sockets.emit("out-file",masterLog);
+   masterLog=[];
 },3000)
 masterConnection.once('open',async function(){
 
@@ -54,6 +42,7 @@ masterConnection.once('open',async function(){
 
 
 
+
 const MasterData={
    
     async checkBalance(){
@@ -61,7 +50,7 @@ const MasterData={
         const docs1 = metadata.tablet1Documents;
         const docs2 = metadata.tablet2Documents;
         const docs3 = metadata.tablet3Documents;
-        const threshold = 50;
+        const threshold = 3;
         if(
             (
                 (docs1-docs2>=threshold)
@@ -96,6 +85,7 @@ const MasterData={
             return;
         }
         else{
+            console.log("master hello");
             await io.sockets.emit("Balance");
         }
         //await new Promise((resolve) => setTimeout(resolve, 10000));
@@ -108,17 +98,22 @@ const MasterData={
         const BigTableCollection = (await masterConnection).collection("BigTable");
         let totalMasterDocuments = await BigTableCollection.countDocuments({});
         let documentsTablet=parseInt(totalMasterDocuments/3);
-        documentsTablet1 = await BigTableCollection.find({}).skip(0).limit(documentsTablet).toArray().then(data=>{
+        let documentsTablet11 = documentsTablet;
+        let tmp=totalMasterDocuments-documentsTablet11;
+        let documentsTablet12 = parseInt(tmp/2);
+        let documentsTablet13 = tmp-documentsTablet12;
+
+        documentsTablet1 = await BigTableCollection.find({}).skip(0).limit(documentsTablet11).toArray().then(data=>{
              return data;
          });
         await tablet.connect(dbs.tablet1,1);
         await tablet.drop(1);
 
         await tablet.loadData(documentsTablet1,1);
-        documentsTablet2 =  await BigTableCollection.find({}).skip(documentsTablet).limit(documentsTablet).toArray().then(data=>{
+        documentsTablet2 =  await BigTableCollection.find({}).skip(documentsTablet11).limit(documentsTablet12).toArray().then(data=>{
             return data;
         });
-        documentsTablet3 = await BigTableCollection.find({}).skip(2*documentsTablet).limit(documentsTablet).toArray().then(data=>{
+        documentsTablet3 = await BigTableCollection.find({}).skip(documentsTablet11+documentsTablet12).limit(documentsTablet13).toArray().then(data=>{
             return data;
         });
         const tablet1KeyRange={
@@ -139,8 +134,9 @@ const MasterData={
          await tablet.connect(dbs.tablet3,3);
          await tablet.drop(3);
          await tablet.loadData(documentsTablet3,3);
-         await MetaData.updateMetaData(masterConnection,tablet1KeyRange,tablet2KeyRange,tablet3KeyRange,documentsTablet,documentsTablet,documentsTablet);
+         await MetaData.updateMetaData(masterConnection,tablet1KeyRange,tablet2KeyRange,tablet3KeyRange,documentsTablet11,documentsTablet12,documentsTablet13);
          await io.sockets.emit("End-Balance");
+         console.log("master hello end");
             masterLog.push({
                 message: "master rebalanced the data",
                 timeStamp: Date.now(),
@@ -169,13 +165,12 @@ const MasterData={
                 anime.anime_id=id.toString();
                 id+=1;
             });
-            console.log(animeDocuments);
             await BigTableCollection.insertMany(animeDocuments);
-            id=id-1;
             metadata.tablet3KeyRange.end=id;
             metadata.tablet3Documents += animeDocuments.length;
             await MetaData.updateMetaData(masterConnection,metadata.tablet1KeyRange,metadata.tablet2KeyRange,metadata.tablet3KeyRange,metadata.tablet1Documents,metadata.tablet2Documents,metadata.tablet3Documents)
         } 
+        
         finally {
             release();
             masterLog.push({
@@ -186,7 +181,6 @@ const MasterData={
        
     },
     //unlock
-
     async delete(ids,tabletId){
         const BigTableCollection = (await masterConnection).collection("BigTable");
         await BigTableCollection.deleteMany({
@@ -250,6 +244,7 @@ io.on("connection", socket => {
                     message: "client => id: " + socket.id + " connected to master",
                     timeStamp: Date.now(),
                   });
+                  console.log("Client Connected");
             }
             else if (payload == "tablet")
             {
@@ -258,8 +253,8 @@ io.on("connection", socket => {
                     message: "Tablet => id: " + socket.id + " connected to master",
                     timeStamp: Date.now(),
                   });
+                  console.log("Tablet Connected");
             }
-            console.log("Tablet Connected");
             await socket.emit('GetMetaData',await MetaData.getMetaData(masterConnection));
         });
 
@@ -288,7 +283,6 @@ io.on("connection", socket => {
         });
       
         socket.on("tablet-update",async (payload)=>{
-            console.log(payload);
             await tablet.connect(dbs["tablet"+payload.tabletId],payload.tabletId);
             let documents;
             if(payload.updateType!='delete'){
@@ -317,49 +311,13 @@ io.on("connection", socket => {
         })
 
         //Getting logs from clients and tablets 
-        socket.on("clientLogs", payload => {
+        socket.on("clientLogs", async payload => {
            //payload -> array of objects
-
-            let logFileString;
-            let logArray = [];
-            try {
-                logFileString = fs.readFileSync('./systemLogs.log', 'utf8');
-                logArray = JSON.parse(logFileString);
-            } catch (err) {
-                console.log("output file not yet intialized")            }
-            logArray = logArray.concat(payload);
-            logArray.sort(function(a, b) {
-                return a.timeStamp - b.timeStamp;
-            });
-            var ArrFormated = JSON.stringify(logArray,null,2)
-            fs.writeFile('systemLogs.log', ArrFormated , err => {
-                if (err) {
-                console.error(err)
-                return
-                }
-            })           //each object consists of message and global time stamp
+            await io.sockets.emit("out-file", payload);
         });
     
-        socket.on("tabletLogs", payload => {
-            let logFileString;
-            let logArray = [];
-            try {
-                logFileString = fs.readFileSync('./systemLogs.log', 'utf8');
-                logArray = JSON.parse(logFileString);
-            } catch (err) {
-                console.log("output file not yet intialized")
-            }
-            logArray = logArray.concat(payload);
-            logArray.sort(function(a, b) {
-                return a.timeStamp - b.timeStamp;
-            });
-            var ArrFormated = JSON.stringify(logArray,null,2)
-            fs.writeFile('systemLogs.log', ArrFormated , err => {
-                if (err) {
-                console.error(err)
-                return
-                }
-            })    
+        socket.on("tabletLogs", async payload => {
+            await io.sockets.emit("out-file",payload);
         });
 });
 

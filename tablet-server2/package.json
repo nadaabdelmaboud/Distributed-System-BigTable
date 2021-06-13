@@ -2,12 +2,10 @@
   "name": "bigtable",
   "version": "1.0.0",
   "description": "",
-  "main": "master.js",
+  "main": "masterMimic.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "install-tablets-client":"cd ../tablet-server && npm i && cd ../tablet-server2 && npm i && cd ../client && npm i",
-    "start-logs":"node logging-handling/file.js",
-    "start": "node master.js"
+    "start": "node tablet-server2.js"
   },
   "repository": {
     "type": "git",
@@ -22,9 +20,9 @@
   "dependencies": {
     "async-mutex": "^0.3.1",
     "express": "^4.17.1",
-    "fs": "0.0.1-security",
-    "mongoose": "^5.12.11",
-    "nodemon": "^2.0.7",
+    "joi": "^17.4.0",
+    "mongoose": "^5.12.13",
+    "socker.io": "0.0.0-alpha-beta",
     "socket.io": "^4.1.2",
     "socket.io-client": "^4.1.2"
   }

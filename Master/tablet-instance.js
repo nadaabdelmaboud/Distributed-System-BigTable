@@ -70,11 +70,9 @@ const TabletInstance={
         });
     }
     else{
-        console.log(ids);
         return await tabletConnection3.db.collection("BigTable").find({
             'anime_id': { $in: ids}
          }).toArray().then(data=>{
-             console.log(data);
             return data;
         });
     }
