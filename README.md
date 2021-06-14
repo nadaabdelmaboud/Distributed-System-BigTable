@@ -19,7 +19,7 @@ The system consists of 3 major components :
 
   - Tablets Assignment
   - Listens For Any Updates Requests And Checks For Balancing
-  - Blances Data between the 3 Tablets Whenever Necessary
+  - Balances Data between the 3 Tablets Whenever Necessary
   - Updates Metadata And Resends It To The Clients
   - Manages Logs For The Whole System In A local File System
 
@@ -64,7 +64,7 @@ The system consists of 3 major components :
 - Vue
 - Mongodb
 - Socket.io
-- Async-Mutux
+- Async-Mutex
 
 ##  Run
 
